@@ -35,7 +35,6 @@ iframe {
   }
 
   .container-login::before {
-    content: "";
     display: block;
     position: absolute;
     z-index: -1;
