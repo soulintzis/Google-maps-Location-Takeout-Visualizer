@@ -19,6 +19,7 @@ iframe {
   }
 
   .container-login {
+    background-image: url('images/bg-01.jpg');
     width: 100%;  
     min-height: 100vh;
     display: flex;
