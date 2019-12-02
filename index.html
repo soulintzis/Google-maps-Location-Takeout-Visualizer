@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="icon" type="image/png" href="images/icons/favicon.png">
+    <link rel="stylesheet" href="css/login-signup.css">
     <link rel="stylesheet" href="css/reset.css">
     <title>WebApp</title>
 </head>
@@ -12,33 +13,27 @@
     <div class="limiter">
         <div class="container-login" style="background-image: url('images/bg-01.jpg');">
             <div class="wrap-login">
-                <form class="login100-form validate-form">
-                    <span class="login100-form-logo">
-                        <i class="zmdi zmdi-landscape"></i>
-                    </span>
-    
-                    <span class="login100-form-title p-b-34 p-t-27">
-                        Log in
-                    </span>
-
-                    <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                        <input class="input100" type="text" name="username" placeholder="Username">
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    <div class = "user-icon">
+                        <img src="../images/icons/user-icon-svg.svg">
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input class="input100" type="password" name="pass" placeholder="Password">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    <span class="login100-form-title">Log-in</span>
+                    
+                    <div class="wrap-input">
+                        <input class="input" type="text" placeholder="Username">
                     </div>
-    
-                    <div class="contact100-form-checkbox">
-                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="label-checkbox100" for="ckb1">
-                            Remember me
-                        </label>
+                        
+                    <div class="wrap-input">
+                        <input class="input" type="password" placeholder="Password">
                     </div>
-    
-                    <div class="container-login100-form-btn">
+
+                    <div class="text-center">
+                        <a class="signup-link" href="html/signup.html">
+                            You don't have an account?Let's create one.
+                        </a>
+                    </div>
+
+                    <div class="container-login-form-btn">
                         <button class="login100-form-btn">
                             Login
                         </button>
