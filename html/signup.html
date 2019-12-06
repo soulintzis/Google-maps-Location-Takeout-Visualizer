@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <title>Sign Up on WebApp</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="../images/icons/favicon.png">
-        <link rel="stylesheet" type="text/css" href="../css/reset.css">
-        <link rel="stylesheet" type="text/css" href="../css/login-signup.css">        
-
-    </head>
-    <body>
-        <div class="limiter">
-            <div class="container-login" style="background-image: url('../images/bg-01.jpg');">
-                <div class="wrap-login">
-                    <form>
-                        <div class = "user-icon">
-                            <img src="../images/icons/user-icon-svg.svg">
-                        </div>
-
-                        <span class="login100-form-title">Sign-up</span>
-                        
-                        <div class="wrap-input">
-                            <input class="input" type="text" placeholder="Username">
-                        </div>
-                        
-                        <div class="wrap-input">
-                                <input class="input" type="email" placeholder="Email">
-                        </div>
-
-                        <div class="wrap-input">
-                                <input class="input" type="password" placeholder="Password">
-                        </div>
-
-                        <div class="wrap-input">
-                                <input class="input" type="password" placeholder="Confirm">
-                        </div>
-
-                        <div class="container-login-form-btn">
-                            <button class="login100-form-btn">
-                                Sign-up
+        <head>
+            <title>Sign Up on Patras Crowdsourcing</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="icon" type="image/png" href="../images/icons/favicon.png">
+            <link rel="stylesheet" type="text/css" href="../css/reset.css">
+            <link rel="stylesheet" type="text/css" href="../css/login-signup.css">        
+            
+        </head>
+        <body>
+            <header class="pp-header" >
+                <div>
+                    <div class="pcrowd-logo">
+                          <!-- <img src="/images/logo.png"  alt="LOGO"> -->
+                    </div>
+                    <div class="container-signup-form-btn">
+                            <button class="login100-form-btn"  onclick="window.location.href='/index.html';">
+                                Login
                             </button>
                         </div>
-
-                    </form>
                 </div>
-            </div>
-        </div>                  
-    </body>
+                        
+            </header>
+            <div class="limiter">
+                    
+                <div class="container-signup" style="background-image: url('../images/bg-01.jpg');">
+                    
+                    <div class="wrap-signup">
+                        <form>
+                            
+                            <div class = "user-icon" alt="USER_ICON">
+                                <img src="../images/icons/user-icon-svg.svg">
+                            </div>
+
+                            <span class="signup100-form-title">Sign-up</span>
+                            
+                            <div class="wrap-input">
+                                <input class="input" type="text" placeholder="Username">
+                            </div>
+                            
+                            <div class="wrap-input">
+                                    <input class="input" type="email" placeholder="Email">
+                            </div>
+
+                            <div class="wrap-input">
+                                    <input class="input" type="password" placeholder="Password">
+                            </div>
+
+                            <div class="wrap-input">
+                                    <input class="input" type="password" placeholder="Confirm Password">
+                            </div>
+
+                            <div class="container-signup-form-btn">
+                                <button class="signup100-form-btn">
+                                    Sign-up
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>                  
+        </body>
 </html>

@@ -3,7 +3,7 @@
         margin: 0 auto;
     }
 
-    .container-login {
+    .container-signup {
         width: 100%;  
         min-height: 100vh;
         display: -webkit-box;
@@ -22,7 +22,7 @@
         z-index: 1;
     }
   
-    .container-login::before {
+    .container-signup::before {
         content: "";
         display: block;
         position: absolute;
@@ -37,7 +37,7 @@
     }
 
   
-    .wrap-login {
+    .wrap-signup {
         width: 500px;
         padding-top: 190px;
         padding-bottom: 20px;
@@ -59,7 +59,7 @@
         width: 100%;
     }
 
-    .login100-form-title {
+    .signup100-form-title {
         font-family: Montserrat-ExtraBold;
         font-size: 26px;
         color: black;
@@ -96,7 +96,7 @@
         outline: none;
     }
 
-    .container-login-form-btn {
+    .container-signup-form-btn {
         width: 100%;
         padding-top: 25px;
         display: -webkit-box;
@@ -108,7 +108,7 @@
         justify-content: center;
     }
 
-    .login100-form-btn {
+    .signup100-form-btn {
         font-family: Montserrat-Bold;
         font-size: 15px;
         line-height: 1.5;
@@ -117,7 +117,7 @@
         width: 90%;
         height: 50px;
         border-radius: 25px;
-        background: #333333;
+        background: #333333; 
         display: -webkit-box;
         display: -webkit-flex;
         display: -moz-box;
@@ -131,12 +131,12 @@
         -o-transition: all 0.4s;
         -moz-transition: all 0.4s;
         transition: all 0.4s;
-      
+        
         position: relative;
         z-index: 1;
       }
       
-      .login100-form-btn::before {
+      .signup100-form-btn::before {
         content: "";
         display: block;
         position: absolute;
@@ -158,12 +158,12 @@
         opacity: 0;
       }
       
-      .login100-form-btn:hover {
+      .signup100-form-btn:hover {
         background: transparent;
         color: #fff;
       }
       
-      .login100-form-btn:hover:before {
+      .signup100-form-btn:hover:before {
         opacity: 1;
       }
 
@@ -172,9 +172,102 @@
         padding-top: 10px;
       }
 
-      .signup-link {
+      .signup-link-c {
         font-family: Montserrat-Regular;
         font-size: 16px;
-        color: #cccccc;
         line-height: 1.4;
+        color:#005bea;
+        text-decoration: none;
+      }
+
+      .signup-link-c:hover {
+        text-decoration:underline;
+      }
+
+      .login100-form-btn {
+        font-family: Montserrat-Bold;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #080808;
+        width: 110px;
+        height: 40px;
+        border-radius: 20px;
+        
+        
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: center;
+        align-items: right;
+        padding: 0 25px;
+        float: right;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        right:2px; 
+        margin-right: 10px; 
+        top:20px;
+        background-color:transparent;
+        border: 2px solid black;
+        cursor:pointer;
+        position: absolute;
+        
+        
+
+        z-index: 1;
+      }
+      
+      .login100-form-btn::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        
+        padding: 5px;
+        margin:auto;
+        
+
+        
+        border-radius: 25px;
+        top: 0;
+        left: 0;
+        
+        color:white;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        opacity: 0;
+      }
+      
+      .login100-form-btn:hover {
+        background: transparent;  
+        color: #ffffff;
+        background: #333333;
+        border-color:#333333!important; 
+      
+      }
+      
+      .login100-form-btn:hover:before {
+        opacity: 1;
+        color:white;
+      }
+      
+      .pcrowd-logo img{
+          width: 23%;
+          height: 23%;
+      }
+      
+      .pp-header{
+        height: 75px;
+        background:#005bea;
+        background: -webkit-linear-gradient(left, #005bea, #00c6fb);
+        background: -o-linear-gradient(left, #005bea, #00c6fb);
+        background: -moz-linear-gradient(left, #005bea, #00c6fb);
+        background: linear-gradient(left, #005bea, #00c6fb);
+        
       }
