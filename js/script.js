@@ -1,5 +1,5 @@
-var user = document.getElementById('username_id');
-var email = document.getElementById('email_id');
+const user = document.getElementById('username_id');
+const email = document.getElementById('email_id');
 const password = document.getElementById('password_id');
 const confirm_password = document.getElementById('confirm_password_id'); 
 
@@ -12,7 +12,6 @@ function isEmpty(value){
     return false;
 }
 
-console.log(user.value) 
 
 function validateUsername(){
     if(isEmpty(user.value)) {
@@ -59,6 +58,7 @@ function checkEmailFormat(field){
         return false;
     }
 }
+
 function validatePassword(){
     if(isEmpty(password.value)) {
         document.getElementById('pass_mes').innerHTML = "*Empty password field";
@@ -86,14 +86,16 @@ function checkPasswordFormat(field){
 function validateConfirmPassword(){
     if(isEmpty(confirm_password.value)){
         document.getElementById('conf_mes').innerHTML = "*Please confirm your password";
-        document.getElementById('confirm_password_id').style.border = "1px solid #ED6160";        
-    }else if(password.value !== confirm_password.value){
-        document.getElementById('conf_mes').innerHTML = "*Passwords should match,please try again";
-        document.getElementById('confirm_password_id').style.border = "1px solid #ED6160";   
-    }else{
-        document.getElementById('conf_mes').innerHTML = "";
-        document.getElementById('confirm_password_id').style.border = "1px solid #4BB543";
-   } 
+        document.getElementById('confirm_password_id').style.border = "1px solid #ED6160";
+    }else if(checkPasswordFormat(password)){     
+            if(password.value !== confirm_password.value){
+                document.getElementById('conf_mes').innerHTML = "*Passwords should match,please try again";
+                document.getElementById('confirm_password_id').style.border = "1px solid #ED6160";   
+            }else{
+                document.getElementById('conf_mes').innerHTML = "";
+                document.getElementById('confirm_password_id').style.border = "1px solid #4BB543";
+            }
+        }
 }
 
 function validation(){
