@@ -279,9 +279,9 @@
         text-align: center;
       }
 
-      input:invalid{
+      /* input:invalid{
         border: 2px solid red;
-      }
+      } */
 
 
       /*******************************************************************************/
@@ -335,4 +335,8 @@
         border-top: 9px solid #ffd866;
     }
       
-    
+    .error_message {
+      display:table;
+      margin:0 auto;
+      color: #ED6160;
+    }
