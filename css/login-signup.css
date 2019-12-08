@@ -285,6 +285,54 @@
 
 
       /*******************************************************************************/
+      .error{
+        position: absolute;
+        top: -110%; left: 31%;
+        padding: 1% 20%;
+        border-radius: 3px;
+        background-color: #FDCAC4;
+        color: #ED6160;
+        display: none;
+    }
+    
+    .error::before{
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+     
+        border-top: 9px solid #FDCAC4;
+        position: absolute;
+        bottom: -21%; left: 10%;
+    }
+    
+    .error:nth-child(2){
+        top: 70px;
+        background-color: #D9F0FD;
+    }
+    
+    .error:nth-child(2)::before{
+        border-top: 9px solid #D9F0FD;
+    }
+    
+    .error:nth-child(3){
+        top: 140px;
+        padding: 1% 18%;
+        background-color: #6DFFA7;
+    }
+    
+    .error:nth-child(3)::before{
+        border-top: 9px solid #6DFFA7;
+    }
+    
+    .error:nth-child(4){
+        top: 210px;
+        background-color: #ffd866;
+    }
+    
+    .error:nth-child(4)::before{
+        border-top: 9px solid #ffd866;
+    }
       
-
-      
+    

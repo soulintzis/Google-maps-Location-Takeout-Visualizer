@@ -47,7 +47,7 @@ function validateConfirmPassword(){
 
 function checkIfEmpty(field){
     if(isEmpty(field.value.trim())){
-        setInvalid(field, `${field.username} This field is required!`);
+        setInvalid(field, `This field is required!`);
         return true;
     } else {
         setValid(field);
@@ -64,17 +64,17 @@ function isEmpty(value){
 
 function setInvalid(field, message){
     field.className='invalid';
-    field.nextElementSibling.innerHTML = message;
+    $('.error').text(message);
+    $('.error').fadeIn("slow");
+    //field.nextElementSibling.innerHTML = message; 
     //change message color and style it later
     field.nextElementSibling.style.color = 'red';
 }
 
 function setValid(field){
     field.className='valid';
-    field.nextElementSibling.innerHTML = '';
-    //change message color and style it later
-    //check later to remove smthg
-    //field.nextElementSibling.fontcolor("green");
+    //check later 
+    
 }
 
 function checkUsernameFormat(field){
@@ -82,7 +82,7 @@ function checkUsernameFormat(field){
         setValid(field);
         return true;
     } else {
-        setInvalid(field, `${field.username} Username must contain only letters,numbers and underscores`);
+        setInvalid(field, `Username must contain only letters,numbers and underscores`);
         return false;
     }
 }
@@ -92,7 +92,7 @@ function checkPasswordFormat(field){
         setValid(field);
         return true;
     } else {
-        setInvalid(field, `${field.password} must contain at least one uppercase letter, one number and one symbol`);
+        setInvalid(field, `Password must contain at least one uppercase letter, one number and one symbol`);
         return false;
     }
 }
@@ -102,7 +102,7 @@ function checkEmailFormat(field){
         setValid(field);
         return true;
     } else {
-        setInvalid(field, `${field.email} Not valid email address, please try again!`);
+        setInvalid(field, `Not valid email address, please try again!`);
         return false;
     }
 }
