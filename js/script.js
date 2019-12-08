@@ -1,59 +1,9 @@
-
-const username = document.getElementById('username_id');
-const email = document.getElementById('email_id');
+var user = document.getElementById('username_id');
+var email = document.getElementById('email_id');
 const password = document.getElementById('password_id');
 const confirm_password = document.getElementById('confirm_password_id'); 
 
 const form = document.getElementById('signup-form');
-
-
-function validateUsername(){
-    if(checkIfEmpty(username)) return;
-
-    if(!checkUsernameFormat(username)) return; 
-    return true;
-}
-
-function validateEmail(){
-    if(checkIfEmpty(email)) return;
-    if(!checkEmailFormat(email)) return;
-    return true;
-}
-
-function validatePassword(){
-
-    if(checkIfEmpty(password)) return;
-    if(!checkPasswordFormat(password)) return;
-
-    return true;
-}
-
-function validateConfirmPassword(){
-    if(password.className !== 'valid'){
-        setInvalid(confirm_password, 'Fill out password correctly first');
-        return;
-    }
-    if(password.value !== confirm_password.value){
-        setInvalid(confirm_password, 'Passwords should match,please try again!');
-        return;
-    } else{
-        setValid(confirm_password);   
-    } 
-    return true;
-}
-
-/*----------------------------------------------------------------------------------------------------*/
-
-
-function checkIfEmpty(field){
-    if(isEmpty(field.value.trim())){
-        setInvalid(field, `This field is required!`);
-        return true;
-    } else {
-        setValid(field);
-        return false;
-    }
-}
 
 function isEmpty(value){
     if (value === ''){
@@ -62,48 +12,93 @@ function isEmpty(value){
     return false;
 }
 
-function setInvalid(field, message){
-    field.className='invalid';
-    $('.error').text(message);
-    $('.error').fadeIn("slow");
-    //field.nextElementSibling.innerHTML = message; 
-    //change message color and style it later
-    field.nextElementSibling.style.color = 'red';
-}
+console.log(user.value) 
 
-function setValid(field){
-    field.className='valid';
-    //check later 
-    
+function validateUsername(){
+    if(isEmpty(user.value)) {
+        document.getElementById('username_mes').innerHTML = "*Empty username field";
+        document.getElementById('username_id').style.border = "1px solid #ED6160";
+    }else if(!checkUsernameFormat(user)) {
+        document.getElementById('username_mes').innerHTML = "*Invalid username format";
+        document.getElementById('username_id').style.border = "1px solid #ED6160";
+    }else if(checkUsernameFormat(user)) {
+        document.getElementById('username_mes').innerHTML = "";
+        document.getElementById('username_id').style.border = "1px solid #4BB543";
+    }
 }
 
 function checkUsernameFormat(field){
-    if(/^(?=.{8,50}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/.test(field.value)){
-        setValid(field);
+    usernameRegEx = /^(?=.{8,50}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+    var usernameResult = usernameRegEx.test(field.value);
+    if(usernameResult){
         return true;
     } else {
-        setInvalid(field, `Username must contain only letters,numbers and underscores`);
         return false;
     }
 }
 
-function checkPasswordFormat(field){
-    if(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(field.value)){
-        setValid(field);
-        return true;
-    } else {
-        setInvalid(field, `Password must contain at least one uppercase letter, one number and one symbol`);
-        return false;
+function validateEmail(){
+    if(isEmpty(email.value)) {
+        document.getElementById('email_mes').innerHTML = "*Empty email field";
+        document.getElementById('email_id').style.border = "1px solid #ED6160";
+    }else if(!checkEmailFormat(email)) {
+        document.getElementById('email_mes').innerHTML = "*Invalid email format";
+        document.getElementById('email_id').style.border = "1px solid #ED6160";
+    }else if(checkEmailFormat(email)) {
+        document.getElementById('email_mes').innerHTML = "";
+        document.getElementById('email_id').style.border = "1px solid #4BB543";
     }
 }
 
 function checkEmailFormat(field){
-    if(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(field.value)){
-        setValid(field);
+    emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    var emailResult = emailRegEx.test(field.value)
+    if(emailResult){
         return true;
     } else {
-        setInvalid(field, `Not valid email address, please try again!`);
+        return false;
+    }
+}
+function validatePassword(){
+    if(isEmpty(password.value)) {
+        document.getElementById('pass_mes').innerHTML = "*Empty password field";
+        document.getElementById('password_id').style.border = "1px solid #ED6160";
+    }else if(!checkPasswordFormat(password)) {
+        document.getElementById('pass_mes').innerHTML = "*Password must contain at least one uppercase letter, one number and one symbol";
+        document.getElementById('password_id').style.border = "1px solid #ED6160";
+    }else if(checkPasswordFormat(password)) {
+        document.getElementById('pass_mes').innerHTML = "";
+        document.getElementById('password_id').style.border = "1px solid #4BB543";
+    }
+    return true;
+}
+
+function checkPasswordFormat(field){
+    var passRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    var passwordResult = passRegEx.test(field.value)
+    if(passwordResult){
+        return true;
+    } else {
         return false;
     }
 }
 
+function validateConfirmPassword(){
+    if(isEmpty(confirm_password.value)){
+        document.getElementById('conf_mes').innerHTML = "*Please confirm your password";
+        document.getElementById('confirm_password_id').style.border = "1px solid #ED6160";        
+    }else if(password.value !== confirm_password.value){
+        document.getElementById('conf_mes').innerHTML = "*Passwords should match,please try again";
+        document.getElementById('confirm_password_id').style.border = "1px solid #ED6160";   
+    }else{
+        document.getElementById('conf_mes').innerHTML = "";
+        document.getElementById('confirm_password_id').style.border = "1px solid #4BB543";
+   } 
+}
+
+function validation(){
+    if( validateUsername() & validateEmail() & validatePassword() & validateConfirmPassword() )
+        return true;
+    else 
+        return false;
+}
