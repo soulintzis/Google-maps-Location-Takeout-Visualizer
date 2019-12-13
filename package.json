@@ -1,0 +1,24 @@
+{
+  "name": "crowdsourcing_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon run app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soulintzis/WebApp.git"
+  },
+  "author": "soulintzis, ioannou, stemitsiotis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soulintzis/WebApp/issues"
+  },
+  "homepage": "https://github.com/soulintzis/WebApp#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
