@@ -16,6 +16,10 @@ app.get("/signup", function(req, res){
     res.render('signup');
 });
 
+app.get("*", function(req, res){
+    res.render('error_page');
+});
+
 app.listen(80, () => {
     console.log("The app is listening on port 80.");
 });
