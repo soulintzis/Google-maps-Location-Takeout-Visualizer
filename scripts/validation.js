@@ -16,13 +16,13 @@ function isEmpty(value){
 function validateUsername(){
     if(isEmpty(user.value)) {
         document.getElementById('username_mes').innerHTML = "*Empty username field";
-        document.getElementById('username_id').style.border = "1px solid #ED6160";
+        document.getElementById('username_id').style.border = "2px solid #ED6160";
     }else if(!checkUsernameFormat(user)) {
         document.getElementById('username_mes').innerHTML = "*Invalid username format";
-        document.getElementById('username_id').style.border = "1px solid #ED6160";
+        document.getElementById('username_id').style.border = "2px solid #ED6160";
     }else if(checkUsernameFormat(user)) {
         document.getElementById('username_mes').innerHTML = "";
-        document.getElementById('username_id').style.border = "1px solid #4BB543";
+        document.getElementById('username_id').style.border = "2px solid #4BB543";
     }
 }
 
@@ -39,13 +39,13 @@ function checkUsernameFormat(field){
 function validateEmail(){
     if(isEmpty(email.value)) {
         document.getElementById('email_mes').innerHTML = "*Empty email field";
-        document.getElementById('email_id').style.border = "1px solid #ED6160";
+        document.getElementById('email_id').style.border = "2px solid #ED6160";
     }else if(!checkEmailFormat(email)) {
         document.getElementById('email_mes').innerHTML = "*Invalid email format";
-        document.getElementById('email_id').style.border = "1px solid #ED6160";
+        document.getElementById('email_id').style.border = "2px solid #ED6160";
     }else if(checkEmailFormat(email)) {
         document.getElementById('email_mes').innerHTML = "";
-        document.getElementById('email_id').style.border = "1px solid #4BB543";
+        document.getElementById('email_id').style.border = "2px solid #4BB543";
     }
 }
 
@@ -62,13 +62,13 @@ function checkEmailFormat(field){
 function validatePassword(){
     if(isEmpty(password.value)) {
         document.getElementById('pass_mes').innerHTML = "*Empty password field";
-        document.getElementById('password_id').style.border = "1px solid #ED6160";
+        document.getElementById('password_id').style.border = "2px solid #ED6160";
     }else if(!checkPasswordFormat(password)) {
         document.getElementById('pass_mes').innerHTML = "*Password must contain at least one uppercase letter, one number and one symbol";
-        document.getElementById('password_id').style.border = "1px solid #ED6160";
+        document.getElementById('password_id').style.border = "2px solid #ED6160";
     }else if(checkPasswordFormat(password)) {
         document.getElementById('pass_mes').innerHTML = "";
-        document.getElementById('password_id').style.border = "1px solid #4BB543";
+        document.getElementById('password_id').style.border = "2px solid #4BB543";
     }
     return true;
 }
@@ -86,14 +86,14 @@ function checkPasswordFormat(field){
 function validateConfirmPassword(){
     if(isEmpty(confirm_password.value)){
         document.getElementById('conf_mes').innerHTML = "*Please confirm your password";
-        document.getElementById('confirm_password_id').style.border = "1px solid #ED6160";
+        document.getElementById('confirm_password_id').style.border = "2px solid #ED6160";
     }else if(checkPasswordFormat(password)){     
             if(password.value !== confirm_password.value){
                 document.getElementById('conf_mes').innerHTML = "*Passwords should match,please try again";
-                document.getElementById('confirm_password_id').style.border = "1px solid #ED6160";   
+                document.getElementById('confirm_password_id').style.border = "2px solid #ED6160";   
             }else{
                 document.getElementById('conf_mes').innerHTML = "";
-                document.getElementById('confirm_password_id').style.border = "1px solid #4BB543";
+                document.getElementById('confirm_password_id').style.border = "2px solid #4BB543";
             }
         }
 }
