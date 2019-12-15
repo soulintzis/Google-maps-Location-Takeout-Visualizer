@@ -1,82 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-        <head>
-            <title>Sign Up on Patras Crowdsourcing</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-            <link rel="icon" type="image/png" href="images/icons/favicon.png">
-            <link rel="stylesheet" href="css/reset.css">
-            <link rel="stylesheet" href="css/login-signup.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-            
-        </head>
-        <body>
-            <header class="pp-header" >
-                <div>
-                    <div class="pcrowd-logo">
-                          <!-- <img src="/images/logo.png"  alt="LOGO"> -->
-                    </div>
-                    <div class="container-signup-form-btn">
-                            <button class="login100-form-btn"  onclick="window.location.href='/';">
-                                Login
-                            </button>
-                        </div>
+<header class="pp-header">
+    <div>
+        <div class="logo">
+            <!-- Logo is needed -->
+        </div>
+        <div class=".container-submit-form-btn">
+            <button class="login-redirect-btn" onclick="window.location.href='/';">
+                Login
+            </button>
+        </div>
+    </div>
+
+</header>
+<div class="container">
+    <div class="login-signup-box" style="background-image: url('../images/bg-01.jpg');">
+        <div class="wrap-login-signup">
+            <form id="signup-form" action="#" onsubmit="return validation()" novalidate>
+
+                <div class="user-icon" alt="USER_ICON">
+                    <img src="../images/icons/user-icon-svg.svg">
                 </div>
-                        
-            </header>
-            <div class="limiter">
-                    
-                <div class="container-signup" style="background-image: url('../images/bg-01.jpg');">
-                    
-                    <div class="wrap-signup">
-                        <form id="signup-form" action="#" onsubmit="return validation()" novalidate>
-                            
-                            <div class = "user-icon" alt="USER_ICON">
-                                <img src="../images/icons/user-icon-svg.svg">
-                            </div>
-                            
-                            <span class="signup100-form-title">Sign-up</span>
-                            
-                            <div class="wrap-input">
-                                    <input id="username_id" class="input" type="text" placeholder="Username" onfocusout="validateUsername()"/>
-                                    <span id="username_mes" class = "error_message"></span>
-                            </div>
 
-                            <div class="wrap-input">
-                                    <input id="email_id" class="input" type="email" placeholder="Email Address" onfocusout="validateEmail()"/>
-                                    <span id="email_mes" class = "error_message"></span>
-                            </div>
+                <span class="login-signup-form-title">Sign-up</span>
 
-                            <div class="wrap-input">
-                                    <input id="password_id" class="input" type="password" placeholder="Password" onfocusout="validatePassword()"/>
-                                    <span id="pass_mes" class = "error_message"></span>
-                            </div>
-
-                            <div class="wrap-input">
-                                    <input id="confirm_password_id" class="input" type="password" placeholder="Confirm Password" onfocusout="validateConfirmPassword()"/>
-                                    <span id="conf_mes" class = "error_message"></span>
-                            </br>
-                                    <p class="password_confirm_tip">Password must be at least 8 characters and contain one uppercase letter, one number and one symbol.</p>
-                            </div>
-
-                            <div class="container-signup-form-btn">
-                                <button type="submit" value="Submit" class="signup100-form-btn">
-                                    Sign-up
-                                </button>
-                            </div>
-                            
-                        </form>
-                    </div>
+                <div class="wrap-form-input">
+                    <input id="username_id" class="input" type="text" placeholder="Username"
+                        onfocusout="validateUsername()" />
+                    <span id="username_mes" class="error_message"></span>
                 </div>
-            </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-            <script type="text/javascript" src="scripts/validation.js"></script>                  
-        </body>
-</html>
+
+                <div class="wrap-form-input">
+                    <input id="email_id" class="input" type="email" placeholder="Email Address"
+                        onfocusout="validateEmail()" />
+                    <span id="email_mes" class="error_message"></span>
+                </div>
+
+                <div class="wrap-form-input">
+                    <input id="password_id" class="input" type="password" placeholder="Password"
+                        onfocusout="validatePassword()" />
+                    <span id="pass_mes" class="error_message"></span>
+                </div>
+
+                <div class="wrap-form-input">
+                    <input id="confirm_password_id" class="input" type="password" placeholder="Confirm Password"
+                        onfocusout="validateConfirmPassword()" />
+                    <span id="conf_mes" class="error_message"></span>
+                    </br>
+                    <p class="password_confirm_tip">Password must be at least 8 characters and contain one uppercase
+                        letter, one number and one symbol.</p>
+                </div>
+
+                <div class="container-submit-form-btn">
+                    <button type="submit" value="Submit" class="submit-form-btn">
+                        Sign-up
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<%- include("partials/footer") %>
