@@ -1,0 +1,31 @@
+<%- include("partials/header") %>
+
+<header class="pp-header">
+    <div>
+        <div class="pcrowd-logo">
+            <!-- <img src="/images/logo.png"  alt="LOGO">  -->
+        </div>
+    </div>
+</header>
+
+<title>Patras Crowdsourcing</title>
+<br>
+<h1 id="text100">Welcome (username) to Patras Crowdsourcing Web App!</h1>
+<br>
+
+<div class="container-image">
+    <div class="location-image"></div>
+</div>
+
+<label>Here you can upload your Google location history (JSON) file to check your statistics:</label>
+<br>
+<br>
+
+<form method="post" enctype="multipart/form-data" action="/upload">
+    <div class="upload-container">
+        <input type="file" name = "filename" id="fileup" accept=".json">
+        <input class="upload-box" type = "submit" value="Upload a file"></input>
+    </div>
+</form>
+
+<%- include("partials/footer") %>

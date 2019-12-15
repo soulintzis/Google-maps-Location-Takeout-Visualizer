@@ -342,3 +342,51 @@ input[type]:focus,
   color: #ed6160;
 }
 /*******************************************************/
+/* Home styles */
+.upload-box {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  background-color:#1e7b85;
+  border-radius: 8px;
+  color: white;
+  height:50px;
+  width:180px;
+  border: 1px solid gray;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.upload-box input[type=file] {
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.upload-box:hover {
+  filter: brightness(0.90);
+  
+}
+
+#text100 {
+  font-family:Helvetica;
+  font-size:30px;
+  color:black;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* .container-image {
+  max-width:600px;
+  margin: 0 auto;
+}
+
+.location-image {
+  width: 100%;
+  padding-top: 66%;
+  background: url('/images/new_location_img.jpg') no-repeat right;
+  background-size: contain;
+} */
