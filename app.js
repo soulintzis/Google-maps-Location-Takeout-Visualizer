@@ -22,10 +22,9 @@ mongoose.connection.on('error', err => {
     console.log('Error at mongoDb: ' + err);
 });
 
-let users = require('./routes/users');
-
-app.use('./users',users);
+app.use(require('./routes/users'));
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
 app.use('/css',express.static(path.join(__dirname, 'css')));
 app.use('/images',express.static(path.join(__dirname, 'images')));
 app.use('/scripts',express.static(path.join(__dirname, 'scripts')));
@@ -36,12 +35,6 @@ app.use(upload());
 app.get("/", function(req, res){
     res.render('login');
 });
-
-app.get("/signup", function(req, res){
-    res.render('signup');
-});
-
-
 
 app.get("/home", function(req, res){
     res.render('home');
