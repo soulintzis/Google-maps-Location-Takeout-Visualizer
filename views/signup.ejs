@@ -16,8 +16,7 @@
 <div class="container">
     <div class="login-signup-box" style="background-image: url('../images/bg-01.jpg');">
         <div class="wrap-login-signup">
-            <form id="signup-form" action="#" onsubmit="return validation()" novalidate>
-
+            <form id="signup-form" action="/register" onsubmit="return validation()" novalidate></form>
                 <div class="user-icon" alt="USER_ICON">
                     <img src="../images/icons/user-icon-svg.svg">
                 </div>
@@ -25,25 +24,25 @@
                 <span class="login-signup-form-title">Sign-up</span>
 
                 <div class="wrap-form-input">
-                    <input id="username_id" class="input" type="text" placeholder="Username"
+                    <input id="username_id" name="username" class="input" type="text" placeholder="Username"
                         onfocusout="validateUsername()" />
                     <span id="username_mes" class="error_message"></span>
                 </div>
 
                 <div class="wrap-form-input">
-                    <input id="email_id" class="input" type="email" placeholder="Email Address"
+                    <input id="email_id" name="email" class="input" type="email" placeholder="Email Address"
                         onfocusout="validateEmail()" />
                     <span id="email_mes" class="error_message"></span>
                 </div>
 
                 <div class="wrap-form-input">
-                    <input id="password_id" class="input" type="password" placeholder="Password"
+                    <input id="password_id" name="password" class="input" type="password" placeholder="Password"
                         onfocusout="validatePassword()" />
                     <span id="pass_mes" class="error_message"></span>
                 </div>
 
                 <div class="wrap-form-input">
-                    <input id="confirm_password_id" class="input" type="password" placeholder="Confirm Password"
+                    <input id="confirm_password_id" name="confirm" class="input" type="password" placeholder="Confirm Password"
                         onfocusout="validateConfirmPassword()" />
                     <span id="conf_mes" class="error_message"></span>
                     </br>

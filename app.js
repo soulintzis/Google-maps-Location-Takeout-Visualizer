@@ -8,6 +8,7 @@ var config = require('./config');
 
 const app = express();
 
+//Server start
 app.listen(PORT, () => {
     console.log("The app is listening on port " +PORT);
 });
@@ -21,6 +22,9 @@ mongoose.connection.on('error', err => {
     console.log('Error at mongoDb: ' + err);
 });
 
+let users = require('./routes/users');
+
+app.use('./users',users);
 app.set('view engine', 'ejs');
 app.use('/css',express.static(path.join(__dirname, 'css')));
 app.use('/images',express.static(path.join(__dirname, 'images')));
@@ -28,14 +32,16 @@ app.use('/scripts',express.static(path.join(__dirname, 'scripts')));
 app.use('/views',express.static(path.join(__dirname, 'views')));
 app.use(upload());
 
+
 app.get("/", function(req, res){
     res.render('login');
 });
 
 app.get("/signup", function(req, res){
-    var username = ['vagos', 'jim'];
     res.render('signup');
 });
+
+
 
 app.get("/home", function(req, res){
     res.render('home');
