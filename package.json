@@ -20,6 +20,7 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
+    "mongoose": "^5.8.1",
     "nodemon": "^2.0.2"
   }
 }

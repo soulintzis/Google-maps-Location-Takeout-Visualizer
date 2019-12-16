@@ -1,7 +1,27 @@
-var express = require("express");
+const express = require("express");
 const path = require('path');
-var upload = require("express-fileupload");
-var app = express();
+const upload = require("express-fileupload");
+const mongoose = require('mongoose');
+
+const PORT = 3000;
+
+
+const app = express();
+
+app.listen(PORT, () => {
+    console.log("The app is listening on port " +PORT);
+});
+
+mongoose.connect('mongodb+srv://admin:e74d42x75@webapp-vuzaa.gcp.mongodb.net/test?retryWrites=true&w=majority');
+let db = mongoose.connection;
+
+db.once('open', function(){
+    console.log("Connected to MongoDB");
+});
+
+db.on('error', function(err){
+    console.log(err);
+});
 
 app.set('view engine', 'ejs');
 app.use('/css',express.static(path.join(__dirname, 'css')));
@@ -15,6 +35,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/signup", function(req, res){
+    var username = ['vagos', 'jim'];
     res.render('signup');
 });
 
@@ -46,6 +67,3 @@ app.get("*", function(req, res){
     res.render('error_page');
 });
 
-app.listen(80, () => {
-    console.log("The app is listening on port 80.");
-});
