@@ -3,7 +3,7 @@ const path = require('path');
 const upload = require("express-fileupload");
 const mongoose = require('mongoose');
 
-const PORT = 3000;
+const PORT = 80;
 var config = require('./config');
 
 const app = express();
