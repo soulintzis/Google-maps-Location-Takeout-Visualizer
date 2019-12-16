@@ -1,3 +1,3 @@
 module.exports = {
-    dbUrl: "mongodb://localhost:27017/crowdsourcing_app"
+    dbUrl: 'mongodb+srv://admin:e74d42x75@webapp-vuzaa.gcp.mongodb.net/test?retryWrites=true&w=majority'
 }

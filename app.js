@@ -4,7 +4,7 @@ const upload = require("express-fileupload");
 const mongoose = require('mongoose');
 
 const PORT = 3000;
-
+var config = require('./config');
 
 const app = express();
 
@@ -12,15 +12,13 @@ app.listen(PORT, () => {
     console.log("The app is listening on port " +PORT);
 });
 
-mongoose.connect('mongodb+srv://admin:e74d42x75@webapp-vuzaa.gcp.mongodb.net/test?retryWrites=true&w=majority');
-let db = mongoose.connection;
-
-db.once('open', function(){
-    console.log("Connected to MongoDB");
+mongoose.connect(config.dbUrl);
+mongoose.connection.on('connected', ()=>{
+    console.log('Connected to mongo database.');
 });
 
-db.on('error', function(err){
-    console.log(err);
+mongoose.connection.on('error', err => {
+    console.log('Error at mongoDb: ' + err);
 });
 
 app.set('view engine', 'ejs');
