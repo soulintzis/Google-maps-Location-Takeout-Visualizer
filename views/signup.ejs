@@ -16,47 +16,46 @@
 <div class="container">
     <div class="login-signup-box" style="background-image: url('../images/bg-01.jpg');">
         <div class="wrap-login-signup">
-            <form id="signup-form" action="/register" onsubmit="return validation()" novalidate></form>
-                <div class="user-icon" alt="USER_ICON">
-                    <img src="../images/icons/user-icon-svg.svg">
-                </div>
+            <!-- onsubmit="return validation()" -->
+            <div class="user-icon" alt="USER_ICON">
+                <img src="../images/icons/user-icon-svg.svg">
+            </div>
+            <span class="login-signup-form-title">Sign-up</span>
 
-                <span class="login-signup-form-title">Sign-up</span>
-
+            <form id="signup-form" action="/signup/register" method="post" onsubmit="return validateForm()" novalidate>
                 <div class="wrap-form-input">
-                    <input id="username_id" name="username" class="input" type="text" placeholder="Username"
+                    <input id="username" name="username" class="input" type="text" placeholder="Username"
                         onfocusout="validateUsername()" />
                     <span id="username_mes" class="error_message"></span>
                 </div>
 
                 <div class="wrap-form-input">
-                    <input id="email_id" name="email" class="input" type="email" placeholder="Email Address"
+                    <input id="email" name="email" class="input" type="email" placeholder="Email Address"
                         onfocusout="validateEmail()" />
                     <span id="email_mes" class="error_message"></span>
                 </div>
 
                 <div class="wrap-form-input">
-                    <input id="password_id" name="password" class="input" type="password" placeholder="Password"
+                    <input id="password" name="password" class="input" type="password" placeholder="Password"
                         onfocusout="validatePassword()" />
                     <span id="pass_mes" class="error_message"></span>
                 </div>
 
                 <div class="wrap-form-input">
-                    <input id="confirm_password_id" name="confirm" class="input" type="password" placeholder="Confirm Password"
-                        onfocusout="validateConfirmPassword()" />
+                    <input id="confirm" name="confirm" class="input" type="password"
+                        placeholder="Confirm Password" onfocusout="validateConfirmPassword()" />
                     <span id="conf_mes" class="error_message"></span>
                     </br>
                     <p class="password_confirm_tip">Password must be at least 8 characters and contain one uppercase
                         letter, one number and one symbol.</p>
                 </div>
-
-                <div class="container-submit-form-btn">
-                    <button type="submit" value="Submit" class="submit-form-btn">
-                        Sign-up
-                    </button>
-                </div>
-
             </form>
+            
+            <div class="container-submit-form-btn">
+                <button type="submit" value="submit" form="signup-form" class="submit-form-btn">
+                    Sign-up
+                </button>
+            </div>
         </div>
     </div>
 </div>

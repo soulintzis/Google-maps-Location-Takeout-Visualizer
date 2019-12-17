@@ -1,28 +1,61 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+const bodyParser = require("body-parser");
+const {check, validationResult} = require('express-validator');
 
-// let User = require('../models/User');
+let User = require('../models/user');
 
-router.get('/signup', function(req,res){
+router.use(bodyParser.urlencoded({ extended: true }))
+router.use(bodyParser.json());
+
+router.get('/', function(req,res){
     res.render('signup');
-    // var username = req.body.username;
-    // var email = req.body.email;
-    // var password = req.body.password;
-    // var confirm = req.body.confirm;
+});
 
-    // var newUser = new User();
-    // newUser.username = username;
-    // newUser.email = email;
-    // newUser.password = password;
+router.post("/register", [
+    check('username').not().isEmpty(),
+    check('email').isEmail(),
+    check('password').not().isEmpty()
+    ], function(req, res){
 
-    // newUser.save(function(err, savedUser){
-    //     if(err){
-    //         console.log(err);
-    //         console.log("hello");
-    //         return res.status(500).send();
-    //     }
-    //     return res.status(200).send();
-    // });
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    const confirm = req.body.confirm;
+
+    let errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        res.render('signup', {
+            errors: errors
+        });
+    } else {
+        var newUser = new User({
+            username: username,
+            email: email,
+            password: password
+        });
+
+        bcrypt.genSalt(10, function(err, salt){
+            bcrypt.hash(newUser.password, salt, function(err, hash){
+                if(err){
+                    console.log(err);
+                }
+                newUser.password = hash;
+                newUser.save(function(err, user){
+                    if(err){
+                        console.log(err);
+                        return;
+                    }else{
+                        // res.render('/');
+                        res.redirect('/');
+                        console.log('You successfully create an account');
+                    }
+                });
+            });
+        });
+    }
 });
 
 module.exports = router;

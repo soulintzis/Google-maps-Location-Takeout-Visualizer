@@ -18,9 +18,11 @@
   "homepage": "https://github.com/soulintzis/WebApp#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
+    "express-validator": "^6.3.0",
     "mongoose": "^5.8.1",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
