@@ -379,14 +379,19 @@ input[type]:focus,
   text-align: center;
 }
 
-/* .container-image {
-  max-width:600px;
+#map {
   margin: 0 auto;
+  height: 50%;
+  width: 50%;
 }
 
-.location-image {
-  width: 100%;
-  padding-top: 66%;
-  background: url('/images/new_location_img.jpg') no-repeat right;
-  background-size: contain;
-} */
+.map-container {
+  text-align: center;     
+  padding-top: 70px;  
+  padding-bottom: 10px;   
+}
+
+.upload-container {
+  padding-top: 20px;
+  text-align: center;     
+}
