@@ -32,7 +32,7 @@ var index = require('./routes/index');
 app.use('/', index);
 app.use('/signup', users);  
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use('/css',express.static(path.join(__dirname, 'css')));
 app.use('/images',express.static(path.join(__dirname, 'images')));

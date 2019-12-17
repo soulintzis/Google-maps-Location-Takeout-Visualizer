@@ -23,6 +23,7 @@ router.post("/register", [
     const email = req.body.email;
     const password = req.body.password;
     const confirm = req.body.confirm;
+    const admin = req.body.admin;
 
     let errors = validationResult(req);
 
@@ -34,7 +35,8 @@ router.post("/register", [
         var newUser = new User({
             username: username,
             email: email,
-            password: password
+            password: password,
+            admin: admin
         });
 
         bcrypt.genSalt(10, function(err, salt){
@@ -48,7 +50,6 @@ router.post("/register", [
                         console.log(err);
                         return;
                     }else{
-                        // res.render('/');
                         res.redirect('/');
                         console.log('You successfully create an account');
                     }
