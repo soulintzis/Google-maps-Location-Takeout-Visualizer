@@ -1,19 +1,20 @@
+const {check, validationResults} = require('express-validator');
+const upload = require("express-fileupload");
+const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 const express = require("express");
 const path = require('path');
-const upload = require("express-fileupload");
-const mongoose = require('mongoose');
-const {check, validationResults} = require('express-validator');
-const bodyParser = require("body-parser");
+var app = express();
 
 const PORT = 80;
 const config = require('./config');
-var app = express();
 
-//Server start
+//SERVER START
 app.listen(PORT, () => {
     console.log("The app is listening on port " +PORT);
 });
 
+//CONNECT TO MONGODB AND CHECK FOR ERRORS
 mongoose.connect(config.dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -21,23 +22,31 @@ mongoose.connect(config.dbUrl, {
 mongoose.connection.on('connected', ()=>{
     console.log('Connected to mongo database.');
 });
-
 mongoose.connection.on('error', err => {
     console.log('Error at mongoDb: ' + err);
 });
 
+//ROUTE PATHS
 var users = require('./routes/users');
 var index = require('./routes/index');
 
+//ROUTES
 app.use('/', index);
 app.use('/signup', users);  
+
+// SET EJS AS VIEW ENGINE
 app.set('view engine', 'ejs');
+
+//SETUP BODY PARSER
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
+
+//SET STATIC FOLDERS
 app.use('/css',express.static(path.join(__dirname, 'css')));
 app.use('/images',express.static(path.join(__dirname, 'images')));
 app.use('/scripts',express.static(path.join(__dirname, 'scripts')));
 app.use('/views',express.static(path.join(__dirname, 'views')));
+
 app.use(upload());
 
 
@@ -66,6 +75,7 @@ app.post("/upload", function(req,res){
     }
 });
 
+//RENDER AN ERROR PAGE WHENEVER A USER VISITS AN NONEXISTING LINK
 app.get("*", function(req, res){
     res.render('error_page');
 });
