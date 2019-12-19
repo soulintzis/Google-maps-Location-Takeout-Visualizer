@@ -10,7 +10,7 @@
     <div class="container">
     <div class="login-signup-box" style="background-image: url('../images/bg-01.jpg');">
         <div class="wrap-login-signup">
-            <form id="login-form" action="#" novalidate>
+            <form id="login-form" action="/" method="post" novalidate>
                 <div class="user-icon" alt="USER_ICON">
                     <img src="../images/icons/user-icon-svg.svg">
                 </div>
@@ -18,11 +18,11 @@
                 <span class="login-signup-form-title">Log-in</span>
 
                 <div class="wrap-form-input">
-                    <input class="input" type="text" placeholder="Username">
+                    <input id="username" name="username" class="input" type="text" placeholder="Username">
                 </div>
 
                 <div class="wrap-form-input">
-                    <input class="input" type="password" placeholder="Password">
+                    <input id="password" name="password" class="input" type="password" placeholder="Password">
                 </div>
 
                 <div class="text-center">
@@ -31,13 +31,12 @@
                         Let's create one.
                     </a>
                 </div>
-
-                <div class="container-submit-form-btn">
-                    <button class="submit-form-btn">
-                        Login
-                    </button>
-                </div>
             </form>
+            <div class="container-submit-form-btn">
+                <button  type="submit" value="submit" form="login-form" class="submit-form-btn">
+                    Login
+                </button>
+            </div>
         </div>
     </div>
 </div>

@@ -2,20 +2,24 @@ const {check, validationResults} = require('express-validator');
 const upload = require("express-fileupload");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const passport = require('passport');
 const express = require("express");
 const path = require('path');
+
 var app = express();
 
 const PORT = 80;
-const config = require('./config');
 
-//SERVER START
+//Database Config
+const db = require('./config/db');
+
+//Server Start
 app.listen(PORT, () => {
     console.log("The app is listening on port " +PORT);
 });
 
-//CONNECT TO MONGODB AND CHECK FOR ERRORS
-mongoose.connect(config.dbUrl, {
+//Connect to MongoDB and check for errors
+mongoose.connect(db.dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -26,22 +30,23 @@ mongoose.connection.on('error', err => {
     console.log('Error at mongoDb: ' + err);
 });
 
-//ROUTE PATHS
+//Signup Route
 var users = require('./routes/users');
+//Login Route
 var index = require('./routes/index');
 
-//ROUTES
+//Routes
 app.use('/', index);
 app.use('/signup', users);  
 
-// SET EJS AS VIEW ENGINE
+//Set EJS as view engine
 app.set('view engine', 'ejs');
 
-//SETUP BODY PARSER
+//Setup body parser
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 
-//SET STATIC FOLDERS
+//Set static folders
 app.use('/css',express.static(path.join(__dirname, 'css')));
 app.use('/images',express.static(path.join(__dirname, 'images')));
 app.use('/scripts',express.static(path.join(__dirname, 'scripts')));
@@ -49,11 +54,16 @@ app.use('/views',express.static(path.join(__dirname, 'views')));
 
 app.use(upload());
 
+//Passport Config
+require('./config/passport')(passport);
+
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/home", function(req, res){
     res.render('home');
 });
-
 
 app.post("/upload", function(req,res){
     var message = "";
