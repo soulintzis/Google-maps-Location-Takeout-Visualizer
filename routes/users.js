@@ -9,6 +9,7 @@ let User = require('../models/user');
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
 
+//Signup Form
 router.get('/', function(req,res){
     res.render('signup');
 });
