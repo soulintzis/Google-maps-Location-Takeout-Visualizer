@@ -71,19 +71,25 @@ app.post("/upload", function(req,res){
     const validFileExtensions = "json"
     if(req.files){
         const file = req.files.filename, filename = file.name;
-        if(filename.split('.').pop() !== validFileExtensions){
-            console.log("You can only upload Json files.")
-        }else{
-            file.mv("../uploads/" + filename, function(err){
-                if(err){
-                    console.log(err);
-                    res.redirect('home');
-                }else{
-                    console.log("The file uploaded successfully.");
-                    res.redirect('home');
-                }
-            });
-        }
+        crypto.randomBytes(8, (err, buf) => {
+            if(err){
+                console.log(err);
+            }
+            const newFilename = buf.toString('hex') + path.extname(filename);
+            if(filename.split('.').pop() !== validFileExtensions){
+                console.log("You can only upload Json files.")
+            }else{
+                file.mv("../uploads/" + newFilename, function(err){
+                    if(err){
+                        console.log(err);
+                        res.redirect('home');
+                    }else{
+                        console.log("The file uploaded successfully.");
+                        res.redirect('home');
+                    }
+                });
+            }
+        });
     }
 });
 
