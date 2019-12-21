@@ -9,6 +9,8 @@ const path = require('path');
 
 var app = express();
 
+const parser = require('./scripts/parseJson');
+
 const PORT = 80;
 
 //Database Config
@@ -84,6 +86,7 @@ app.post("/upload", function(req,res){
                         console.log(err);
                         res.redirect('home');
                     }else{
+                        parser.readJsonObjectFromFile(newFilename); 
                         console.log("The file uploaded successfully.");
                         res.redirect('home');
                     }
