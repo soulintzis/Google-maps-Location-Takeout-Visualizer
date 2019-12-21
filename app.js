@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const passport = require('passport');
 const express = require("express");
+const crypto = require('crypto');
 const path = require('path');
 
 var app = express();
@@ -66,15 +67,16 @@ app.get("/home", function(req, res){
 });
 
 app.post("/upload", function(req,res){
-    var message = "";
+    let message = "";
     const validFileExtensions = "json"
     if(req.files){
-        var file = req.files.filename, filename = file.name;
+        const file = req.files.filename, filename = file.name;
         if(filename.split('.').pop() !== validFileExtensions){
             console.log("You can only upload Json files.")
         }else{
             file.mv("../uploads/" + filename, function(err){
                 if(err){
+                    console.log(err);
                     res.redirect('home');
                 }else{
                     console.log("The file uploaded successfully.");

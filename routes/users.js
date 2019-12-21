@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const bodyParser = require("body-parser");
+const crypto = require('crypto');
 const {check, validationResult} = require('express-validator');
 
 let User = require('../models/user');
@@ -25,6 +26,7 @@ router.post("/register", [
     const password = req.body.password;
     const confirm = req.body.confirm;
     const admin = req.body.admin;
+    var id = '';
 
     let errors = validationResult(req);
 
@@ -37,8 +39,15 @@ router.post("/register", [
             username: username,
             email: email,
             password: password,
+            user_id: id,
             admin: admin
         });
+
+        //Create a user_id that only the user himself can decipher using his password
+        var key = crypto.createCipher('aes-128-cbc', password);
+        id = key.update(email, 'utf8', 'hex')
+        id += key.final('hex');
+        newUser.user_id = id;
 
         bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(newUser.password, salt, function(err, hash){
@@ -61,3 +70,8 @@ router.post("/register", [
 });
 
 module.exports = router;
+
+//Decipher Documentation
+// var mykey = crypto.createDecipher('aes-128-cbc', 'mypassword');
+// var mystr = mykey.update('34feb914c099df25794bf9ccb85bea72', 'hex', 'utf8')
+// mystr += mykey.final('utf8');
