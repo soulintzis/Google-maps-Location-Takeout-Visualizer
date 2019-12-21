@@ -1,5 +1,6 @@
 const fs = require('fs');
 const filePath = '../uploads/'
+
 module.exports = {
     readJsonObjectFromFile: (filename) => {
         path = filePath + filename;
@@ -9,7 +10,6 @@ module.exports = {
             for(item in jsonObj){
                 for(subItem in jsonObj[item]){
                     location = jsonObj[item][subItem];
-                    console.log(location);
                 }
             }
         });
