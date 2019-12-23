@@ -25,7 +25,7 @@ router.post("/register", [
     const email = req.body.email;
     const password = req.body.password;
     const confirm = req.body.confirm;
-    const admin = req.body.admin;
+
     var id = '';
 
     let errors = validationResult(req);
@@ -39,8 +39,7 @@ router.post("/register", [
             username: username,
             email: email,
             password: password,
-            user_id: id,
-            admin: admin
+            user_id: id
         });
 
         //Create a user_id that only the user himself can decipher using his password
