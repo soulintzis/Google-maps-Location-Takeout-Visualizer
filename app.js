@@ -82,7 +82,7 @@ app.post("/upload", function(req,res){
                 console.log("You can only upload Json files.")
             }else{
                 file.mv("../uploads/" + newFilename, function(err){
-                    if(err){
+                if(err){
                         console.log(err);
                         res.redirect('home');
                     }else{
@@ -101,3 +101,19 @@ app.get("*", function(req, res){
     res.render('error_page');
 });
 
+
+// var dataSchema = new mongoose.Schema({
+//     timestampMs : Number,
+//     latitude : Number,
+//     longitude : Number,
+//     accuracy : Number,
+//     activity : [ new mongoose.Schema({
+//         timestampMs : Number,
+//         activity : [ new mongoose.Schema({
+//             type: String,
+//             confidence: Number
+//         },{strict: false})
+//         ]
+//     },{strict: false})
+//     ]
+// },{strict: false});
