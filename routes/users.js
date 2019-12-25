@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const crypto = require('crypto');
 const {check, validationResult} = require('express-validator');
 
-let User = require('../models/user');
+let User = require('../models/User');
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());

@@ -5,7 +5,7 @@ const express = require('express');
 
 const router = express.Router();
 
-let User = require('../models/user');
+let User = require('../models/User');
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());

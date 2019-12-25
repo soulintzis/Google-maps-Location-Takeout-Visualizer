@@ -11,14 +11,14 @@ var app = express();
 
 const parser = require('./scripts/parseJson');
 
-const PORT = 80;
+const PORT = 3000;
 
 //Database Config
 const db = require('./config/db');
 
 //Server Start
 app.listen(PORT, () => {
-    console.log("The app is listening on port " +PORT);
+    console.log("The app is listening on port " + PORT);
 });
 
 //Connect to MongoDB and check for errors
@@ -68,11 +68,28 @@ app.get("/home", function(req, res){
     res.render('home');
 });
 
+app.post("/api", function(req, res) {
+    newObj = {
+        polygons: []
+    }
+    const obj = req.body;
+    obj.angles.forEach(element => {
+        areas = [];
+        for(var i=0;i<element;i++){
+            areas.push(obj.coordinates[i]);
+        }
+        newObj.polygons.push(areas);
+    });
+    console.log(newObj);
+});
+
 app.post("/upload", function(req,res){
     let message = "";
     const validFileExtensions = "json"
+    
     if(req.files){
         const file = req.files.filename, filename = file.name;
+        console.log(file);
         crypto.randomBytes(8, (err, buf) => {
             if(err){
                 console.log(err);
