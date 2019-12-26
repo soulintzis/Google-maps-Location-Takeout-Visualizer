@@ -2,7 +2,7 @@ const fs = require('fs');
 const filePath = '../uploads/'
 const latitude_center = 38.2466395;
 const longitude_center = 21.753150;
-var counter = 0;
+retrievedPolygons = [];
 
 module.exports = {
     readJsonObjectFromFile: (filename) => {
@@ -10,19 +10,52 @@ module.exports = {
         fs.readFile(path, (err, data) => {
             if(err) throw err;
             let jsonObj = JSON.parse(data);
-            // for(item in jsonObj){
-            //     for(subItem in jsonObj[item]){
-            //         location = jsonObj[item][subItem];
-            //         lat = location.latitudeE7/10000000;
-            //         lon = location.longitudeE7/10000000;
-            //         counter = counter + 1;
-            //         if(module.exports.checkLocation(lat, lon) > 10.0) {
-            //             console.log(lat, lon + ' outside');
-            //         }else{
-            //             console.log(lat, lon + ' inside');
-            //         }
-            //     }
-            // }
+      
+            for(item in jsonObj){
+                for(subItem in jsonObj[item]){
+                    location = jsonObj[item][subItem];
+                    var lat = location.latitudeE7/10000000;
+                    var lon = location.longitudeE7/10000000;
+                    if(module.exports.checkLocation(lat, lon) < 10.0) {
+                        console.log(lat + ', ' +  lon + ' inside');
+                    }else{
+                        console.log(lat + ', ' + lon + ' outside');
+                    }
+                }
+            }
+        });
+    },
+    readJsonObjectFromFileExtra: (filename, locations) => {
+        path = filePath + filename;
+        fs.readFile(path, (err, data) => {
+            if(err) throw err;
+            let jsonObj = JSON.parse(data);
+            for(loc in locations.polygons){
+                polygon = [];
+                for(point in locations.polygons[loc]){
+                    polygon.push(locations.polygons[loc][point].split(','));
+                }
+                retrievedPolygons.push(polygon);
+            }
+            for(item in jsonObj){
+                for(subItem in jsonObj[item]){
+                    location = jsonObj[item][subItem];
+                    var lat = location.latitudeE7/10000000;
+                    var lon = location.longitudeE7/10000000;
+                    var isInsidePolygon = false;
+                    for(pol in retrievedPolygons){
+                        if(module.exports.checkPolygon(retrievedPolygons[pol], lat, lon)){
+                            isInsidePolygon = !isInsidePolygon
+                            break;
+                        }
+                    }
+                    if(module.exports.checkLocation(lat, lon) < 10.0 && !isInsidePolygon) {
+                        console.log(lat + ', ' +  lon + ' inside');
+                    }else{
+                        console.log(lat + ', ' + lon + ' outside');
+                    }
+                }
+            }
         });
     },
     //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
@@ -44,6 +77,21 @@ module.exports = {
     degrees_to_radians: (degrees) => {
         var pi = Math.PI;
         return degrees * (pi/180);
+    },
+
+    checkPolygon: (polygon, lat, lon) => {
+        var isInside = false;
+
+        for(var i = 0, j = polygon.length-1; i < polygon.length; j = i++){
+            var xi = parseFloat(polygon[i][0]), yi = parseFloat(polygon[i][1]);
+            var xj = parseFloat(polygon[j][0]), yj = parseFloat(polygon[j][1]);
+            var intersect = ((yi > lon) != (yj > lon))
+            && (lat < (xj - xi) * (lon - yi) / (yj - yi) + xi);
+            if (intersect) {
+                isInside = !isInside;
+            }
+        }
+        return isInside;
     }
 
 };

@@ -69,7 +69,7 @@ app.get("/home", function(req, res){
 });
 
 app.post("/api", function(req, res) {
-    newObj = {
+    restrictedAreas = {
         polygons: []
     }
     const obj = req.body;
@@ -78,18 +78,18 @@ app.post("/api", function(req, res) {
         for(var i=0;i<element;i++){
             areas.push(obj.coordinates[i]);
         }
-        newObj.polygons.push(areas);
+        restrictedAreas.polygons.push(areas);
     });
-    console.log(newObj);
+    // console.log(restrictedAreas);
 });
 
 app.post("/upload", function(req,res){
     let message = "";
     const validFileExtensions = "json"
-    
+    console.log(restrictedAreas)
     if(req.files){
         const file = req.files.filename, filename = file.name;
-        console.log(file);
+        // console.log(file);
         crypto.randomBytes(8, (err, buf) => {
             if(err){
                 console.log(err);
@@ -103,7 +103,11 @@ app.post("/upload", function(req,res){
                         console.log(err);
                         res.redirect('home');
                     }else{
-                        parser.readJsonObjectFromFile(newFilename); 
+                        if(restrictedAreas.polygons != ''){
+                            parser.readJsonObjectFromFileExtra(newFilename, restrictedAreas); 
+                        }else{
+                            parser.readJsonObjectFromFile(newFilename); 
+                        }
                         console.log("The file uploaded successfully.");
                         res.redirect('home');
                     }
