@@ -18,6 +18,7 @@ module.exports = {
                     var lon = location.longitudeE7/10000000;
                     if(module.exports.checkLocation(lat, lon) < 10.0) {
                         console.log(lat + ', ' +  lon + ' inside');
+                        console.log(location);
                     }else{
                         console.log(lat + ', ' + lon + ' outside');
                     }
@@ -51,6 +52,7 @@ module.exports = {
                     }
                     if(module.exports.checkLocation(lat, lon) < 10.0 && !isInsidePolygon) {
                         console.log(lat + ', ' +  lon + ' inside');
+                        console.log(location);
                     }else{
                         console.log(lat + ', ' + lon + ' outside');
                     }
