@@ -11,6 +11,20 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
 
 router.use(passport.initialize());
+router.use(passport.session());
+
+function authenticationMiddleware() {  
+	return (req, res, next) => {
+        if(!typeof req.session.passport != undefined) {
+            console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+            if (req.isAuthenticated()) {
+                return next();
+            }else{
+                res.redirect('/')
+            }
+        }
+	}
+}
 
 //Login Form
 router.get("/", function(req, res){
@@ -18,7 +32,7 @@ router.get("/", function(req, res){
 });
 
 //Login Process
-router.post("/", function(req, res, next){
+router.post("/login", function(req, res, next){
     let query = {username: req.body.username};
     User.findOne(query, function(err, user){
         if(user.admin === true){
@@ -33,6 +47,10 @@ router.post("/", function(req, res, next){
             })(req, res, next);
         }
     });  
+});
+
+router.get("/home", authenticationMiddleware(), function(req, res){
+    res.render('home');
 });
 
 module.exports = router;
