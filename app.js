@@ -13,7 +13,6 @@ const path = require('path');
 var app = express();
 
 const parser = require('./scripts/parseJson');
-const authentication = require('./config/passport');
 
 const PORT = 3000;
 //Session constants
@@ -101,10 +100,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get("/home",authenticationMiddleware(), function(req, res){
-    // console.log(req.session.passport.user);
-    res.render('home');
-});
+// app.get("/home",authenticationMiddleware(), function(req, res){
+//     // console.log(req.session.passport.user);
+//     res.render('home');
+// });
 
 app.post("/api", authenticationMiddleware(), function(req, res) {
     restrictedAreas = {
