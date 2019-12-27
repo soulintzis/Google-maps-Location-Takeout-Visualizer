@@ -13,6 +13,7 @@ const path = require('path');
 var app = express();
 
 const parser = require('./scripts/parseJson');
+const auth = require('./scripts/authentication');
 
 const PORT = 3000;
 //Session constants
@@ -46,15 +47,6 @@ app.use(session({
         touchAfter: 24 * 3600 // time period in seconds
     })
 }));
-
-function authenticationMiddleware() {  
-	return (req, res, next) => {
-		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-
-	    if (req.isAuthenticated()) return next();
-	    res.redirect('/')
-	}
-}
 
 //Connect to MongoDB and check for errors
 mongoose.connect(db.dbUrl, {
@@ -100,12 +92,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// app.get("/home",authenticationMiddleware(), function(req, res){
-//     // console.log(req.session.passport.user);
-//     res.render('home');
-// });
-
-app.post("/api", authenticationMiddleware(), function(req, res) {
+app.post("/api", auth.authenticationMiddleware(), function(req, res) {
     restrictedAreas = {
         polygons: []
     }
@@ -120,7 +107,7 @@ app.post("/api", authenticationMiddleware(), function(req, res) {
     // console.log(restrictedAreas);
 });
 
-app.post("/upload", authenticationMiddleware(), function(req,res){
+app.post("/upload", auth.authenticationMiddleware(), function(req,res){
     let message = "";
     const validFileExtensions = "json"
     console.log(restrictedAreas)

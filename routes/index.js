@@ -6,6 +6,9 @@ const express = require('express');
 const router = express.Router();
 
 let User = require('../models/User');
+require('../config/passport')(passport);
+const auth = require('../scripts/authentication');
+
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
@@ -13,18 +16,6 @@ router.use(bodyParser.json());
 router.use(passport.initialize());
 router.use(passport.session());
 
-function authenticationMiddleware() {  
-	return (req, res, next) => {
-        if(!typeof req.session.passport != undefined) {
-            console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-            if (req.isAuthenticated()) {
-                return next();
-            }else{
-                res.redirect('/')
-            }
-        }
-	}
-}
 
 //Login Form
 router.get("/", function(req, res){
@@ -49,7 +40,7 @@ router.post("/login", function(req, res, next){
     });  
 });
 
-router.get("/home", authenticationMiddleware(), function(req, res){
+router.get("/home", auth.authenticationMiddleware(), function(req, res){
     res.render('home');
 });
 

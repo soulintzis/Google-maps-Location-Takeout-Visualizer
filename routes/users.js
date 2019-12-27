@@ -1,14 +1,21 @@
-const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcryptjs');
-const bodyParser = require("body-parser");
-const crypto = require('crypto');
 const {check, validationResult} = require('express-validator');
+const bodyParser = require("body-parser");
+const passport = require('passport');
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const router = express.Router();
+
+//Passport Config
+require('../config/passport')(passport);
 
 let User = require('../models/User');
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
+
+router.use(passport.initialize());
+router.use(passport.session());
 
 //Signup Form
 router.get('/', function(req,res){
@@ -67,6 +74,7 @@ router.post("/register", [
         });
     }
 });
+
 
 module.exports = router;
 
