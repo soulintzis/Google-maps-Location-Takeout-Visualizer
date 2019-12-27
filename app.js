@@ -1,5 +1,8 @@
 const {check, validationResults} = require('express-validator');
+const cookieParser = require('cookie-parser');
 const upload = require("express-fileupload");
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -10,8 +13,13 @@ const path = require('path');
 var app = express();
 
 const parser = require('./scripts/parseJson');
+const authentication = require('./config/passport');
 
 const PORT = 3000;
+//Session constants
+const SESSION_NAME = 'sid';
+const SESSION_SECRET = 'webDevelopmentForaUniversityCourse';
+const SESSION_LIFETIME = 1000 * 60;
 
 //Database Config
 const db = require('./config/db');
@@ -20,6 +28,34 @@ const db = require('./config/db');
 app.listen(PORT, () => {
     console.log("The app is listening on port " + PORT);
 });
+
+//Initialize Session
+app.use(session({
+    name: SESSION_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: SESSION_SECRET,
+    cookie: {
+        maxAge: SESSION_LIFETIME,
+        sameSite: true,
+        secure: false
+    },
+    store: new MongoStore({ 
+        mongooseConnection: mongoose.connection,
+        autoRemove: 'interval',
+        autoRemoveInterval: 10, // In minutes. Default
+        touchAfter: 24 * 3600 // time period in seconds
+    })
+}));
+
+function authenticationMiddleware() {  
+	return (req, res, next) => {
+		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+
+	    if (req.isAuthenticated()) return next();
+	    res.redirect('/')
+	}
+}
 
 //Connect to MongoDB and check for errors
 mongoose.connect(db.dbUrl, {
@@ -64,11 +100,13 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/home", function(req, res){
+
+app.get("/home",authenticationMiddleware(), function(req, res){
+    // console.log(req.session.passport.user);
     res.render('home');
 });
 
-app.post("/api", function(req, res) {
+app.post("/api", authenticationMiddleware(), function(req, res) {
     restrictedAreas = {
         polygons: []
     }
@@ -83,7 +121,7 @@ app.post("/api", function(req, res) {
     // console.log(restrictedAreas);
 });
 
-app.post("/upload", function(req,res){
+app.post("/upload", authenticationMiddleware(), function(req,res){
     let message = "";
     const validFileExtensions = "json"
     console.log(restrictedAreas)
@@ -116,6 +154,11 @@ app.post("/upload", function(req,res){
         });
     }
 });
+
+app.post('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
 
 //RENDER AN ERROR PAGE WHENEVER A USER VISITS AN NONEXISTING LINK
 app.get("*", function(req, res){
