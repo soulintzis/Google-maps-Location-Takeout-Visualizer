@@ -2,35 +2,44 @@ const fs = require('fs');
 const filePath = '../uploads/'
 const latitude_center = 38.2466395;
 const longitude_center = 21.753150;
+
 retrievedPolygons = [];
 
+let User = require('../models/User');
+
 module.exports = {
-    readJsonObjectFromFile: (filename) => {
+    readJsonObjectFromFile: (filename, pass) => {
         path = filePath + filename;
         fs.readFile(path, (err, data) => {
             if(err) throw err;
             let jsonObj = JSON.parse(data);
-      
+            objId = pass.user;
+            User.findById(objId, function (err, user) { 
+                const userId = user.user_id;
+            });
             for(item in jsonObj){
                 for(subItem in jsonObj[item]){
                     location = jsonObj[item][subItem];
                     var lat = location.latitudeE7/10000000;
                     var lon = location.longitudeE7/10000000;
                     if(module.exports.checkLocation(lat, lon) < 10.0) {
-                        console.log(lat + ', ' +  lon + ' inside');
-                        console.log(location);
+
                     }else{
-                        console.log(lat + ', ' + lon + ' outside');
+                        continue;
                     }
                 }
             }
         });
     },
-    readJsonObjectFromFileExtra: (filename, locations) => {
+    readJsonObjectFromFileExtra: (filename, locations, pass) => {
         path = filePath + filename;
         fs.readFile(path, (err, data) => {
             if(err) throw err;
             let jsonObj = JSON.parse(data);
+            objId = pass.user;
+            User.findById(objId, function (err, user) { 
+                const userId = user.user_id;
+            });
             for(loc in locations.polygons){
                 polygon = [];
                 for(point in locations.polygons[loc]){
@@ -51,10 +60,9 @@ module.exports = {
                         }
                     }
                     if(module.exports.checkLocation(lat, lon) < 10.0 && !isInsidePolygon) {
-                        console.log(lat + ', ' +  lon + ' inside');
-                        console.log(location);
+                        // console.log(lat + ', ' +  lon + ' inside');
                     }else{
-                        console.log(lat + ', ' + lon + ' outside');
+                        continue;
                     }
                 }
             }
