@@ -37,5 +37,5 @@ async function retriveRestrictedAreas() {
         },
         body: JSON.stringify(restrictedAreas)
     };
-    await fetch("/api", options);   
+    await fetch("/restrictions", options);   
 }
