@@ -59,7 +59,7 @@ router.post("/restrictions", auth.authenticationMiddleware(), function(req, res)
 
 router.post("/upload", auth.authenticationMiddleware(), function(req,res){
     let message = "";
-    const validFileExtensions = "json"
+    const validFileExtensions = "json";
     if(req.files){
         const file = req.files.filename, filename = file.name;
         // console.log(file);

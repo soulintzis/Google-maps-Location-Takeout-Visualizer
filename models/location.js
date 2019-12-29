@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 
 const locationSchema = mongoose.Schema({
     user_id : {
-        type: String,
-        required: true
+        type: String
+        // required: true
     },
     timestampMs : {
         type: Number,
         required: true
     },
-    latitude : {
+    latitudeE7 : {
         type: Number,
         required: true
     },
-    longitude : {
+    longitudeE7 : {
         type: Number,
         required: true
     },
@@ -54,5 +54,5 @@ const locationSchema = mongoose.Schema({
 });
 
 const Location = mongoose.exports = mongoose.model('Location', locationSchema);
-module.exports = User;
+module.exports = Location;
 
