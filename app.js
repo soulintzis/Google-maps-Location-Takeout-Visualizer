@@ -1,5 +1,4 @@
 const {check, validationResults} = require('express-validator');
-const cookieParser = require('cookie-parser');
 const upload = require("express-fileupload");
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -17,7 +16,7 @@ const PORT = 3000;
 const SESSION_NAME = 'sid';
 const SESSION_SECRET = 'webDevelopmentForaUniversityCourse';
 const MONGO_STORE_SECRET = '20192020project';
-const SESSION_LIFETIME = 1000 * 60;
+const SESSION_LIFETIME = 1000 * 60 * 60 * 1; //One hour timeout
 
 //Database Config
 const db = require('./config/db');
@@ -29,25 +28,6 @@ app.on('ready', function() {
     }); 
 });
 
-//Initialize Session
-app.use(session({
-    name: SESSION_NAME,
-    resave: false,
-    saveUninitialized: false,
-    secret: SESSION_SECRET,
-    cookie: {
-        maxAge: SESSION_LIFETIME,
-        sameSite: true,
-        secure: false
-    },
-    store: new MongoStore({ 
-        mongooseConnection: mongoose.connection,
-        secret: MONGO_STORE_SECRET
-        // autoRemove: 'interval',
-        // autoRemoveInterval: 10, // In minutes. Default
-        // touchAfter: 24 * 3600 // time period in seconds
-    })
-}));
 
 //Connect to MongoDB and check for errors
 mongoose.connect(db.dbUrl, {
@@ -64,6 +44,27 @@ mongoose.connection.once('open', function() {
     // All OK - fire (emit) a ready event. 
     app.emit('ready'); 
 });
+
+
+//Initialize Session
+app.use(session({
+    name: SESSION_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: SESSION_SECRET,
+    cookie: {
+        maxAge: SESSION_LIFETIME,
+        sameSite: true,
+        secure: false
+    },
+    store: new MongoStore({ 
+        mongooseConnection: mongoose.connection,
+        secret: MONGO_STORE_SECRET,
+        autoRemove: 'interval',
+        autoRemoveInterval: 60 // In minutes. Default
+        // touchAfter: 24 * 3600 // time period in seconds
+    })
+}));
 
 //Signup Route
 var users = require('./routes/users');
@@ -100,6 +101,3 @@ app.use(passport.session());
 app.get("*", function(req, res){
     res.render('error_page');
 });
-
-
-
