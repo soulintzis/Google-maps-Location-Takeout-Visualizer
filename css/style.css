@@ -395,3 +395,129 @@ input[type]:focus,
   padding-top: 20px;
   text-align: center;     
 }
+
+/* NavBar */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+html {
+  font-family: Arial;
+  font-size: 16px;
+  background: #5e42a6;
+}
+
+.sidebar {
+  position: fixed;
+  width: 25%;
+  height: 100vh;
+  background: #312450;
+  font-size: 0.65em;
+}
+
+.nav {
+  position: relative;
+  margin: 0 15%;
+  text-align: right;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.nav ul {
+  list-style: none;
+}
+
+.nav ul li {
+  position: relative;
+  margin: 3.2em 0;
+}
+
+.nav ul li a {
+  line-height: 5em;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.4em;
+  color: rgba(#FFF, 0.35);
+  display: block;
+  transition: all ease-out 300ms;
+}
+
+.nav ul li.active a {
+  color: white;
+}
+
+.nav ul li:not(.active)::after {
+  opacity: 0.2;
+}
+
+.nav ul li:not(.active):hover a {
+  color: rgba(#FFF, 0.75);
+}
+
+.nav ul li::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 0.2em;
+  background: black;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, #5e42a6, #b74e91)
+}
+
+.container-home {
+  position: relative;
+  width: 75%;
+  float: right;
+  height: 100vh;
+}
+
+.container-home .welcome-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.container-home .welcome-message {
+  position: relative;
+  padding-top: 90px;
+  padding-bottom: 20px;
+  color: #e6e6e6;
+  text-transform: inherit;
+  text-align: center;
+}
+
+.container-home .welcome-page h1 {
+  font-size: 3em;
+  font-weight: 600;
+}
+
+.container-home .description {
+  text-align: center;
+  position: relative;
+  line-height: 1.2em;
+  padding: 0 100px;
+  font-size: 1.3em;
+  color: #e6e6e6;
+  text-transform: inherit;
+}
+
+.container-home .team {
+  position: relative;
+  text-align: center;
+  list-style: none;
+  padding-top: 50px;
+  color: #e6e6e6;
+  text-transform: inherit;
+}
+
+.container-home .team p{
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+.container-home .team li{
+  line-height: 1.4em;
+  font-size: 1.25em;
+}
