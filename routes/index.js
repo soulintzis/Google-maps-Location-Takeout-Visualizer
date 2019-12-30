@@ -20,7 +20,7 @@ router.use(passport.session());
 router.use(upload());
 
 //Login Form
-router.get("/", function(req, res){
+router.get("/", auth.authenticationMiddleware(), function(req, res){
     res.render('login');
 });
 

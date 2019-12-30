@@ -8,7 +8,11 @@ module.exports = {
           `req.session.passport.user: ${JSON.stringify(req.session.passport)}`
         );
         if (req.isAuthenticated()) {
-          return next();
+          if(req.route.path === '/'){
+            res.redirect("/home");
+          }else{
+            return next();
+          }
         } else {
           res.redirect("/");
         }
