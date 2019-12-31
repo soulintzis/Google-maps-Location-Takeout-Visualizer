@@ -14,7 +14,7 @@ module.exports = {
             return next();
           }
         } else {
-          res.redirect("/");
+          res.redirect("/login");
         }
       }
     };

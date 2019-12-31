@@ -464,14 +464,14 @@ html {
   background-image: linear-gradient(to right, #5e42a6, #b74e91)
 }
 
-.container-home {
+.home-page {
   position: relative;
   width: 75%;
   float: right;
   height: 100vh;
 }
 
-.container-home .welcome-page {
+.home-page .welcome-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -479,7 +479,7 @@ html {
   height: 100%;
 }
 
-.container-home .welcome-message {
+.home-page .welcome-message {
   position: relative;
   padding-top: 90px;
   padding-bottom: 20px;
@@ -488,12 +488,12 @@ html {
   text-align: center;
 }
 
-.container-home .welcome-page h1 {
+.home-page .welcome-page h1 {
   font-size: 3em;
   font-weight: 600;
 }
 
-.container-home .description {
+.home-page .description {
   text-align: center;
   position: relative;
   line-height: 1.2em;
@@ -503,7 +503,7 @@ html {
   text-transform: inherit;
 }
 
-.container-home .team {
+.home-page .team {
   position: relative;
   text-align: center;
   list-style: none;
@@ -512,12 +512,66 @@ html {
   text-transform: inherit;
 }
 
-.container-home .team p{
+.home-page .team p{
   font-size: 1.4em;
   font-weight: 600;
 }
 
-.container-home .team li{
+.home-page .team li{
   line-height: 1.4em;
   font-size: 1.25em;
+}
+
+.profile-page {
+  position: relative;
+  width: 100%;
+  float: right;
+  height: 100vh;
+}
+
+.profile-page .left-container {
+  position: relative;
+  float: left;
+  width: 50%;
+  height: 100vh;
+}
+
+.profile-page .right-container {
+  position: relative;
+  float: right;
+  width: 50%;
+  height: 100vh;
+}
+
+#profile-icon{
+  display: block;
+  position: relative;
+  top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-page .right-container .profile-info {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  top: 11vh;
+  width: 70%;
+}
+
+.profile-info { 
+  height: 400px; 
+  border-style: solid; 
+  border-color: #000000; 
+  border-width: 3px 3px 3px 3px; 
+  border-radius: 20px; 
+} 
+
+#eco-score {
+  display: block;
+  position: relative;
+  top: 17vh;
+  width: 75%;
+  height: 35vh;
+  margin: 0 auto;
 }

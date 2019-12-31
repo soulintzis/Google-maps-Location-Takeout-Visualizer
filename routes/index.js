@@ -24,6 +24,14 @@ router.get("/", auth.authenticationMiddleware(), function(req, res){
     res.render('login');
 });
 
+router.get("/profile", auth.authenticationMiddleware(), function(req, res){
+    res.render('profile');
+});
+
+router.get("/login", function(req, res){
+    res.render('login');
+});
+
 //Login Process
 router.post("/login", function(req, res, next){
     let query = {username: req.body.username};
@@ -94,6 +102,7 @@ router.post("/upload", auth.authenticationMiddleware(), function(req,res){
 router.get("/home", auth.authenticationMiddleware(), function(req, res){
     res.render('home');
 });
+
 
 router.post('/logout', function(req, res){
     req.logout();
