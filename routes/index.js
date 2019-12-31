@@ -10,6 +10,7 @@ const router = express.Router();
 
 let User = require('../models/User');
 require('../config/passport')(passport);
+
 const auth = require('../scripts/authentication');
 const parser = require('../scripts/parseJson');
 
@@ -104,7 +105,8 @@ router.get("/home", auth.authenticationMiddleware(), function(req, res){
 });
 
 
-router.post('/logout', function(req, res){
+router.get('/logout', auth.authenticationMiddleware(), async function(req, res){
+    await req.session.destroy();
     req.logout();
     res.redirect('/');
 });
