@@ -70,10 +70,13 @@ app.use(session({
 var users = require('./routes/users');
 //Login Route
 var index = require('./routes/index');
+//API Route
+var api = require('./routes/api');
 
 //Routes
 app.use('/', index);
 app.use('/signup', users);  
+app.use('/api', api);
 
 //Set EJS as view engine
 app.set('view engine', 'ejs');
@@ -98,6 +101,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Render an error page whenever a user visits an nonexisting link
-app.get("*", function(req, res){
-    res.render('error_page');
-});
+// app.get("*", function(req, res){
+//     res.render('error_page');
+// });
