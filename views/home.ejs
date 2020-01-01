@@ -3,27 +3,31 @@
 <main class="main">
     <aside class="sidebar">
         <nav class="nav">
-            <ul>
-                <li class="active"><a href="/home">Welcome</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="#">What We Do</a></li>
-                <li><a href="#">Get In Touch</a></li>
-                <li><a href="/logout">Log out</a></li>
+            <ul id="link-list">
+                <li class="nav-link active"><a href="#welcome">Welcome</a></li>
+                <li class="nav-link"><a href="#statistics">Statistics</a></li>
+                <li class="nav-link"><a href="#profile">Profile</a></li>
+                <li class="nav-link"><a href="#upload">Upload a File</a></li>
+                <li class="nav-link"><a href="logout">Log out</a></li>
             </ul>
         </nav>
     </aside>
 
-    <section class="home-page">
+    <section id="welcome" class="home-page">
         <div class="welcome-page">
             <div class="welcome-message">
                 <h1>Welcome to our fun project!</h1>
                 <!-- <p>This site was made for our semester's project for the subject of Programming on the World Wide Web.</p> -->
             </div>
             <div class="description">
-                <p>Google Maps service is being used by millions of users daily for navigation and information seeking purposes. For the service's 
-                    correct operation, mobile's location services(Wi-Fi, GPS or 3/4 G Network). Voluntarily, Google account settings allow Location 
-                    History service to be toggled on/off. Using this service, Google periodically saves users' current location in cloud, so that 
-                    they would be able to review their transport history and explore Points of Interest near their location.</p>
+                <p>Google Maps service is being used by millions of users daily for navigation and information seeking
+                    purposes. For the service's
+                    correct operation, mobile's location services(Wi-Fi, GPS or 3/4 G Network). Voluntarily, Google
+                    account settings allow Location
+                    History service to be toggled on/off. Using this service, Google periodically saves users' current
+                    location in cloud, so that
+                    they would be able to review their transport history and explore Points of Interest near their
+                    location.</p>
             </div>
             <div class="team">
                 <p>Our Team:</p>
@@ -33,12 +37,33 @@
             </div>
         </div>
     </section>
-    
-    <section id = "profile">
-        <div class="welcome-page">
-            <h1>Profile</h1>
-        <div>
+
+    <section id="statistics">
+
     </section>
+
+    <section id="profile">
+        <div class="profile-page">
+            <div class="left-container">
+                <canvas id="eco-score"></canvas>
+            </div>
+            <div class="right-container">
+                <img id="profile-icon" src="../images/icons/user-icon.png">
+                <div class="profile-info">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="upload">
+        <div class="page-title">
+            <h1>Upload a File</h1>
+        </div>
+        <div class="profile-page">
+            <div id="map"></div>
+        </div>
+    </section>
+
 </main>
 
 <%- include("partials/footer") %>

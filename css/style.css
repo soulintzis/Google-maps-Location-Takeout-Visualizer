@@ -380,9 +380,9 @@ input[type]:focus,
 }
 
 #map {
-  margin: 0 auto;
-  height: 50%;
-  width: 50%;
+  position: relative;
+  height: 50vh;
+  width: 100%;
 }
 
 .map-container {
@@ -397,13 +397,32 @@ input[type]:focus,
 }
 
 /* NavBar */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans'); */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap');
 
 html {
   font-family: Arial;
   font-size: 16px;
   /* background: #5e42a6; */
   background:#d7d2cc;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 75%;
+  height: 100vh;
 }
 
 .sidebar {
@@ -442,13 +461,23 @@ html {
   color: #76b852;
   display: block;
   transition: all ease-out 300ms;
+  cursor: pointer;
 }
 
-.nav ul li.active a {
+/* Style the active class, and buttons on mouse-over */
+.active{
+  content: '';
+  position: relative;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+ .nav ul li.active a {
   color: white;
-}
+} 
 
-.nav ul li:not(.active)::after {
+ .nav ul li:not(.active)::after {
   opacity: 0.2;
 }
 
@@ -459,11 +488,10 @@ html {
   height: 0.2em;
   left: 0;
   bottom: 0;
-  /* background-image: linear-gradient(to right, #5e42a6, #b74e91) */
-  background: #DBDBDB;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #EAEAEA, #237A57);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #EAEAEA, #237A57); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
-}
+  background: #DBDBDB; 
+  background: -webkit-linear-gradient(to right, #EAEAEA, #237A57); 
+  background: linear-gradient(to right, #EAEAEA, #237A57); 
+}  
 
 .home-page {
   position: relative;
@@ -478,6 +506,17 @@ html {
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+
+.page-title {
+  position: relative;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  color: #000000;
+  text-transform: inherit;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 400;
 }
 
 .home-page .welcome-message {
