@@ -380,9 +380,11 @@ input[type]:focus,
 }
 
 #map {
+  display: block;
+  margin: 0 auto;
   position: relative;
   height: 50vh;
-  width: 100%;
+  width: 75%;
 }
 
 .map-container {
@@ -397,13 +399,11 @@ input[type]:focus,
 }
 
 /* NavBar */
-/* @import url('https://fonts.googleapis.com/css?family=Open+Sans'); */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap');
 
 html {
   font-family: Arial;
   font-size: 16px;
-  /* background: #5e42a6; */
   background:#d7d2cc;
 }
 
@@ -418,9 +418,9 @@ section {
   display: flex;
   flex-direction: column;
   margin-left: 25%;
-  align-items: center;
+  /* align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: center; */
   width: 75%;
   height: 100vh;
 }
@@ -429,7 +429,6 @@ section {
   position: fixed;
   width: 25%;
   height: 100vh;
-  /* background: #312450; */
   background: #237A57;  
   font-size: 0.65em;
 }
@@ -510,7 +509,7 @@ section {
 
 .page-title {
   position: relative;
-  padding-top: 50px;
+  padding-top: 20px;
   padding-bottom: 20px;
   color: #000000;
   text-transform: inherit;
@@ -616,4 +615,35 @@ section {
   width: 75%;
   height: 35vh;
   margin: 0 auto;
+}
+
+.upload-page {
+  height: 100vh;
+  text-align: center;
+}
+
+.upload-page h3 {
+  text-decoration: underline;
+  padding-top: 20px;
+  font-size: 1.2em;
+  padding-bottom: 10px;
+}
+
+.upload-page .instructions {
+  padding-top: 10px 0 0 0;
+  list-style: decimal;
+  text-align: center;
+  justify-content: center;    
+  margin: 0 auto;
+} 
+
+.instructions ol {
+  display: inline-block;
+  text-align: left;
+  list-style: decimal;
+}
+
+.instructions ol ul {
+  list-style: lower-latin;
+  padding-left: 20px !important;
 }
