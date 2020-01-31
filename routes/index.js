@@ -25,12 +25,12 @@ router.get("/", auth.authenticationMiddleware(), function(req, res){
     res.render('login');
 });
 
-router.get("/profile", auth.authenticationMiddleware(), function(req, res){
-    res.render('profile');
-});
-
 router.get("/login", function(req, res){
     res.render('login');
+});
+
+router.get("/upload", function(req, res){
+    res.render('upload')
 });
 
 //Login Process
@@ -66,7 +66,7 @@ router.post("/restrictions", auth.authenticationMiddleware(), function(req, res)
     // console.log(restrictedAreas);
 });
 
-router.post("/upload", auth.authenticationMiddleware(), function(req,res){
+router.post("/upload", auth.authenticationMiddleware(), async function(req,res){
     let message = "";
     const validFileExtensions = "json";
     if(req.files){
@@ -80,15 +80,15 @@ router.post("/upload", auth.authenticationMiddleware(), function(req,res){
             if(filename.split('.').pop() !== validFileExtensions){
                 console.log("You can only upload Json files.")
             }else{
-                file.mv("../uploads/" + newFilename, function(err){
+                file.mv("../uploads/" + newFilename,async function(err){
                 if(err){
                         console.log(err);
                         res.redirect('home');
                     }else{
                         if(restrictedAreas.polygons != ''){
-                            parser.readJsonObjectFromFileExtra(newFilename, restrictedAreas, req.session.passport); 
+                            await parser.readJsonObjectFromFileExtra(newFilename, restrictedAreas, req.session.passport); 
                         }else{
-                            parser.readJsonObjectFromFile(newFilename, req.session.passport); 
+                            await parser.readJsonObjectFromFile(newFilename, req.session.passport); 
                         }
                         console.log("The file uploaded successfully.");
                         res.redirect('home');

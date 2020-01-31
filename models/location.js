@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const locationSchema = mongoose.Schema({
     user_id : {
         type: String,
-        required: true
+        required: false
     },
     timestampMs : {
         type: Number,
