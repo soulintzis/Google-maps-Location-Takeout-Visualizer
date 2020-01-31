@@ -1,6 +1,5 @@
 // Add active class to the current button (highlight it)
 var header = document.getElementById("link-list");
-console.log(header)
 var links = header.getElementsByClassName("nav-link");
 for (var i = 0; i < links.length; i++) {
   links[i].addEventListener("click", function() {

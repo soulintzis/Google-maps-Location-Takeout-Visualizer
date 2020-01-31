@@ -379,7 +379,7 @@ input[type]:focus,
   text-align: center;
 }
 
-#map {
+#patrasMap {
   display: block;
   margin: 0 auto;
   position: relative;
