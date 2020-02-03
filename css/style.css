@@ -647,3 +647,19 @@ section {
   list-style: lower-latin;
   padding-left: 20px !important;
 }
+
+/* Drop zone area style */
+.dropzone {
+  width: 50vw;
+  height: 20vh;
+  border: 2px dashed #666666;
+  line-height: 300px;
+  text-align: center;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.dropzone.dragover {
+  border-color: #000;
+  color: #000;
+}
