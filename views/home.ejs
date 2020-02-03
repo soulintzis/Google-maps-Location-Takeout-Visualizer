@@ -61,9 +61,22 @@
         </div>
         <div class="upload-page">
             <div id="patrasMap"></div>
-            <div class="dropzone" id="dropzone">
-
-            </div>
+            <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data" onsubmit="uploadFiles(event)">
+                <input type="file" name="files" id="fileInput" accept=".json">
+              
+                <label for="fileInput" id="fileLabel" ondragover="overrideDefault(event);fileHover();" ondragenter="overrideDefault(event);fileHover();" ondragleave="overrideDefault(event);fileHoverEnd();" ondrop="overrideDefault(event);fileHoverEnd(); addFiles(event);">
+                    <img src="/images/icons/icons8-upload-document-50.png">
+                    <i class="fa fa-download fa-5x"></i>
+                    <br>
+                    <span id="fileLabelText">
+                        Choose a file or drag it here
+                    </span>
+                    <br>
+                    <span id="uploadStatus"></span>
+                </label>
+              
+                <input type="submit" value="Upload" class="uploadButton">
+              </form>
         </div>
     </section>
 
