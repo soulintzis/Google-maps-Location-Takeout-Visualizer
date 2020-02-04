@@ -29,10 +29,6 @@ router.get("/login", function(req, res){
     res.render('login');
 });
 
-router.get("/upload", function(req, res){
-    res.render('upload')
-});
-
 //Login Process
 router.post("/login", function(req, res, next){
     let query = {username: req.body.username};
@@ -51,58 +47,46 @@ router.post("/login", function(req, res, next){
     });  
 });
 
+let restrictedAreas = '';
+
 router.post("/restrictions", auth.authenticationMiddleware(), function(req, res) {
-    restrictedAreas = {
-        polygons: []
-    }
-    const obj = req.body;
-    obj.angles.forEach(element => {
-        areas = [];
-        for(var i=0;i<element;i++){
-            areas.push(obj.coordinates[i]);
-        }
-        restrictedAreas.polygons.push(areas);
-    });
-    // console.log(restrictedAreas);
+    restrictedAreas = req.body;
+    console.log(restrictedAreas);
+    res.send();
 });
 
 router.post("/upload", auth.authenticationMiddleware(), async function(req,res){
-    console.log(req.files)
-    res.render('home');
+    let message = "";
+    const validFileExtensions = "json";
+    if(req.files){
+        const file = req.files.files;
+        const filename = file.name;
+        console.log(filename);
+        crypto.randomBytes(8, (err, buf) => {
+            if(err){
+                console.log(err);
+            }
+            const newFilename = buf.toString('hex') + path.extname(filename);
+            if(filename.split('.').pop() !== validFileExtensions){
+                    console.log("You can only upload Json files.")
+            }else{
+                file.mv("../uploads/" + newFilename,async function(err){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        if(restrictedAreas != ''){
+                            await parser.readJsonObjectFromFileExtra(newFilename, restrictedAreas, req.session.passport); 
+                        }else{
+                            await parser.readJsonObjectFromFile(newFilename, req.session.passport); 
+                        }
+                        console.log("The file uploaded successfully.");
+                    }
+                });
+            }
+            res.redirect('home');
+        });
+    }
 });
-    // let message = "";
-    // const validFileExtensions = "json";
-    // if(req.files){
-    //     const file = req.files.filename, filename = file.name;
-    //     console.log(file);
-    //     crypto.randomBytes(8, (err, buf) => {
-    //         if(err){
-    //             console.log(err);
-    //         }
-    //     const newFilename = buf.toString('hex') + path.extname(filename);
-    //     if(filename.split('.').pop() !== validFileExtensions){
-    //             console.log("You can only upload Json files.")
-    //     }else{
-    //         file.mv("../uploads/" + newFilename,async function(err){
-    //         if(err){
-    //             console.log(err);
-    //         }
-    //         res.render('home');
-
-    //     })}})}});
-                    // else{
-    //                     if(restrictedAreas.polygons != ''){
-    //                         await parser.readJsonObjectFromFileExtra(newFilename, restrictedAreas, req.session.passport); 
-    //                     }else{
-    //                         await parser.readJsonObjectFromFile(newFilename, req.session.passport); 
-    //                     }
-    //                     console.log("The file uploaded successfully.");
-    //                     res.redirect('home');
-    //                 }
-    //             });
-    //         }
-    //     });
-    // }
 
 
 

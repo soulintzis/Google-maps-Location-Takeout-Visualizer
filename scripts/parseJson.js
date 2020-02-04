@@ -26,7 +26,7 @@ module.exports = {
                         User.findById(objId, function (err, user) { 
                             location.user_id = user.user_id;
                             var newLocation = new Location(location);
-                            console.log(newLocation)
+                            // console.log(newLocation)
                             newLocation.save(function(err, location){
                                 if(err){
                                     console.log(err);
@@ -70,12 +70,12 @@ module.exports = {
                         }
                     }
                     if(module.exports.checkLocation(lat, lon) < 10.0 && !isInsidePolygon) {
-                        console.log(lat + ', ' +  lon + ' inside');
+                        // console.log(lat + ', ' +  lon + ' inside');
                         var newLocation = new Location({
                             user_id: userId,
                             location
                         });
-                        console.log(newLocation);
+                        // console.log(newLocation);
                     }else{
                         continue;
                     }

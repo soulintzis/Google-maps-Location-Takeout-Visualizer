@@ -649,22 +649,13 @@ section {
 }
 
 /* Drop zone area style */
-.dropzone {
-  width: 50vw;
-  height: 20vh;
-  border: 2px dashed #666666;
-  line-height: 300px;
-  text-align: center;
-  margin: auto;
-  margin-top: 20px;
-}
-
 #dropFileForm {
   margin: auto;
-  margin-top: 20px;
+  margin-top: 30px;
   width: 55vw;
-  height: 15vh;
-  border-radius: 10px;
+  height: 20%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;  
   text-align: center;
   overflow: hidden;
   background-color: #b3b3b3;
@@ -674,11 +665,24 @@ section {
 #dropFileForm #fileLabel {
   display: block;
   width: 55vw;
-  height: 11vh;
+  height: 100%;
   padding: 2vh;
   position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   cursor: pointer;
 }
+
+#dropFileForm #fileLabel img {
+  display: block;
+  width: 75px;
+  height: 75px;
+  position: relative;
+  text-align: center;
+  margin: auto;
+}
+
 
 #dropFileForm #fileInput {
   display: none;
@@ -714,16 +718,41 @@ section {
   opacity: 0.25;
 }
 
-#dropFileForm .uploadButton {
-  border: 0;
-  outline: 0;
-  width: 100%;
+.uploadButton {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 1em;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin: auto;
+  border: 0px;
+  width: 55vw;
   height: 35px;
   background-color: #737373;
+  overflow: hidden;
   color: #fff;
   cursor: pointer;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
 #dropFileForm.fileHover {
   box-shadow: 0 0 16px #595959;
+}
+
+.submit-input::after {
+  display: none;
+}
+
+.submit-input::before {
+  display: none;
 }
