@@ -48,13 +48,14 @@ module.exports = {
             });
         });
     },
-    readJsonObjectFromFileExtra: (filename, locations, pass) => {
+    readJsonObjectFromFileExtra: (filename, restrictedLocations, pass) => {
         path = filePath + filename;
+        let inside_counter = 0, outside_counter = 0;
+        locations = [];
         fs.readFile(path, (err, data) => {
             if(err) throw err;
             let jsonObj = JSON.parse(data);
             objId = pass.user;
-            console.log(locations)
             User.findById(objId, function (err, user) { 
                 for(item in jsonObj){
                     for(subItem in jsonObj[item]){
@@ -62,26 +63,30 @@ module.exports = {
                         var lat = location.latitudeE7/10000000;
                         var lon = location.longitudeE7/10000000;
                         var isInsidePolygon = false;
-                        for(pol in retrievedPolygons){
-                            if(module.exports.checkPolygon(retrievedPolygons[pol], lat, lon)){
-                                isInsidePolygon = !isInsidePolygon
+                        for(let pol of restrictedLocations){
+                            if(module.exports.checkPolygon(pol, lat, lon)){
+                                isInsidePolygon = !isInsidePolygon;
                                 break;
                             }
                         }           
-                        if(module.exports.checkLocation(lat, lon) < 10.0 && !isInsidePolygon) {
+                        if(module.exports.checkLocation(lat, lon) < 10.0 & !isInsidePolygon) {
                             location.user_id = user.user_id;
-                            var newLocation = new Location(location);
-                            newLocation.save(function(err, location){
-                                if(err){
-                                    console.log(err);
-                                    return;
-                                }
-                            });
+                            locations.push(location);
+                            inside_counter = inside_counter + 1;
                         }else{
-                            continue;
+                            outside_counter = outside_counter + 1;
                         }
                     }
                 }
+                console.log('Inside: ' + inside_counter);
+                console.log('Outside: ' + outside_counter);
+                var newLocation = new Location(location);
+                newLocation.save(function(err, location){
+                    if(err){
+                        console.log(err);
+                        return;
+                    }
+                });
             });
         });
     },
@@ -107,13 +112,13 @@ module.exports = {
     },
 
     checkPolygon: (polygon, lat, lon) => {
-        var isInside = false;
+        let isInside = false;
+        for(let i = 0, j = polygon.length-1; i < polygon.length; j = i++){
+            let xi = parseFloat(polygon[i].lat), yi = parseFloat(polygon[i].lng);
+            let xj = parseFloat(polygon[j].lat), yj = parseFloat(polygon[j].lng);
 
-        for(var i = 0, j = polygon.length-1; i < polygon.length; j = i++){
-            var xi = parseFloat(polygon[i][0]), yi = parseFloat(polygon[i][1]);
-            var xj = parseFloat(polygon[j][0]), yj = parseFloat(polygon[j][1]);
-            var intersect = ((yi > lon) != (yj > lon))
-            && (lat < (xj - xi) * (lon - yi) / (yj - yi) + xi);
+            let intersect = ((yi > lon) != (yj > lon)) && (lat < ((xj - xi) * (lon - yi) / (yj - yi) + xi));
+
             if (intersect) {
                 isInside = !isInside;
             }
