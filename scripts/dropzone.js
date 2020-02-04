@@ -5,16 +5,16 @@ const fileInput = document.getElementById("fileInput");
 let droppedFiles;
 
 function overrideDefault(event) {
-  event.preventDefault();
-  event.stopPropagation();
+  	event.preventDefault();
+  	event.stopPropagation();
 }
 
 function fileHover() {
-  dropFileForm.classList.add("fileHover");
+  	dropFileForm.classList.add("fileHover");
 }
 
 function fileHoverEnd() {
-  dropFileForm.classList.remove("fileHover");
+  	dropFileForm.classList.remove("fileHover");
 }
 
 function addFiles(event) { 
@@ -30,14 +30,14 @@ function showFiles(files) {
 function uploadFiles(event) {
     event.preventDefault();
     if(typeof(droppedFiles) != "undefined"){
-      file = droppedFiles[0];
-      changeStatus("Uploading...");
-      var formData = new FormData();
+		file = droppedFiles[0];
+		changeStatus("Uploading...");
+		var formData = new FormData();
         formData.append(fileInput.name, file, file.name);
 
-        var xhr = new XMLHttpRequest();
+		var xhr = new XMLHttpRequest();
+
         xhr.onreadystatechange = function(data) {
-          console.log(this.readyState)
             if(this.readyState == 4 && this.status == 200){
                 changeStatus("The file uploaded successfully...");
             }
@@ -48,5 +48,5 @@ function uploadFiles(event) {
 }
 
 function changeStatus(text) {
-  uploadStatus.innerText = text;
+  	uploadStatus.innerText = text;
 }

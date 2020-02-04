@@ -11,34 +11,41 @@ let Location = require('../models/location');
 module.exports = {
     readJsonObjectFromFile: (filename, pass) => {
         path = filePath + filename;
+        locations = [];
         fs.readFile(path, (err, data) => {
+            let inside_counter = 0;
+            let outside_counter = 0;
             if(err) throw err;
             let jsonObj = JSON.parse(data);
             objId = pass.user;
-
-            for(item in jsonObj){
-                for(subItem in jsonObj[item]){
-                    // console.log(jsonObj[item][subItem])
-                    location = jsonObj[item][subItem];
-                    var lat = location.latitudeE7/10000000;
-                    var lon = location.longitudeE7/10000000;
-                    if(module.exports.checkLocation(lat, lon) < 10.0) {
-                        User.findById(objId, function (err, user) { 
+            User.findById(objId, async function (err, user) { 
+                for(item in jsonObj){
+                    for(subItem in jsonObj[item]){
+                        // console.log(jsonObj[item][subItem])
+                        location = jsonObj[item][subItem];
+                        var lat = location.latitudeE7/10000000;
+                        var lon = location.longitudeE7/10000000;
+                        if(module.exports.checkLocation(lat, lon) < 10.0) {
                             location.user_id = user.user_id;
-                            var newLocation = new Location(location);
-                            // console.log(newLocation)
-                            newLocation.save(function(err, location){
-                                if(err){
-                                    console.log(err);
-                                    return;
-                                }
-                            });
-                        });
-                    }else{
-                        continue;
+                            locations.push(location);
+                            inside_counter = inside_counter + 1;
+                        }else{
+                            outside_counter = outside_counter + 1;
+                        }
                     }
                 }
-            }
+                console.log('Inside: ' + inside_counter);
+                console.log('Outside: ' + outside_counter);
+                for(let location of locations){
+                    var newLocation = new Location(location);
+                    newLocation.save(function(err, location){
+                        if(err){
+                            console.log(err);
+                            return;
+                        }
+                    });
+                }            
+            });
         });
     },
     readJsonObjectFromFileExtra: (filename, locations, pass) => {
@@ -47,40 +54,35 @@ module.exports = {
             if(err) throw err;
             let jsonObj = JSON.parse(data);
             objId = pass.user;
+            console.log(locations)
             User.findById(objId, function (err, user) { 
-                const userId = user.user_id;
-            });
-            for(loc in locations.polygons){
-                polygon = [];
-                for(point in locations.polygons[loc]){
-                    polygon.push(locations.polygons[loc][point].split(','));
-                }
-                retrievedPolygons.push(polygon);
-            }
-            for(item in jsonObj){
-                for(subItem in jsonObj[item]){
-                    location = jsonObj[item][subItem];
-                    var lat = location.latitudeE7/10000000;
-                    var lon = location.longitudeE7/10000000;
-                    var isInsidePolygon = false;
-                    for(pol in retrievedPolygons){
-                        if(module.exports.checkPolygon(retrievedPolygons[pol], lat, lon)){
-                            isInsidePolygon = !isInsidePolygon
-                            break;
+                for(item in jsonObj){
+                    for(subItem in jsonObj[item]){
+                        location = jsonObj[item][subItem];
+                        var lat = location.latitudeE7/10000000;
+                        var lon = location.longitudeE7/10000000;
+                        var isInsidePolygon = false;
+                        for(pol in retrievedPolygons){
+                            if(module.exports.checkPolygon(retrievedPolygons[pol], lat, lon)){
+                                isInsidePolygon = !isInsidePolygon
+                                break;
+                            }
+                        }           
+                        if(module.exports.checkLocation(lat, lon) < 10.0 && !isInsidePolygon) {
+                            location.user_id = user.user_id;
+                            var newLocation = new Location(location);
+                            newLocation.save(function(err, location){
+                                if(err){
+                                    console.log(err);
+                                    return;
+                                }
+                            });
+                        }else{
+                            continue;
                         }
                     }
-                    if(module.exports.checkLocation(lat, lon) < 10.0 && !isInsidePolygon) {
-                        // console.log(lat + ', ' +  lon + ' inside');
-                        var newLocation = new Location({
-                            user_id: userId,
-                            location
-                        });
-                        // console.log(newLocation);
-                    }else{
-                        continue;
-                    }
                 }
-            }
+            });
         });
     },
     //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)

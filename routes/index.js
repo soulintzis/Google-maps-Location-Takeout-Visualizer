@@ -83,7 +83,7 @@ router.post("/upload", auth.authenticationMiddleware(), async function(req,res){
                     }
                 });
             }
-            res.redirect('home');
+            res.send();
         });
     }
 });
