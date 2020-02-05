@@ -21,7 +21,6 @@ module.exports = {
             User.findById(objId, async function (err, user) { 
                 for(item in jsonObj){
                     for(subItem in jsonObj[item]){
-                        // console.log(jsonObj[item][subItem])
                         location = jsonObj[item][subItem];
                         var lat = location.latitudeE7/10000000;
                         var lon = location.longitudeE7/10000000;
@@ -36,15 +35,14 @@ module.exports = {
                 }
                 console.log('Inside: ' + inside_counter);
                 console.log('Outside: ' + outside_counter);
-                for(let location of locations){
-                    var newLocation = new Location(location);
-                    newLocation.save(function(err, location){
-                        if(err){
-                            console.log(err);
-                            return;
-                        }
-                    });
-                }            
+                Location.insertMany(locations)
+                .then(function(mongooseDocuments) {
+                    console.log("Your data was processed successfully");
+                })
+                .catch(function(err) {
+                    console.log('An error occurred.')
+                    console.log(err)
+                });       
             });
         });
     },

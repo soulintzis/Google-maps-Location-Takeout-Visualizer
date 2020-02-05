@@ -2,7 +2,7 @@ let restrictedAreas = []
 const patrasMap = L.map("patrasMap").setView([38.230462, 21.75315], 11);
 const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-const tileUrl = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png';
+const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const tiles = L.tileLayer(tileUrl, { attribution });
 tiles.addTo(patrasMap);
 

@@ -738,3 +738,9 @@ section {
 #dropFileForm.fileHover {
   box-shadow: 0 0 16px #595959;
 }
+
+/* Charts */
+#eco-score {
+  width: 300px;
+  height: 300px;
+}
