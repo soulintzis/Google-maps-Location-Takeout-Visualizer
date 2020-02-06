@@ -9,7 +9,7 @@ async function getUser() {
 async function getMinTimestamp() {
     const user = await getUser();
 	const user_id = user.user_id;
-    const url = 'http://localhost:3000/api/location/min_timestamp/' + user_id;
+    const url = 'http://localhost:3000/api/location/min_timesamp/' + user_id;
     let xhr = new XMLHttpRequest;
     xhr.open('GET', url, true)
 
@@ -23,7 +23,9 @@ async function getMinTimestamp() {
             output += '<span>' + from + '</span>';
             document.getElementById('timestamp_from').innerHTML = output;
         }else {
-            console.log('error')
+            output = '';
+            output += '<span>' + 'NaN' + '</span>';
+            document.getElementById('timestamp_from').innerHTML = output;
         }
     }
 
