@@ -56,6 +56,7 @@ async function getActivities() {
 
 async function parseActivitiesForEcoScore() {
 	let activities = await getActivities();
+	console.log(activities)
 	let eco_counter = 0,
 		non_eco_counter = 0;
 	for (let item of activities) {

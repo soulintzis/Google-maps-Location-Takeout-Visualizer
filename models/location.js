@@ -49,6 +49,8 @@ const locationSchema = mongoose.Schema({
         ]
     }, {    
         strict: false
+    },{
+        ordered: false
     })
     ]
 });

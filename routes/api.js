@@ -51,6 +51,7 @@ router.get("/location/:id", async (req, res) => {
         if(error) {
             return res.status(500).send(error);
         }
+        // console.log(result)
         res.send(result);
     });
 });
@@ -121,6 +122,19 @@ router.get("/locations/:id", async (req, res) => {
     });
 });
 
+router.get("/activities/:id", async (req, res) => {
+    let id = req.params.id;
+
+    await Location.find({user_id: id}, async (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        let activities = await getActivities(result);
+        console.log(activities[0][1])
+        res.send(activities);
+    });
+});
+
 function getStartOfMonthDateAsString(date) {        
     function zerosPad(number, numOfZeros) {
       var zero = numOfZeros - number.toString().length + 1;
@@ -132,6 +146,18 @@ function getStartOfMonthDateAsString(date) {
     var year = date.getFullYear();
   
     return year + '-' + month + '-' + day + 'T00:00:00';
+}
+
+function getActivities(data) {
+    let activities = [];
+    for (let item of data) {
+        if (item.activity.length !== 0) {
+            activities.push(item.activity);
+        } else {
+            continue;
+        }
+    }       
+    return activities;
 }
 
 
