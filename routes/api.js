@@ -74,3 +74,11 @@ router.delete("/locations/:id", async (req, res) => {
 });
 
 module.exports = router;
+
+// if(activity.type === 'WALKING' || activity.type === 'ON_FOOT' || activity.type === 'RUNNING' || activity.type === 'ON_BICYCLE' ){
+//     eco_counter = eco_counter + 1; 
+// } else if(activity.type === 'IN_ROAD_VEHICLE' || activity.type === 'EXITING_VEHICLE' || activity.type === 'IN_RAIL_VEHICLE') {
+//     non_eco_counter = non_eco_counter + 1; 
+// } else {
+//     continue;
+// }

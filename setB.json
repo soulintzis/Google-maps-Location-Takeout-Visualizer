@@ -1,155 +1,69 @@
-{ "locations": [
-{"timestampMs":"1363771653625","latitudeE7":382836331,"longitudeE7":217888750,"accuracy":21,"activity":[{"timestampMs":"1363771628390","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363773298219","latitudeE7":382836008,"longitudeE7":217888978,"accuracy":20,"activity":[{"timestampMs":"1363773306251","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363776463129","latitudeE7":382836316,"longitudeE7":217888859,"accuracy":20,"activity":[{"timestampMs":"1363776469162","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363789385580","latitudeE7":382836346,"longitudeE7":217888712,"accuracy":20,"activity":[{"timestampMs":"1363789389343","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363791289741","latitudeE7":382836018,"longitudeE7":217888997,"accuracy":20,"activity":[{"timestampMs":"1363791345159","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363795414262","latitudeE7":382419770,"longitudeE7":217275142,"accuracy":27,"activity":[{"timestampMs":"1363795313920","activity":[{"type":"IN_VEHICLE","confidence":100}]}]}
-,{"timestampMs":"1363796262125","latitudeE7":382416628,"longitudeE7":217277399,"accuracy":26,"activity":[{"timestampMs":"1363796286159","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363798746894","latitudeE7":382417669,"longitudeE7":217277228,"accuracy":24,"activity":[{"timestampMs":"1363798748919","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363802530033","latitudeE7":382417669,"longitudeE7":217277228,"accuracy":24,"activity":[{"timestampMs":"1363802534470","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363803186946","latitudeE7":382417669,"longitudeE7":217277228,"accuracy":24,"activity":[{"timestampMs":"1363803248298","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363805769219","latitudeE7":382417669,"longitudeE7":217277228,"accuracy":24,"activity":[{"timestampMs":"1363805771560","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363806069756","latitudeE7":382417669,"longitudeE7":217277228,"accuracy":24,"activity":[{"timestampMs":"1363806132029","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363816928768","latitudeE7":382418138,"longitudeE7":217276826,"accuracy":24,"activity":[{"timestampMs":"1363818552509","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363824619776","latitudeE7":382416563,"longitudeE7":217277300,"accuracy":26,"activity":[{"timestampMs":"1363824621422","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363826425631","latitudeE7":382416563,"longitudeE7":217277300,"accuracy":26,"activity":[{"timestampMs":"1363826429361","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363852277905","latitudeE7":382418660,"longitudeE7":217276137,"accuracy":23,"activity":[{"timestampMs":"1363852281811","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363853900151","latitudeE7":382418660,"longitudeE7":217276137,"accuracy":23,"activity":[{"timestampMs":"1363853904416","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363871074393","latitudeE7":382836340,"longitudeE7":217888795,"accuracy":20,"activity":[{"timestampMs":"1363871147623","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363874183382","latitudeE7":382417996,"longitudeE7":217276962,"accuracy":40,"activity":[{"timestampMs":"1363874265836","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363875503695","latitudeE7":382417996,"longitudeE7":217276962,"accuracy":40,"activity":[{"timestampMs":"1363875527083","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363881768649","latitudeE7":382848694,"longitudeE7":217877298,"accuracy":30,"activity":[{"timestampMs":"1363881832553","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363883029620","latitudeE7":382848694,"longitudeE7":217877298,"accuracy":30,"activity":[{"timestampMs":"1363883016298","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363883510453","latitudeE7":382848694,"longitudeE7":217877298,"accuracy":30,"activity":[{"timestampMs":"1363883556988","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363893002572","latitudeE7":382417894,"longitudeE7":217277002,"accuracy":25,"activity":[{"timestampMs":"1363892973747","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363901459542","latitudeE7":382417490,"longitudeE7":217277374,"accuracy":25,"activity":[{"timestampMs":"1363901465708","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363902540093","latitudeE7":382418126,"longitudeE7":217276725,"accuracy":25,"activity":[{"timestampMs":"1363902547267","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363925917576","latitudeE7":382418126,"longitudeE7":217276725,"accuracy":25,"activity":[{"timestampMs":"1363925931708","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363933481962","latitudeE7":382416297,"longitudeE7":217277658,"accuracy":24,"activity":[{"timestampMs":"1363933500688","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363945973117","latitudeE7":382836310,"longitudeE7":217888715,"accuracy":25,"activity":[{"timestampMs":"1363945994366","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363948134214","latitudeE7":382836355,"longitudeE7":217888705,"accuracy":20,"activity":[{"timestampMs":"1363948157023","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363959665953","latitudeE7":382841714,"longitudeE7":217885418,"accuracy":24,"activity":[{"timestampMs":"1363959588087","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363989046194","latitudeE7":382471005,"longitudeE7":217357728,"accuracy":1723,"activity":[{"timestampMs":"1363989109955","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363989586618","latitudeE7":382471005,"longitudeE7":217357728,"accuracy":1723,"activity":[{"timestampMs":"1363989590401","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363989944704","latitudeE7":382471005,"longitudeE7":217357728,"accuracy":1723,"activity":[{"timestampMs":"1363990008400","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363990665763","latitudeE7":382471005,"longitudeE7":217357728,"accuracy":1723,"activity":[{"timestampMs":"1363990729468","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1363997756023","latitudeE7":382416563,"longitudeE7":217277379,"accuracy":27,"activity":[{"timestampMs":"1363997775827","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364000251662","latitudeE7":382416563,"longitudeE7":217277379,"accuracy":27,"activity":[{"timestampMs":"1364000271197","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364003421104","latitudeE7":382416342,"longitudeE7":217277355,"accuracy":26,"activity":[{"timestampMs":"1364003335823","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364004744766","latitudeE7":382416286,"longitudeE7":217277448,"accuracy":24,"activity":[{"timestampMs":"1364004748605","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364006546494","latitudeE7":382416286,"longitudeE7":217277448,"accuracy":24,"activity":[{"timestampMs":"1364006551219","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364008291094","latitudeE7":382416286,"longitudeE7":217277448,"accuracy":24,"activity":[{"timestampMs":"1364008350178","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364009612225","latitudeE7":382416286,"longitudeE7":217277448,"accuracy":24,"activity":[{"timestampMs":"1364009612012","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364014201418","latitudeE7":382416286,"longitudeE7":217277448,"accuracy":24,"activity":[{"timestampMs":"1364014221217","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364017220725","latitudeE7":382416286,"longitudeE7":217277448,"accuracy":24,"activity":[{"timestampMs":"1364017300156","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364019186990","latitudeE7":382416286,"longitudeE7":217277448,"accuracy":24,"activity":[{"timestampMs":"1364019102680","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364025084398","latitudeE7":382415578,"longitudeE7":217277535,"accuracy":72,"activity":[{"timestampMs":"1364024977930","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364025144927","latitudeE7":382415578,"longitudeE7":217277535,"accuracy":49,"activity":[{"timestampMs":"1364025158140","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364026528879","latitudeE7":382416591,"longitudeE7":217277245,"accuracy":26,"activity":[{"timestampMs":"1364026588056","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364027310284","latitudeE7":382416591,"longitudeE7":217277245,"accuracy":26,"activity":[{"timestampMs":"1364027308895","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364041610035","latitudeE7":382418420,"longitudeE7":217276514,"accuracy":23,"activity":[{"timestampMs":"1364041600127","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364043351507","latitudeE7":382418420,"longitudeE7":217276514,"accuracy":23,"activity":[{"timestampMs":"1364043336338","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364043952044","latitudeE7":382418420,"longitudeE7":217276514,"accuracy":23,"activity":[{"timestampMs":"1364044024166","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364056327537","latitudeE7":382471851,"longitudeE7":217356449,"accuracy":58,"activity":[{"timestampMs":"1364057230582","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364059766818","latitudeE7":382419984,"longitudeE7":217275123,"accuracy":22,"activity":[{"timestampMs":"1364059770580","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364063670596","latitudeE7":382415674,"longitudeE7":217278081,"accuracy":53,"activity":[{"timestampMs":"1364063731835","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364069854081","latitudeE7":382418302,"longitudeE7":217276283,"accuracy":25,"activity":[{"timestampMs":"1364069919297","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364098617691","latitudeE7":382418651,"longitudeE7":217276142,"accuracy":25,"activity":[{"timestampMs":"1364098479802","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364106058906","latitudeE7":382418651,"longitudeE7":217276142,"accuracy":25,"activity":[{"timestampMs":"1364106047504","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364108219848","latitudeE7":382418651,"longitudeE7":217276142,"accuracy":25,"activity":[{"timestampMs":"1364108209918","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364110801341","latitudeE7":382418651,"longitudeE7":217276142,"accuracy":25,"activity":[{"timestampMs":"1364110732708","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364112819722","latitudeE7":382417933,"longitudeE7":217276996,"accuracy":25,"activity":[{"timestampMs":"1364112844124","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364113119923","latitudeE7":382417933,"longitudeE7":217276996,"accuracy":25,"activity":[{"timestampMs":"1364113204853","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364113720387","latitudeE7":382418044,"longitudeE7":217276928,"accuracy":26,"activity":[{"timestampMs":"1364113745408","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364118973282","latitudeE7":382418251,"longitudeE7":217276716,"accuracy":22,"activity":[{"timestampMs":"1364118946994","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364140883367","latitudeE7":382408825,"longitudeE7":217268905,"accuracy":74,"activity":[{"timestampMs":"1364140907090","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364141364271","latitudeE7":382403739,"longitudeE7":217311525,"accuracy":2755,"activity":[{"timestampMs":"1364141368108","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364147734000","latitudeE7":382416989,"longitudeE7":217277745,"accuracy":26,"activity":[{"timestampMs":"1364147739175","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364149836267","latitudeE7":382417925,"longitudeE7":217276928,"accuracy":25,"activity":[{"timestampMs":"1364149840257","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364150496866","latitudeE7":382417911,"longitudeE7":217276933,"accuracy":25,"activity":[{"timestampMs":"1364150561230","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364154102401","latitudeE7":382418663,"longitudeE7":217276163,"accuracy":20,"activity":[{"timestampMs":"1364154171496","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364157224421","latitudeE7":382418663,"longitudeE7":217276163,"accuracy":20,"activity":[{"timestampMs":"1364157234799","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364158485214","latitudeE7":382418663,"longitudeE7":217276163,"accuracy":20,"activity":[{"timestampMs":"1364158496471","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364158665208","latitudeE7":382418663,"longitudeE7":217276163,"accuracy":20,"activity":[{"timestampMs":"1364158676633","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364164669766","latitudeE7":382402125,"longitudeE7":217310123,"accuracy":2748,"activity":[{"timestampMs":"1364164673589","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364165389995","latitudeE7":382402125,"longitudeE7":217310123,"accuracy":2748,"activity":[{"timestampMs":"1364165394311","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364165750153","latitudeE7":382402125,"longitudeE7":217310123,"accuracy":2748,"activity":[{"timestampMs":"1364165754717","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364167010918","latitudeE7":382402125,"longitudeE7":217310123,"accuracy":2748,"activity":[{"timestampMs":"1364167015929","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364192017377","latitudeE7":382417742,"longitudeE7":217277023,"accuracy":26,"activity":[{"timestampMs":"1364191896664","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364196198801","latitudeE7":382417669,"longitudeE7":217277228,"accuracy":24,"activity":[{"timestampMs":"1364196230967","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364204366078","latitudeE7":382417669,"longitudeE7":217277228,"accuracy":24,"activity":[{"timestampMs":"1364204373547","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364225198545","latitudeE7":382420064,"longitudeE7":217275101,"accuracy":22,"activity":[{"timestampMs":"1364225202647","activity":[{"type":"IN_VEHICLE","confidence":100}]}]}
-,{"timestampMs":"1364225441103","latitudeE7":382420064,"longitudeE7":217275101,"accuracy":22,"activity":[{"timestampMs":"1364225462404","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364225621164","latitudeE7":382417562,"longitudeE7":217277315,"accuracy":26,"activity":[{"timestampMs":"1364225642577","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364228682879","latitudeE7":382418091,"longitudeE7":217276851,"accuracy":24,"activity":[{"timestampMs":"1364228705509","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364230123556","latitudeE7":382418091,"longitudeE7":217276851,"accuracy":24,"activity":[{"timestampMs":"1364230147048","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364234386075","latitudeE7":382418091,"longitudeE7":217276851,"accuracy":24,"activity":[{"timestampMs":"1364234472563","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364240689587","latitudeE7":382418276,"longitudeE7":217276686,"accuracy":23,"activity":[{"timestampMs":"1364240602396","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364247112221","latitudeE7":382418097,"longitudeE7":217274936,"accuracy":36,"activity":[{"timestampMs":"1364247114295","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364249651573","latitudeE7":382466268,"longitudeE7":217315061,"accuracy":3267,"activity":[{"timestampMs":"1364249636743","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364251755330","latitudeE7":382418650,"longitudeE7":217276132,"accuracy":27,"activity":[{"timestampMs":"1364251759788","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364253195188","latitudeE7":382402125,"longitudeE7":217310123,"accuracy":2748,"activity":[{"timestampMs":"1364253201335","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364254276167","latitudeE7":382402125,"longitudeE7":217310123,"accuracy":2748,"activity":[{"timestampMs":"1364254282516","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364262921555","latitudeE7":382402125,"longitudeE7":217310123,"accuracy":2748,"activity":[{"timestampMs":"1364262931987","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364265442823","latitudeE7":382402125,"longitudeE7":217310123,"accuracy":2748,"activity":[{"timestampMs":"1364265454946","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364274197533","latitudeE7":382416555,"longitudeE7":217277363,"accuracy":28,"activity":[{"timestampMs":"1364274198188","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364274317640","latitudeE7":382416555,"longitudeE7":217277363,"accuracy":28,"activity":[{"timestampMs":"1364274378351","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364276813269","latitudeE7":382416555,"longitudeE7":217277363,"accuracy":28,"activity":[{"timestampMs":"1364276815433","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364277714248","latitudeE7":382416555,"longitudeE7":217277363,"accuracy":28,"activity":[{"timestampMs":"1364277716466","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364284257705","latitudeE7":382837064,"longitudeE7":217887405,"accuracy":62,"activity":[{"timestampMs":"1364284137150","activity":[{"type":"IN_VEHICLE","confidence":100}]}]}
-,{"timestampMs":"1364284610423","latitudeE7":382836310,"longitudeE7":217888799,"accuracy":20,"activity":[{"timestampMs":"1364284638715","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364289050848","latitudeE7":382836331,"longitudeE7":217888794,"accuracy":20,"activity":[{"timestampMs":"1364289052469","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364289891226","latitudeE7":382836000,"longitudeE7":217889000,"accuracy":20,"activity":[{"timestampMs":"1364289953393","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364293002516","latitudeE7":382836313,"longitudeE7":217888871,"accuracy":20,"activity":[{"timestampMs":"1364293078229","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364293670071","latitudeE7":382836313,"longitudeE7":217888871,"accuracy":20,"activity":[{"timestampMs":"1364293732049","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364296834662","latitudeE7":382418492,"longitudeE7":217279152,"accuracy":32,"activity":[{"timestampMs":"1364296898220","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364315782452","latitudeE7":382864856,"longitudeE7":217746718,"accuracy":3308,"activity":[{"timestampMs":"1364315804262","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364333084873","latitudeE7":382417948,"longitudeE7":217276975,"accuracy":24,"activity":[{"timestampMs":"1364333094961","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364334646338","latitudeE7":382417948,"longitudeE7":217276975,"accuracy":24,"activity":[{"timestampMs":"1364334717120","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364345582300","latitudeE7":382416612,"longitudeE7":217277211,"accuracy":36,"activity":[{"timestampMs":"1364345607501","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364347596439","latitudeE7":382416598,"longitudeE7":217276817,"accuracy":36,"activity":[{"timestampMs":"1364347615785","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364350720360","latitudeE7":382417229,"longitudeE7":217276794,"accuracy":36,"activity":[{"timestampMs":"1364350680218","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364354675876","latitudeE7":382417411,"longitudeE7":217276464,"accuracy":36,"activity":[{"timestampMs":"1364354695129","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364355397219","latitudeE7":382417411,"longitudeE7":217276464,"accuracy":36,"activity":[{"timestampMs":"1364355415829","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364358131175","latitudeE7":382417244,"longitudeE7":217276739,"accuracy":36,"activity":[{"timestampMs":"1364358066465","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364358191341","latitudeE7":382417244,"longitudeE7":217276739,"accuracy":36,"activity":[{"timestampMs":"1364358246743","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364359619790","latitudeE7":382417244,"longitudeE7":217276739,"accuracy":36,"activity":[{"timestampMs":"1364359639429","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364389512809","latitudeE7":382175860,"longitudeE7":217490320,"accuracy":2899,"activity":[{"timestampMs":"1364389556984","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364393131023","latitudeE7":382184534,"longitudeE7":217481112,"accuracy":2274,"activity":[{"timestampMs":"1364393135240","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364395412164","latitudeE7":382184534,"longitudeE7":217481112,"accuracy":2274,"activity":[{"timestampMs":"1364395417176","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364399570998","latitudeE7":382183030,"longitudeE7":217481389,"accuracy":25,"activity":[{"timestampMs":"1364399480640","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364399693313","latitudeE7":382183030,"longitudeE7":217481389,"accuracy":25,"activity":[{"timestampMs":"1364399632675","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364414641276","latitudeE7":382449143,"longitudeE7":217339790,"accuracy":27,"activity":[{"timestampMs":"1364414645293","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364417127351","latitudeE7":382417606,"longitudeE7":217277441,"accuracy":40,"activity":[{"timestampMs":"1364417191997","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364418748990","latitudeE7":382418728,"longitudeE7":217276481,"accuracy":40,"activity":[{"timestampMs":"1364418813652","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364419172952","latitudeE7":382418728,"longitudeE7":217276481,"accuracy":40,"activity":[{"timestampMs":"1364419174200","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364448791960","latitudeE7":382419959,"longitudeE7":217275933,"accuracy":36,"activity":[{"timestampMs":"1364448729796","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364449992771","latitudeE7":382419959,"longitudeE7":217275933,"accuracy":36,"activity":[{"timestampMs":"1364449991624","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364455277447","latitudeE7":382418650,"longitudeE7":217276136,"accuracy":24,"activity":[{"timestampMs":"1364455281318","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364456298140","latitudeE7":382418650,"longitudeE7":217276136,"accuracy":24,"activity":[{"timestampMs":"1364456362655","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364457176247","latitudeE7":382418650,"longitudeE7":217276136,"accuracy":24,"activity":[{"timestampMs":"1364457177939","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364457476522","latitudeE7":382418650,"longitudeE7":217276136,"accuracy":24,"activity":[{"timestampMs":"1364457538289","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364459321570","latitudeE7":382412543,"longitudeE7":217276929,"accuracy":39,"activity":[{"timestampMs":"1364459322800","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364461977043","latitudeE7":382836371,"longitudeE7":217888682,"accuracy":53,"activity":[{"timestampMs":"1364462039139","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364478283301","latitudeE7":382839652,"longitudeE7":217882586,"accuracy":47,"activity":[{"timestampMs":"1364478304661","activity":[{"type":"ON_FOOT","confidence":100}]}]}
-,{"timestampMs":"1364478646716","latitudeE7":382849914,"longitudeE7":217879325,"accuracy":48,"activity":[{"timestampMs":"1364478564212","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364478889663","latitudeE7":382842066,"longitudeE7":217881311,"accuracy":44,"activity":[{"timestampMs":"1364478893422","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364481051272","latitudeE7":382835994,"longitudeE7":217888967,"accuracy":20,"activity":[{"timestampMs":"1364481040562","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364481954888","latitudeE7":382836006,"longitudeE7":217889004,"accuracy":20,"activity":[{"timestampMs":"1364481942297","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364501596110","latitudeE7":382473951,"longitudeE7":217346280,"accuracy":27,"activity":[{"timestampMs":"1364501599996","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364501956337","latitudeE7":382473951,"longitudeE7":217346280,"accuracy":27,"activity":[{"timestampMs":"1364501960665","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364553559882","latitudeE7":382418640,"longitudeE7":217276155,"accuracy":24,"activity":[{"timestampMs":"1364553477918","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364559967946","latitudeE7":382418650,"longitudeE7":217276132,"accuracy":27,"activity":[{"timestampMs":"1364559938052","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364575016217","latitudeE7":382417755,"longitudeE7":217276805,"accuracy":36,"activity":[{"timestampMs":"1364575020239","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364579457257","latitudeE7":382417755,"longitudeE7":217276805,"accuracy":36,"activity":[{"timestampMs":"1364579520877","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364581674810","latitudeE7":382417755,"longitudeE7":217276805,"accuracy":36,"activity":[{"timestampMs":"1364581676892","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364582575412","latitudeE7":382417843,"longitudeE7":217277005,"accuracy":24,"activity":[{"timestampMs":"1364582578347","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364582935742","latitudeE7":382417843,"longitudeE7":217277005,"accuracy":24,"activity":[{"timestampMs":"1364582938995","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364594994648","latitudeE7":382404286,"longitudeE7":217312148,"accuracy":2727,"activity":[{"timestampMs":"1364594996768","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364601147501","latitudeE7":382414208,"longitudeE7":217277495,"accuracy":32,"activity":[{"timestampMs":"1364601142211","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364603731792","latitudeE7":382417734,"longitudeE7":217276437,"accuracy":40,"activity":[{"timestampMs":"1364603756479","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364606823489","latitudeE7":382417361,"longitudeE7":217276619,"accuracy":40,"activity":[{"timestampMs":"1364606761499","activity":[{"type":"STILL","confidence":100}]}]}
-,{"timestampMs":"1364607550731","latitudeE7":382417361,"longitudeE7":217276619,"accuracy":40,"activity":[{"timestampMs":"1364607569971","activity":[{"type":"STILL","confidence":100}]}]}
-]
+{
+    "locations": [
+        {
+            "timestampMs": "1510060334100",
+            "latitudeE7": 382928793,
+            "longitudeE7": 217852864,
+            "accuracy": 2320
+        },
+        {
+            "timestampMs": "1510060841668",
+            "latitudeE7": 382895204,
+            "longitudeE7": 217839926,
+            "accuracy": 3560,
+            "activity": [
+                {
+                    "timestampMs": "1510060473876",
+                    "activity": [
+                        {
+                            "type": "TILTING",
+                            "confidence": 100
+                        },
+                        {
+                            "type": "IN_RAIL_VEHICLE",
+                            "confidence": 100
+                        }
+                    ]
+                },
+                {
+                    "timestampMs": "1510060730250",
+                    "activity": [
+                        {
+                            "type": "STILL",
+                            "confidence": 69
+                        },
+                        {
+                            "type": "IN_VEHICLE",
+                            "confidence": 26
+                        },
+                        {
+                            "type": "ON_FOOT",
+                            "confidence": 26
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "timestampMs": "1470421001674",
+            "activity": [
+                {
+                    "type": "IN_VEHICLE",
+                    "confidence": 80
+                },
+                {
+                    "type": "UNKNOWN",
+                    "confidence": 10
+                },
+                {
+                    "type": "ON_BICYCLE",
+                    "confidence": 8
+                },
+                {
+                    "type": "STILL",
+                    "confidence": 3
+                }
+            ]
+        }
+    ]
 }

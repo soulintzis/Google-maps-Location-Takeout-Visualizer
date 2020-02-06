@@ -90,7 +90,7 @@ router.post("/upload", auth.authenticationMiddleware(), async function(req,res){
 
 
 
-router.get("/home", auth.authenticationMiddleware(), function(req, res){
+router.get("/home", auth.authenticationMiddleware(), function(req, res) {
     res.render('home');
 });
 
