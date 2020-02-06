@@ -5,21 +5,44 @@
 // });
 // parseDataForEcoScore();
 
-var ctx = document.getElementById('eco-score').getContext('2d');
-var pieChart = new Chart(ctx, {
-	type: 'pie',
-    data: {
+pieChart();
+
+
+async function pieChart(){
+	let results = await parseActivitiesForEcoScore();
+	const ctx = document.getElementById('eco-score').getContext('2d');
+	let pieChart = new Chart(ctx,{
+	type:'doughnut',
+	options: {
+        title: {
+			display: true,
+			position: 'top',
+			fontSize: 16,
+            text: 'Eco-Score'
+		},
+		legend: {
+			display: true,
+			position: 'bottom',
+		},
+		responsive: true
+    },
+	data : {
 		datasets: [{
-			data: [eco_counter,non_eco_counter]
+			label:("Eco", "Non Eco"),
+			data: [results.eco_counter, results.non_eco_counter],
+			backgroundColor:['#248f24','#cc0000'],
+			bordercolor:['#fff','#fff'],
+			borderWidth:0.3,
+			position: top
 		}],
 		labels:["Eco Behavior","Non Eco Behavior"]
 	}
 });
+}
 
-parseActivitiesForEcoScore();
 
 async function getActivities() {
-	const data = await getCurrentMonthActivities();
+	const data = await getAllActivities();
 	let activities = [];
 	for (let item of data) {
 		if (item.activity.length !== 0) {

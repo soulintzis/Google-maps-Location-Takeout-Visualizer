@@ -50,17 +50,25 @@
     <section id="profile">
         <div class="profile-page">
             <div class="left-container">
-                <canvas id="eco-score" onload="getData(event)"></canvas>
+                <figure class="eco_score_graph">
+                    <canvas id="eco-score"></canvas>
+                </figure>
+
             </div>
             <div class="right-container">
                 <div class="user-info">
                     <span class="info-title">General User Information</span>
                     <hr class="line">
                     <br>
-                    <span class="information">Username: </span>
-                    <span class="information">E-mail: </span>
-                    <span class="information">Last upload date: </span>
-                    <span class="information">Period of data uploaded: </span>
+                    <span class="information_label">Username: </span> 
+                    <span class="info"><%= user.username %></span>
+                    <span class="information_label">E-mail: </span>
+                    <span class="info"><%= user.email %></span>
+                    <span class="information_label">Last upload date: </span>
+                    <span class="info"></span>
+                    <span class="information_label">Period of data uploaded: </span>
+                    <span class="info"></span>
+                    <br>
                     <br>
                 </div>
             </div>

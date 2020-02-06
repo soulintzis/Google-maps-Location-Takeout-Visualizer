@@ -67,6 +67,16 @@ router.get("/locations/current_month/:id", async (req, res) => {
     });
 });
 
+router.get("/locations/get_eco_score/:id", async (req, res) => {
+    let id = req.params.id;
+    await Location.find({user_id: id, timestampMs: { $gte: start_of_month}}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        res.send(result);
+    });
+});
+
 router.get("/locations/:from_day/:from_month/:from_year/:id", async (req, res) => {
     let id = req.params.id;
     let day = req.params.from_day, month = req.params.from_month, year = req.params.from_year;
@@ -106,6 +116,7 @@ router.get("/locations/:id", async (req, res) => {
         if(error) {
             return res.status(500).send(error);
         }
+        console.log(result)
         res.send(result);
     });
 });

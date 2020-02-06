@@ -91,7 +91,8 @@ router.post("/upload", auth.authenticationMiddleware(), async function(req,res){
 
 
 router.get("/home", auth.authenticationMiddleware(), function(req, res) {
-    res.render('home');
+    let user = req.user;
+    res.render('home', { user: user });
 });
 
 router.get("/admin", function(req, res){
