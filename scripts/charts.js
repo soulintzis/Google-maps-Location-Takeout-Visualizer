@@ -9,7 +9,7 @@ pieChart();
 
 
 async function pieChart(){
-	let results = await parseActivitiesForEcoScore();
+	let results = await getEcoScore();
 	const ctx = document.getElementById('eco-score').getContext('2d');
 	let pieChart = new Chart(ctx,{
 	type:'doughnut',
@@ -41,63 +41,63 @@ async function pieChart(){
 }
 
 
-async function getActivities() {
-	const data = await getAllActivities();
-	let activities = [];
-	for (let item of data) {
-		if (item.activity.length !== 0) {
-			activities.push(item.activity);
-		} else {
-			continue;
-		}
-	}
-	return activities;
-}
+// async function getActivities() {
+// 	const data = await getAllActivities();
+// 	let activities = [];
+// 	for (let item of data) {
+// 		if (item.activity.length !== 0) {
+// 			activities.push(item.activity);
+// 		} else {
+// 			continue;
+// 		}
+// 	}
+// 	return activities;
+// }
 
-async function parseActivitiesForEcoScore() {
-	let activities = await getActivities();
-	console.log(activities)
-	let eco_counter = 0,
-		non_eco_counter = 0;
-	for (let item of activities) {
-		for (let activity of item) {
-			for (let final_obj of activity.activity) {
-				console.log(final_obj)
-				if (
-					(final_obj.type === "WALKING" ||
-					final_obj.type === "ON_FOOT" ||
-					final_obj.type === "RUNNING" ||
-					final_obj.type === "ON_BICYCLE") &&
-					final_obj.confidence > 65
-				) {
-					eco_counter = eco_counter + 1;
-					break;
-				} else if (
-					(final_obj.type === "IN_ROAD_VEHICLE" ||
-						final_obj.type === "EXITING_VEHICLE" ||
-						final_obj.type === "IN_RAIL_VEHICLE" ||
-						final_obj.type === "IN_VEHICLE") &&
-					final_obj.confidence > 65
-				) {
-					non_eco_counter = non_eco_counter + 1;
-					break;
-				} else if (
-					final_obj.type === "STILL" ||
-					final_obj.type === "TILTING" ||
-					final_obj.type === "UNKNOWN"
-				) {
-					continue;
-				}
-			}
-		}
-	}
+// async function parseActivitiesForEcoScore() {
+// 	let activities = await getActivities();
+// 	console.log(activities)
+// 	let eco_counter = 0,
+// 		non_eco_counter = 0;
+// 	for (let item of activities) {
+// 		for (let activity of item) {
+// 			for (let final_obj of activity.activity) {
+// 				console.log(final_obj)
+// 				if (
+// 					(final_obj.type === "WALKING" ||
+// 					final_obj.type === "ON_FOOT" ||
+// 					final_obj.type === "RUNNING" ||
+// 					final_obj.type === "ON_BICYCLE") &&
+// 					final_obj.confidence > 65
+// 				) {
+// 					eco_counter = eco_counter + 1;
+// 					break;
+// 				} else if (
+// 					(final_obj.type === "IN_ROAD_VEHICLE" ||
+// 						final_obj.type === "EXITING_VEHICLE" ||
+// 						final_obj.type === "IN_RAIL_VEHICLE" ||
+// 						final_obj.type === "IN_VEHICLE") &&
+// 					final_obj.confidence > 65
+// 				) {
+// 					non_eco_counter = non_eco_counter + 1;
+// 					break;
+// 				} else if (
+// 					final_obj.type === "STILL" ||
+// 					final_obj.type === "TILTING" ||
+// 					final_obj.type === "UNKNOWN"
+// 				) {
+// 					continue;
+// 				}
+// 			}
+// 		}
+// 	}
 
-	console.log(eco_counter, non_eco_counter);
-	return {
-		eco_counter,
-		non_eco_counter
-	};
-}
+// 	console.log(eco_counter, non_eco_counter);
+// 	return {
+// 		eco_counter,
+// 		non_eco_counter
+// 	};
+// }
 
 
 async function getCurrentMonthActivities() {
@@ -114,6 +114,15 @@ async function getAllActivities() {
 	const user_id = user.user_id;
 	const response = await fetch(
 		"http://localhost:3000/api/locations/" + user_id
+	);
+	return await response.json();
+}
+
+async function getEcoScore() {  
+	const user = await getUser();
+	const user_id = user.user_id;
+	const response = await fetch(
+		"http://localhost:3000/api/locations/get_eco_score/" + user_id
 	);
 	return await response.json();
 }

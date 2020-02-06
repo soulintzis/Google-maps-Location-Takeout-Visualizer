@@ -70,11 +70,13 @@ router.get("/locations/current_month/:id", async (req, res) => {
 
 router.get("/locations/get_eco_score/:id", async (req, res) => {
     let id = req.params.id;
-    await Location.find({user_id: id, timestampMs: { $gte: start_of_month}}, (error, result) => {
+    await Location.find({user_id: id}, (error, result) => {
         if(error) {
             return res.status(500).send(error);
         }
-        res.send(result);
+        let activities = getActivities(result);
+        let counters = getEcoScore(activities)
+        res.send(counters);
     });
 });
 
@@ -135,6 +137,7 @@ router.get("/activities/:id", async (req, res) => {
     });
 });
 
+
 function getStartOfMonthDateAsString(date) {        
     function zerosPad(number, numOfZeros) {
       var zero = numOfZeros - number.toString().length + 1;
@@ -158,6 +161,47 @@ function getActivities(data) {
         }
     }       
     return activities;
+}
+
+function getEcoScore(activities) {
+    let eco_counter = 0,
+    non_eco_counter = 0;
+for (let item of activities) {
+    for (let activity of item) {
+        for (let final_obj of activity.activity) {
+            if (
+                (final_obj.type === "WALKING" ||
+                final_obj.type === "ON_FOOT" ||
+                final_obj.type === "RUNNING" ||
+                final_obj.type === "ON_BICYCLE") &&
+                final_obj.confidence > 65
+            ) {
+                eco_counter = eco_counter + 1;
+                break;
+            } else if (
+                (final_obj.type === "IN_ROAD_VEHICLE" ||
+                    final_obj.type === "EXITING_VEHICLE" ||
+                    final_obj.type === "IN_RAIL_VEHICLE" ||
+                    final_obj.type === "IN_VEHICLE") &&
+                final_obj.confidence > 65
+            ) {
+                non_eco_counter = non_eco_counter + 1;
+                break;
+            } else if (
+                final_obj.type === "STILL" ||
+                final_obj.type === "TILTING" ||
+                final_obj.type === "UNKNOWN"
+            ) {
+                continue;
+            }
+        }
+    }
+}
+
+return {
+    eco_counter,
+    non_eco_counter
+};
 }
 
 
