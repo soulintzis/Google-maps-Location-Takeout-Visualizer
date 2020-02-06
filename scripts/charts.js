@@ -5,6 +5,17 @@
 // });
 // parseDataForEcoScore();
 
+var ctx = document.getElementById('eco-score').getContext('2d');
+var pieChart = new Chart(ctx, {
+	type: 'pie',
+    data: {
+		datasets: [{
+			data: [eco_counter,non_eco_counter]
+		}],
+		labels:["Eco Behavior","Non Eco Behavior"]
+	}
+});
+
 parseActivitiesForEcoScore();
 
 async function getActivities() {
