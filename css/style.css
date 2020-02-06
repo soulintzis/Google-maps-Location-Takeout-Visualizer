@@ -429,7 +429,7 @@ section {
   position: fixed;
   width: 25%;
   height: 100vh;
-  background: #237A57;  
+  background: #00c9a7;  
   font-size: 0.65em;
 }
 
@@ -457,7 +457,7 @@ section {
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 0.4em;
-  color: #76b852;
+  color: #000000;
   display: block;
   transition: all ease-out 300ms;
   cursor: pointer;
@@ -743,4 +743,88 @@ section {
 #eco-score {
   width: 300px;
   height: 300px;
+}
+
+/*-----------------------------------------------------------------------------*/
+
+[type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+/* custom styles */
+.date_input {
+  width: 15vw;
+  height: 35px;
+  margin-right: 40px;
+  font-size: 1em;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+}
+
+.date_pickers {
+  display: block;
+  padding: 30px;
+  padding-top: 50px;
+  position: relative;
+  float: left;
+  margin: 0 auto;
+}
+
+.date_pickers span {
+  font-size: 1.2em;
+}
+
+.user-info {
+  width: 25vw;
+  /* height: 30vh; */
+  display: block;
+  position: relative;
+  align-items: center;
+  margin: 0 auto;
+  top: 10vh;
+  line-height: 2em;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.user-info .info-title {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  top: 20px;
+  font-weight: 500;
+  font-size: 1.4em;
+}
+
+.user-info .information {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  top: 20px;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.line { 
+  position: relative;
+  display: block;
+  top: 1.5em;
+  left: 10px;
+  width: 90%;
+  border: 0; 
+  height: 1px; 
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
 }

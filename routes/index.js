@@ -94,6 +94,17 @@ router.get("/home", auth.authenticationMiddleware(), function(req, res){
     res.render('home');
 });
 
+router.get("/admin", function(req, res){
+    res.render('admin');
+});
+
+router.get("/dashboard", function(req, res){
+    res.render('dashboard');
+});
+
+router.get("/heatmap", function(req, res){
+    res.render('heatmap');
+});
 
 router.get('/logout', auth.authenticationMiddleware(), async function(req, res){
     await req.session.destroy();
