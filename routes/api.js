@@ -113,6 +113,26 @@ router.get("/locations/:from_day/:from_month/:from_year/:until_day/:until_month/
     });
 });
 
+router.get("/location/max_timestamp/:id", async (req, res) => {
+    let id = req.params.id;
+    await Location.find({user_id: id}).sort({timestampMs: -1}).limit(1).exec(async function(error, result) {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        res.send(result);
+    });
+});
+
+router.get("/location/min_timestamp/:id", async (req, res) => {
+    let id = req.params.id;
+    await Location.find({user_id: id}).sort({timestampMs: 1}).limit(1).exec(async function(error, result) {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        res.send(result);
+    });
+});
+
 router.get("/locations/:id", async (req, res) => {
     let id = req.params.id;
     await Location.find({user_id: id}, (error, result) => {

@@ -20,9 +20,9 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    filesSubmited: [{
-        type: String 
-    }]},
+    lastUpload: {
+        date: String
+    }},
     {
         timestamps: true
     }

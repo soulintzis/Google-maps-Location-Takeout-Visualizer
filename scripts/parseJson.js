@@ -42,9 +42,27 @@ module.exports = {
                 .catch(function(err) {
                     console.log('An error occurred.')
                     console.log(err)
-                });       
+                });  
+                var query = {'_id': objId};
+                let date = new Date();
+                const months = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                    ];
+                let monthName = months[date.getMonth()]
+                let uploadDate = (date.getDay() < 10 ? '0' : '') + date.getDay()  + ' ' + monthName + ' ' + date.getFullYear() + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+
+                User.findOneAndUpdate(query, {$set: { lastUpload: uploadDate }}, {upsert: true, useFindAndModify: false}, function(err, doc) {
+                    if (err) {
+                        console.log(err)   
+                    };
+                    console.log('Succesfully saved.');
+                });     
             });
         });
+    },
+    zeroPad: (number, numOfZeros) => {
+        var zero = numOfZeros - number.toString().length + 1;
+        return Array(+(zero > 0 && zero)).join("0") + number;
     },
     readJsonObjectFromFileExtra: (filename, restrictedLocations, pass) => {
         path = filePath + filename;

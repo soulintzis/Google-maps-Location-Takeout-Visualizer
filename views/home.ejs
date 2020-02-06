@@ -65,9 +65,11 @@
                     <span class="information_label">E-mail: </span>
                     <span class="info"><%= user.email %></span>
                     <span class="information_label">Last upload date: </span>
-                    <span class="info"></span>
-                    <span class="information_label">Period of data uploaded: </span>
-                    <span class="info"></span>
+                    <span class="info"> <%= user.lastUpload %></span>
+                    <span class="information_label">Uploaded data from: </span>
+                    <div id="timestamp_from" class="info"></div>
+                    <span class="information_label">Uploaded data until: </span>
+                    <div id="timestamp_until" class="info"></div>
                     <br>
                     <br>
                 </div>
