@@ -19,7 +19,7 @@ var pieChart = new Chart(ctx, {
 parseActivitiesForEcoScore();
 
 async function getActivities() {
-	const data = await getCurrentMonthActivities();
+	const data = await getAllActivities();
 	let activities = [];
 	for (let item of data) {
 		if (item.activity.length !== 0) {
@@ -33,6 +33,7 @@ async function getActivities() {
 
 async function parseActivitiesForEcoScore() {
 	let activities = await getActivities();
+	console.log(activities)
 	let eco_counter = 0,
 		non_eco_counter = 0;
 	for (let item of activities) {
