@@ -59,11 +59,43 @@ router.get("/locations/current_month/:id", async (req, res) => {
     let id = req.params.id;
     let date = new Date();
     let start_of_month = new Date(getStartOfMonthDateAsString(date)).getTime();
-    console.log(start_of_month)
     await Location.find({user_id: id, timestampMs: { $gte: start_of_month}}, (error, result) => {
         if(error) {
             return res.status(500).send(error);
         }
+        res.send(result);
+    });
+});
+
+router.get("/locations/:from_day/:from_month/:from_year/:id", async (req, res) => {
+    let id = req.params.id;
+    let day = req.params.from_day, month = req.params.from_month, year = req.params.from_year;
+    let from_date = year + '-' + month + '-' + day + 'T00:00:00';
+    let from = new Date(from_date).getTime();
+    console.log(from)
+    await Location.find({user_id: id, timestampMs: { $gte: from}}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        console.log(result);
+        res.send(result);
+    });
+});
+
+router.get("/locations/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/:id", async (req, res) => {
+    let id = req.params.id;
+    let from_day = req.params.from_day, from_month = req.params.from_month, from_year = req.params.from_year;
+    let until_day = req.params.until_day, until_month = req.params.until_month, until_year = req.params.until_year;
+    let from_date = from_year + '-' + from_month + '-' + from_day + 'T00:00:00';
+    let until_date = until_year + '-' + until_month + '-' + until_day + 'T00:00:00';
+    let from = new Date(from_date).getTime();
+    let until = new Date(until_date).getTime();
+    console.log(from, until);
+    await Location.find({user_id: id, timestampMs: { $gte: from, $lte: until}}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        // console.log(result);
         res.send(result);
     });
 });
