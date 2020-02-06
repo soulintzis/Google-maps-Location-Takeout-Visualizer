@@ -39,7 +39,12 @@
     </section>
 
     <section id="statistics">
-
+        <div class="date_pickers">
+            <span>Choose date from: </span>
+            <input type="date" name="from" id="from_date" class="date_input" value="2013-01-08">
+            <span>Choose date until: </span>
+            <input type="date" name="until" id="until_date"  class="date_input">
+        </div>
     </section>
 
     <section id="profile">
@@ -48,8 +53,15 @@
                 <canvas id="eco-score" onload="getData(event)"></canvas>
             </div>
             <div class="right-container">
-                <img id="profile-icon" src="../images/icons/user-icon.png">
-                <div class="profile-info">
+                <div class="user-info">
+                    <span class="info-title">General User Information</span>
+                    <hr class="line">
+                    <br>
+                    <span class="information">Username: </span>
+                    <span class="information">E-mail: </span>
+                    <span class="information">Last upload date: </span>
+                    <span class="information">Period of data uploaded: </span>
+                    <br>
                 </div>
             </div>
         </div>
