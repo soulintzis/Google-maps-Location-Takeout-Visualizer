@@ -6,7 +6,7 @@
 // });
 parseData();
 
-async function parseData() {
+async function parseDataForEcoScore() {
     const data = await getData()
     let eco_counter = 0, non_eco_counter=0;
     for(let item of data) {
