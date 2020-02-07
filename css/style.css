@@ -341,6 +341,7 @@ input[type]:focus,
   margin: 0 auto;
   color: #ed6160;
 }
+
 /*******************************************************/
 /* Home styles */
 .upload-box {
@@ -758,7 +759,7 @@ section {
   opacity: 0;
 }
 
-/* custom styles */
+
 .date_input {
   width: 15vw;
   height: 35px;
@@ -822,7 +823,8 @@ section {
   display: inline-block; 
   position: relative;
   top: 20px;
-  font-size: 1.1em;}
+  font-size: 1.1em;
+}
 
 .line { 
   position: relative;
@@ -850,4 +852,59 @@ section {
   background-color: white;
   border-radius: 20px;
   padding: 30px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.select {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background-color: whitesmoke;
+  overflow: hidden;
+  border-radius: .25em;
+}
+
+select {
+  flex: 1;
+  font-size: 1em;
+  padding: 0 .5em;
+  background-color: whitesmoke;
+  color: black;
+  cursor: pointer;
+}
+
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: white;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+
+.select:hover::after {
+  color: #1e7b85;
 }

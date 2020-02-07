@@ -40,19 +40,57 @@ async function pieChart(){
 });
 }
 
+parseRecordedActivities()
 
-// async function getActivities() {
-// 	const data = await getAllActivities();
-// 	let activities = [];
-// 	for (let item of data) {
-// 		if (item.activity.length !== 0) {
-// 			activities.push(item.activity);
-// 		} else {
-// 			continue;
-// 		}
-// 	}
-// 	return activities;
-// }
+async function parseRecordedActivities(){
+	const activities = await getActivities();
+	let typesOfActivities =[]
+	activity = {
+		type: String,
+		counter: Number
+	}
+	for(let item of activities){
+		for(let act of item){
+			for(let final_obj of act.activity){
+				if (!(
+					final_obj.type === "STILL" ||
+					final_obj.type === "TILTING" ||
+					final_obj.type === "UNKNOWN" ||
+					final_obj.type === 'EXITING_VEHICLE'
+				) && final_obj.confidence >= 65) {
+						if (typesOfActivities.filter(e => e.type === final_obj.type).length > 0) {
+							index = typesOfActivities.findIndex(x => x.type === final_obj.type);
+							typesOfActivities[index].counter += 1;
+							console.log(final_obj.confidence)
+						} else {
+							activity = {
+								type: final_obj.type,
+								counter: 1
+							}
+							typesOfActivities.push(activity);
+						}
+						break;
+				}else {
+					continue;
+				}
+			}			
+		}
+	}
+	console.log(typesOfActivities);
+}
+
+async function getActivities() {
+	const data = await getAllActivities();
+	let activities = [];
+	for (let item of data) {
+		if (item.activity.length !== 0) {
+			activities.push(item.activity);
+		} else {
+			continue;
+		}
+	}
+	return activities;
+}
 
 // async function parseActivitiesForEcoScore() {
 // 	let activities = await getActivities();
