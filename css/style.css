@@ -875,8 +875,8 @@ select::-ms-expand {
   position: relative;
   margin: 0 auto;
   width: 20em;
-  height: 3em;
-  line-height: 3;
+  height: 2em;
+  line-height: 2;
   background-color: whitesmoke;
   overflow: hidden;
   border-radius: .25em;
@@ -907,4 +907,13 @@ select {
 
 .select:hover::after {
   color: #1e7b85;
+}
+
+.graph_pos {
+  width: 65vw;
+  height: 60vh;
+  display: block;
+  position: relative;
+  margin: auto;
+  margin-top: 20px;
 }
