@@ -874,12 +874,12 @@ select::-ms-expand {
   display: block;
   position: relative;
   margin: 0 auto;
-  width: 20em;
+  width: 22em;
   height: 2em;
   line-height: 2;
   background-color: whitesmoke;
   overflow: hidden;
-  border-radius: .25em;
+  border-radius: .5em;
 }
 
 select {
@@ -889,6 +889,10 @@ select {
   background-color: whitesmoke;
   color: black;
   cursor: pointer;
+}
+
+#slct {
+  width: 22em;
 }
 
 .select::after {
@@ -917,3 +921,41 @@ select {
   margin: auto;
   margin-top: 20px;
 }
+
+
+
+@keyframes ldio-5i9edknw1sc {
+  0% { transform: translate(-50%,-50%) rotate(0deg); }
+  100% { transform: translate(-50%,-50%) rotate(360deg); }
+}
+.ldio-5i9edknw1sc div {
+  position: relative;
+  width: 62.800000000000004px;
+  height: 62.800000000000004px;
+  border: 6.28px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+.ldio-5i9edknw1sc div {
+  animation: ldio-5i9edknw1sc 1.1627906976744184s linear infinite;
+  top: 78.5px;
+  left: 78.5px
+}
+.loadingio-spinner-rolling-7bqc3dhw93 {
+  display: none;
+  margin: auto;
+  width: 157px;
+  height: 157px;
+  display: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0);
+}
+.ldio-5i9edknw1sc {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-5i9edknw1sc div { box-sizing: content-box; }

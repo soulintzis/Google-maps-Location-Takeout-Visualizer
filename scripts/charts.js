@@ -1,133 +1,97 @@
-// var myPieChart = new Chart(ctx, {
-//     type: 'pie',
-//     data: data,
-//     options: options
-// });
-// parseDataForEcoScore();
+let charts = null;
+let date_from = null;
+let date_until = null;
 
-pieChart();
-
-
-async function pieChart(){
-	let results = await getEcoScore();
-	const ctx = document.getElementById('eco-score').getContext('2d');
-	let pieChart = new Chart(ctx,{
-	type:'doughnut',
-	options: {
-        title: {
-			display: true,
-			position: 'top',
-			fontSize: 16,
-            text: 'Eco-Score'
-		},
-		legend: {
-			display: true,
-			position: 'bottom',
-		},
-		responsive: true
-    },
-	data : {
-		datasets: [{
-			label:("Eco", "Non Eco"),
-			data: [results.eco_counter, results.non_eco_counter],
-			backgroundColor:['#248f24','#cc0000'],
-			bordercolor:['#fff','#fff'],
-			borderWidth:0.3,
-			position: top
-		}],
-		labels:["Eco Behavior","Non Eco Behavior"]
+function typesGraph(results){
+	let types = [], counters = [];
+	for(let item of results) {
+		types.push(item.type);
+		counters.push(item.counter);
 	}
-});
+	if(charts !== null){ 
+		charts.destroy();
+	}
+	const ctx = document.getElementById('graphs').getContext('2d');
+	charts = new Chart(ctx,{
+		type:'bar',
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			},
+			title: {
+				display: true,
+				position: 'top',
+				fontSize: 16,
+				text: 'Number of Records per Activity'
+			},
+			legend: {
+				display: true,
+				position: 'bottom',
+			}
+		},
+		data: {
+			datasets: [{
+				label: [types],
+				data: counters,
+				backgroundColor: '#009973',
+				bordercolorColor: '#000',
+				borderWidth: 2
+			}],
+			labels: types
+		}
+	});
 }
-// barChartRecorded();
-// async function barChartRecorded(){
-// 	let results= await parseRecordedActivities();
-// 	var data = results.map(function(e) {
-// 		return e.counter;
-// 	});
-// 	var labels = results.map(function(e) {
-// 		return e.type;
-// 	 });
-// 	const ctx=document.getElementById('graphs').getContext('2d');
-// 	let barChartRecorded=new Chart(ctx,{
-// 		type:'bar',
-// 		options: {
-// 			scales: {
-// 				yAxes: [{
-// 					ticks: {
-// 						beginAtZero: true
-// 					}
-// 				}]
-// 			},
-// 			title: {
-// 				display: true,
-// 				position: 'top',
-// 				fontSize: 16,
-// 				text: 'Number of Records per Activity'
-// 			},
-// 			legend: {
-// 				display: true,
-// 				position: 'bottom',
-// 			}
-// 		},
-// 		data:{
-// 			datasets: [{
-// 				label: [labels],
-// 				data: data,
-// 				backgroundColor: '#009973',
-// 				bordercolorColor: '#000',
-// 				borderWidth: 2
-// 			}],
-// 			labels: labels
-// 		}
-// 	});
-// }
 
-// hourGraph();
-// async function hourGraph(){
-// 	let results= await getBussiestHour();
+function hourGraph(results){
+	const ctx=document.getElementById('graphs').getContext('2d');
+	if(charts !== null){ 
+		charts.destroy();
+	}
+	charts = new Chart(ctx,{
+		type:'bar',
+		options: {
+			scales: {
+				scales:{
+					xAxes: [{
+						stacked: true
+					}],
+					yAxes: [{
+						stacked: true,
+						ticks: {
+							beginAtZero: true
+						}
+					}],
+				}
+			},
+			title: {
+				display: true,
+				position: 'top',
+				fontSize: 16,
+				text: 'Number of Records per Activity'
+			},
+			legend: {
+				display: true,
+				position: 'bottom',
+			}
+		},
+		data:{
+			datasets: manipulateDateForHourGraph(results),
+			labels: getHours()
+		}
+	});
+}
 
-// 	const ctx=document.getElementById('graphs').getContext('2d');
-// 	let barChartRecorded=new Chart(ctx,{
-// 		type:'bar',
-// 		options: {
-// 			scales: {
-// 				scales:{
-// 					xAxes: [{
-// 						stacked: true
-// 					}],
-// 					yAxes: [{
-// 						stacked: true,
-// 						ticks: {
-// 							beginAtZero: true
-// 						}
-// 					}],
-// 				}
-// 			},
-// 			title: {
-// 				display: true,
-// 				position: 'top',
-// 				fontSize: 16,
-// 				text: 'Number of Records per Activity'
-// 			},
-// 			legend: {
-// 				display: true,
-// 				position: 'bottom',
-// 			}
-// 		},
-// 		data:{
-// 			datasets: 	manipulateDateForHourGraph(results),
-// 			labels: getHours()
-// 		}
-// 	});
-// }
-dayGraph();
-
-async function dayGraph(){
-	let results= await getBussiestDay();
+function dayGraph(results){
 	let result = manipulateDateForDayGraph(results);
 	const ctx=document.getElementById('graphs').getContext('2d');
-	let barChartRecorded=new Chart(ctx,{
+	if(charts !== null){ 
+		charts.destroy();
+	}
+	charts = new Chart(ctx,{
 		type:'bar',
 		options: {
 			scales: {
@@ -161,6 +125,7 @@ async function dayGraph(){
 	});
 }
 
+
 function getHours() {
 	var hours = [];
 	var text_hour;
@@ -173,6 +138,81 @@ function getHours() {
 		hours.push(text_hour);
 	}
 	return hours;
+}
+
+async function getTypesOfActivity() {
+	document.getElementById("loading-img").style.display = "block";
+    const user = await getUser();
+	const user_id = user.user_id;
+    const url = 'http://localhost:3000/api/locations/get_types_of_activity/' + user_id;
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', url, true)
+
+    xhr.onload = function () {
+
+        if (this.status === 200)
+        {
+			typesGraph(JSON.parse(this.responseText));
+			document.getElementById("loading-img").style.display = "none";
+		}else {
+            console.log('error');
+        }
+    }
+
+    xhr.send()
+}
+
+async function getBusiestHour() {
+	document.getElementById("loading-img").style.display = "block";
+    const user = await getUser();
+	const user_id = user.user_id;
+    const url = 'http://localhost:3000/api/locations/get_busiest_hour_of_the_day/' + user_id;
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', url, true)
+
+    xhr.onload = function () {
+        if (this.status === 200)
+        {
+			hourGraph(JSON.parse(this.responseText));
+			document.getElementById("loading-img").style.display = "none";
+		}else {
+            console.log('error')
+        }
+    }
+
+    xhr.send()
+}
+
+async function getBusiestDay() {
+	document.getElementById("loading-img").style.display = "block";
+    const user = await getUser();
+	const user_id = user.user_id;
+    const url = 'http://localhost:3000/api/locations/get_busiest_day_of_the_week/' + user_id;
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', url, true)
+
+    xhr.onload = function () {
+        if (this.status === 200)
+        {
+			dayGraph(JSON.parse(this.responseText));
+			document.getElementById("loading-img").style.display = "none";
+		}else {
+            console.log('error')
+        }
+    }
+
+    xhr.send()
+}
+
+curr_date();
+
+function curr_date() {
+    let from = document.getElementById("from_date");
+    let until = document.getElementById("until_date");
+    let today = new Date();
+    until.value = today.toISOString().substr(0, 10);
+	today.setFullYear(today.getFullYear() - 1);
+	from.value = today.toISOString().substr(0, 10);
 }
 
 function manipulateDateForHourGraph(result) {
@@ -244,171 +284,252 @@ function getRandomColor() {
 	return color;
 }
 
-async function getBussiestHour(){
-	const activities = await getActivities();
-	let typesOfActivities =[]
-	let activity = {
-		type: String,
-		hours: [{
-			hour: Number,
-			counter: Number
-		}]
+// pieChart();
+
+function getGraph(selectedObject) {
+	let value = selectedObject.value;
+	if(value === 'types_of_activity'){
+		getTypesOfActivity();
+	}else if(value === 'busiest_hour'){
+		getBusiestHour();
+	}else if(value === 'busiest_day'){
+		getBusiestDay();
 	}
-	for(let item of activities){
-		for(let act of item){
-			let timestamp = act.timestampMs;
-			let date = new Date(timestamp);
-			let hour = date.getHours();
-			for(let final_obj of act.activity){
-				if (!(
-					final_obj.type === "STILL" ||
-					final_obj.type === "TILTING" ||
-					final_obj.type === "UNKNOWN" ||
-					final_obj.type === 'EXITING_VEHICLE'
-				) && final_obj.confidence >= 65) {
-						if (typesOfActivities.filter(e => e.type === final_obj.type).length > 0) {
-							index = typesOfActivities.findIndex(x => x.type === final_obj.type);
-							if(typesOfActivities[index].hours.filter(e => e.hour === hour).length > 0) {
-								hour_index = typesOfActivities[index].hours.findIndex(x => x.hour === hour);
-								typesOfActivities[index].hours[hour_index].counter += 1;
-							}else{
-								index = typesOfActivities.findIndex(x => x.type === final_obj.type);
-								new_hour =	{
-									hour: hour,
-									counter: 1
-								}
-								typesOfActivities[index].hours.push(new_hour);
-							}
-						} else {
-							activity = {
-								type: final_obj.type,
-								hours: [
-									{
-										hour: hour,
-										counter: 1
-									}
-								]
-							}
-							typesOfActivities.push(activity);
-						}
-						break;
-				}else {
-					continue;
-				}
-			}			
-		}
-	}
-	return typesOfActivities;
 }
 
-getBussiestDay()
 
-async function getBussiestDay(){
-	const activities = await getActivities();
-	let typesOfActivities =[]
-	let activity = {
-		type: String,
-		days: [{
-			day: String,
-			counter: Number
-		}]
+
+async function pieChart(){
+	let results = await getEcoScore();
+	const ctx = document.getElementById('eco-score').getContext('2d');
+	let pieChart = new Chart(ctx,{
+	type:'doughnut',
+	options: {
+        title: {
+			display: true,
+			position: 'top',
+			fontSize: 16,
+            text: 'Eco-Score'
+		},
+		legend: {
+			display: true,
+			position: 'bottom',
+		},
+		responsive: true
+    },
+	data : {
+		datasets: [{
+			label:("Eco", "Non Eco"),
+			data: [results.eco_counter, results.non_eco_counter],
+			backgroundColor:['#248f24','#cc0000'],
+			bordercolor:['#fff','#fff'],
+			borderWidth:0.3,
+			position: top
+		}],
+		labels:["Eco Behavior","Non Eco Behavior"]
 	}
-	for(let item of activities){
-		for(let act of item){
-			let timestamp = act.timestampMs;
-			let date = new Date(timestamp);
-			let day = date.getDay();
-			for(let final_obj of act.activity){
-				if (!(
-					final_obj.type === "STILL" ||
-					final_obj.type === "TILTING" ||
-					final_obj.type === "UNKNOWN" ||
-					final_obj.type === 'EXITING_VEHICLE'
-				) && final_obj.confidence >= 65) {
-						if (typesOfActivities.filter(e => e.type === final_obj.type).length > 0) {
-							index = typesOfActivities.findIndex(x => x.type === final_obj.type);
-							if(typesOfActivities[index].days.filter(e => e.day === day).length > 0) {
-								day_index = typesOfActivities[index].days.findIndex(x => x.day === day);
-								typesOfActivities[index].days[day_index].counter += 1;
-							}else{
-								index = typesOfActivities.findIndex(x => x.type === final_obj.type);
-								new_day =	{
-									day: day,
-									counter: 1
-								}
-								typesOfActivities[index].days.push(new_day);
-							}
-						} else {
-							activity = {
-								type: final_obj.type,
-								days: [
-									{
-										day: day,
-										counter: 1
-									}
-								]
-							}
-							typesOfActivities.push(activity);
-						}
-						break;
-				}else {
-					continue;
-				}
-			}			
-		}
-	}
-	return typesOfActivities;
+});
+}
+getLatAndLon();
+
+async function getAllLocations() {
+	const user = await getUser();
+	const user_id = user.user_id;
+	const response = await fetch(
+		"http://localhost:3000/api/locations/" + user_id
+	);
+	return await response.json();
 }
 
-async function parseRecordedActivities(){
-	const activities = await getActivities();
-	let typesOfActivities =[]
-	activity = {
-		type: String,
-		counter: Number
+
+async function getLatAndLon() {
+	let points = [];
+	let location = {
+		latitude: Number,
+		longitude: Number
 	}
-	for(let item of activities){
-		for(let act of item){
-			for(let final_obj of act.activity){
-				if (!(
-					final_obj.type === "STILL" ||
-					final_obj.type === "TILTING" ||
-					final_obj.type === "UNKNOWN" ||
-					final_obj.type === 'EXITING_VEHICLE'
-				) && final_obj.confidence >= 65) {
-						if (typesOfActivities.filter(e => e.type === final_obj.type).length > 0) {
-							index = typesOfActivities.findIndex(x => x.type === final_obj.type);
-							typesOfActivities[index].counter += 1;
-							console.log(final_obj.confidence)
-						} else {
-							activity = {
-								type: final_obj.type,
-								counter: 1
-							}
-							typesOfActivities.push(activity);
-						}
-						break;
-				}else {
-					continue;
-				}
-			}			
-		}
+	const locations = await getAllLocations();
+	for(let item of locations){
+		let loc =  {
+			latitude: item.latitudeE7/10000000,
+			longitude: item.longitudeE7/10000000
+		};
+		points.push(loc);
 	}
-	return typesOfActivities;
+	console.log(points);
+	return points;
 }
 
-async function getActivities() {
-	const data = await getAllActivities();
-	let activities = [];
-	for (let item of data) {
-		if (item.activity.length !== 0) {
-			activities.push(item.activity);
-		} else {
-			continue;
-		}
-	}
-	return activities;
+
+async function getUser() {
+	const response = await fetch("http://localhost:3000/api/current_user");
+	return await response.json();
 }
+// async function getBussiestHour(){
+// 	const activities = await getActivities();
+// 	let typesOfActivities =[]
+// 	let activity = {
+// 		type: String,
+// 		hours: [{
+// 			hour: Number,
+// 			counter: Number
+// 		}]
+// 	}
+// 	for(let item of activities){
+// 		for(let act of item){
+// 			let timestamp = act.timestampMs;
+// 			let date = new Date(timestamp);
+// 			let hour = date.getHours();
+// 			for(let final_obj of act.activity){
+// 				if (!(
+// 					final_obj.type === "STILL" ||
+// 					final_obj.type === "TILTING" ||
+// 					final_obj.type === "UNKNOWN" ||
+// 					final_obj.type === 'EXITING_VEHICLE'
+// 				) && final_obj.confidence >= 65) {
+// 						if (typesOfActivities.filter(e => e.type === final_obj.type).length > 0) {
+// 							index = typesOfActivities.findIndex(x => x.type === final_obj.type);
+// 							if(typesOfActivities[index].hours.filter(e => e.hour === hour).length > 0) {
+// 								hour_index = typesOfActivities[index].hours.findIndex(x => x.hour === hour);
+// 								typesOfActivities[index].hours[hour_index].counter += 1;
+// 							}else{
+// 								index = typesOfActivities.findIndex(x => x.type === final_obj.type);
+// 								new_hour =	{
+// 									hour: hour,
+// 									counter: 1
+// 								}
+// 								typesOfActivities[index].hours.push(new_hour);
+// 							}
+// 						} else {
+// 							activity = {
+// 								type: final_obj.type,
+// 								hours: [
+// 									{
+// 										hour: hour,
+// 										counter: 1
+// 									}
+// 								]
+// 							}
+// 							typesOfActivities.push(activity);
+// 						}
+// 						break;
+// 				}else {
+// 					continue;
+// 				}
+// 			}			
+// 		}
+// 	}
+// 	return typesOfActivities;
+// }
+
+// getBussiestDay()
+
+// async function getBussiestDay(){
+// 	const activities = await getActivities();
+// 	let typesOfActivities =[]
+// 	let activity = {
+// 		type: String,
+// 		days: [{
+// 			day: String,
+// 			counter: Number
+// 		}]
+// 	}
+// 	for(let item of activities){
+// 		for(let act of item){
+// 			let timestamp = act.timestampMs;
+// 			let date = new Date(timestamp);
+// 			let day = date.getDay();
+// 			for(let final_obj of act.activity){
+// 				if (!(
+// 					final_obj.type === "STILL" ||
+// 					final_obj.type === "TILTING" ||
+// 					final_obj.type === "UNKNOWN" ||
+// 					final_obj.type === 'EXITING_VEHICLE'
+// 				) && final_obj.confidence >= 65) {
+// 						if (typesOfActivities.filter(e => e.type === final_obj.type).length > 0) {
+// 							index = typesOfActivities.findIndex(x => x.type === final_obj.type);
+// 							if(typesOfActivities[index].days.filter(e => e.day === day).length > 0) {
+// 								day_index = typesOfActivities[index].days.findIndex(x => x.day === day);
+// 								typesOfActivities[index].days[day_index].counter += 1;
+// 							}else{
+// 								index = typesOfActivities.findIndex(x => x.type === final_obj.type);
+// 								new_day =	{
+// 									day: day,
+// 									counter: 1
+// 								}
+// 								typesOfActivities[index].days.push(new_day);
+// 							}
+// 						} else {
+// 							activity = {
+// 								type: final_obj.type,
+// 								days: [
+// 									{
+// 										day: day,
+// 										counter: 1
+// 									}
+// 								]
+// 							}
+// 							typesOfActivities.push(activity);
+// 						}
+// 						break;
+// 				}else {
+// 					continue;
+// 				}
+// 			}			
+// 		}
+// 	}
+// 	return typesOfActivities;
+// }
+
+// async function parseRecordedActivities(){
+// 	const activities = await getActivities();
+// 	let typesOfActivities =[]
+// 	activity = {
+// 		type: String,
+// 		counter: Number
+// 	}
+// 	for(let item of activities){
+// 		for(let act of item){
+// 			for(let final_obj of act.activity){
+// 				if (!(
+// 					final_obj.type === "STILL" ||
+// 					final_obj.type === "TILTING" ||
+// 					final_obj.type === "UNKNOWN" ||
+// 					final_obj.type === 'EXITING_VEHICLE'
+// 				) && final_obj.confidence >= 65) {
+// 						if (typesOfActivities.filter(e => e.type === final_obj.type).length > 0) {
+// 							index = typesOfActivities.findIndex(x => x.type === final_obj.type);
+// 							typesOfActivities[index].counter += 1;
+// 							console.log(final_obj.confidence)
+// 						} else {
+// 							activity = {
+// 								type: final_obj.type,
+// 								counter: 1
+// 							}
+// 							typesOfActivities.push(activity);
+// 						}
+// 						break;
+// 				}else {
+// 					continue;
+// 				}
+// 			}			
+// 		}
+// 	}
+// 	return typesOfActivities;
+// }
+
+// async function getActivities() {
+// 	const data = await getAllActivities();
+// 	let activities = [];
+// 	for (let item of data) {
+// 		if (item.activity.length !== 0) {
+// 			activities.push(item.activity);
+// 		} else {
+// 			continue;
+// 		}
+// 	}
+// 	return activities;
+// }
 
 // async function parseActivitiesForEcoScore() {
 // 	let activities = await getActivities();
@@ -456,32 +577,32 @@ async function getActivities() {
 // }
 
 
-async function getCurrentMonthActivities() {
-	const user = await getUser();
-	const user_id = user.user_id;
-	const response = await fetch(
-		"http://localhost:3000/api/locations/current_month/" + user_id
-	);
-	return await response.json();
-}
+// async function getCurrentMonthActivities() {
+// 	const user = await getUser();
+// 	const user_id = user.user_id;
+// 	const response = await fetch(
+// 		"http://localhost:3000/api/locations/current_month/" + user_id
+// 	);
+// 	return await response.json();
+// }
 
-async function getAllActivities() {
-	const user = await getUser();
-	const user_id = user.user_id;
-	const response = await fetch(
-		"http://localhost:3000/api/locations/" + user_id
-	);
-	return await response.json();
-}
+// async function getAllActivities() {
+// 	const user = await getUser();
+// 	const user_id = user.user_id;
+// 	const response = await fetch(
+// 		"http://localhost:3000/api/locations/" + user_id
+// 	);
+// 	return await response.json();
+// }
 
-async function getEcoScore() {  
-	const user = await getUser();
-	const user_id = user.user_id;
-	const response = await fetch(
-		"http://localhost:3000/api/locations/get_eco_score/" + user_id
-	);
-	return await response.json();
-}
+// async function getEcoScore() {  
+// 	const user = await getUser();
+// 	const user_id = user.user_id;
+// 	const response = await fetch(
+// 		"http://localhost:3000/api/locations/get_eco_score/" + user_id
+// 	);
+// 	return await response.json();
+// }
 
 // const data = await JSON.parse(response.text());
 // return data;
@@ -502,7 +623,3 @@ async function getEcoScore() {
 
 // xhr.send(this.response);
 
-async function getUser() {
-	const response = await fetch("http://localhost:3000/api/current_user");
-	return await response.json();
-}

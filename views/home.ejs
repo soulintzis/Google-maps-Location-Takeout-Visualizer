@@ -46,6 +46,22 @@
             <span>Choose date until: </span>
             <input type="date" name="until" id="until_date"  class="date_input">
         </div>
+
+        <div class="select">
+            <select name="slct" id="slct" onchange="getGraph(this);">
+                <option value="">Choose graph</option>
+                <option value="types_of_activity">Number of records per Type of Activity</option>
+                <option value="busiest_hour">Busiest hour of the day per Activity</option>
+                <option value="busiest_day">Busiest day of the week per Activity</option>
+            </select>
+        </div>
+
+        <div id="loading-img" class="loadingio-spinner-rolling-7bqc3dhw93"><div class="ldio-5i9edknw1sc">
+            <div></div>
+            </div></div>
+        <div class="graph_pos" id="graph_container" onchange="getGraph();">
+            <canvas id = "graphs"></canvas>
+        </div>
     </section>
 
     <section id="profile">

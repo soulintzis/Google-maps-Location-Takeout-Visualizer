@@ -51,7 +51,6 @@ router.get("/location/:id", async (req, res) => {
         if(error) {
             return res.status(500).send(error);
         }
-        // console.log(result)
         res.send(result);
     });
 });
@@ -65,18 +64,6 @@ router.get("/locations/current_month/:id", async (req, res) => {
             return res.status(500).send(error);
         }
         res.send(result);
-    });
-});
-
-router.get("/locations/get_eco_score/:id", async (req, res) => {
-    let id = req.params.id;
-    await Location.find({user_id: id}, (error, result) => {
-        if(error) {
-            return res.status(500).send(error);
-        }
-        let activities = getActivities(result);
-        let counters = getEcoScore(activities)
-        res.send(counters);
     });
 });
 
@@ -108,7 +95,6 @@ router.get("/locations/:from_day/:from_month/:from_year/:until_day/:until_month/
         if(error) {
             return res.status(500).send(error);
         }
-        // console.log(result);
         res.send(result);
     });
 });
@@ -139,7 +125,23 @@ router.get("/locations/:id", async (req, res) => {
         if(error) {
             return res.status(500).send(error);
         }
-        console.log(result)
+        console.log(result);
+        res.send(result);
+    });
+});
+
+
+router.get("/current_user", auth.authenticationMiddleware(), async (req, res) => {
+    current_user = req.user;
+    res.send(current_user);
+});
+
+router.delete("/locations/:id", async (req, res) => {
+    var id = req.params.id;
+    await Location.deleteMany({user_id: id}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
         res.send(result);
     });
 });
@@ -154,6 +156,67 @@ router.get("/activities/:id", async (req, res) => {
         let activities = await getActivities(result);
         console.log(activities[0][1])
         res.send(activities);
+    });
+});
+
+router.get("/activities/:id", async (req, res) => {
+    let id = req.params.id;
+
+    await Location.find({user_id: id}, async (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        let activities = await getActivities(result);
+        console.log(activities[0][1]);
+        res.send(activities);
+    });
+});
+
+router.get("/locations/get_eco_score/:id", async (req, res) => {
+    let id = req.params.id;
+    await Location.find({user_id: id}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        let activities = getActivities(result);
+        let counters = getEcoScore(activities);
+        res.send(counters);
+    });
+});
+
+router.get("/locations/get_busiest_hour_of_the_day/:id", async (req, res) => {
+    let id = req.params.id;
+    await Location.find({user_id: id}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        let activities = getActivities(result);
+        let results = getBusiestHour(activities);
+        res.send(results);
+    });
+});
+
+router.get("/locations/get_busiest_day_of_the_week/:id", async (req, res) => {
+    let id = req.params.id;
+    await Location.find({user_id: id}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        let activities = getActivities(result);
+        let results = getBusiestDay(activities);
+        res.send(results);
+    });
+});
+
+router.get("/locations/get_types_of_activity/:id", async (req, res) => {
+    let id = req.params.id;
+    await Location.find({user_id: id}, (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        let activities = getActivities(result);
+        let results = getTypesOfActivity(activities);
+        res.send(results);
     });
 });
 
@@ -186,58 +249,189 @@ function getActivities(data) {
 function getEcoScore(activities) {
     let eco_counter = 0,
     non_eco_counter = 0;
-for (let item of activities) {
-    for (let activity of item) {
-        for (let final_obj of activity.activity) {
-            if (
-                (final_obj.type === "WALKING" ||
-                final_obj.type === "ON_FOOT" ||
-                final_obj.type === "RUNNING" ||
-                final_obj.type === "ON_BICYCLE") &&
-                final_obj.confidence > 65
-            ) {
-                eco_counter = eco_counter + 1;
-                break;
-            } else if (
-                (final_obj.type === "IN_ROAD_VEHICLE" ||
-                    final_obj.type === "EXITING_VEHICLE" ||
-                    final_obj.type === "IN_RAIL_VEHICLE" ||
-                    final_obj.type === "IN_VEHICLE") &&
-                final_obj.confidence > 65
-            ) {
-                non_eco_counter = non_eco_counter + 1;
-                break;
-            } else if (
-                final_obj.type === "STILL" ||
-                final_obj.type === "TILTING" ||
-                final_obj.type === "UNKNOWN"
-            ) {
-                continue;
+    for (let item of activities) {
+        for (let activity of item) {
+            for (let final_obj of activity.activity) {
+                if (
+                    (final_obj.type === "WALKING" ||
+                    final_obj.type === "ON_FOOT" ||
+                    final_obj.type === "RUNNING" ||
+                    final_obj.type === "ON_BICYCLE") &&
+                    final_obj.confidence > 65
+                ) {
+                    eco_counter = eco_counter + 1;
+                    break;
+                } else if (
+                    (final_obj.type === "IN_ROAD_VEHICLE" ||
+                        final_obj.type === "EXITING_VEHICLE" ||
+                        final_obj.type === "IN_RAIL_VEHICLE" ||
+                        final_obj.type === "IN_VEHICLE") &&
+                    final_obj.confidence > 65
+                ) {
+                    non_eco_counter = non_eco_counter + 1;
+                    break;
+                } else if (
+                    final_obj.type === "STILL" ||
+                    final_obj.type === "TILTING" ||
+                    final_obj.type === "UNKNOWN"
+                ) {
+                    continue;
+                }
             }
         }
     }
+
+    return {
+        eco_counter,
+        non_eco_counter
+    };
 }
 
-return {
-    eco_counter,
-    non_eco_counter
-};
+function getBusiestHour(activities){
+	let busiestHours =[];
+	let activity = {
+		type: String,
+		hours: [{
+			hour: Number,
+			counter: Number
+		}]
+	}
+	for(let item of activities){
+		for(let act of item){
+			let timestamp = act.timestampMs;
+			let date = new Date(timestamp);
+			let hour = date.getHours();
+			for(let final_obj of act.activity){
+				if (!(
+					final_obj.type === "STILL" ||
+					final_obj.type === "TILTING" ||
+					final_obj.type === "UNKNOWN" ||
+					final_obj.type === 'EXITING_VEHICLE'
+				) && final_obj.confidence >= 65) {
+						if (busiestHours.filter(e => e.type === final_obj.type).length > 0) {
+							index = busiestHours.findIndex(x => x.type === final_obj.type);
+							if(busiestHours[index].hours.filter(e => e.hour === hour).length > 0) {
+								hour_index = busiestHours[index].hours.findIndex(x => x.hour === hour);
+								busiestHours[index].hours[hour_index].counter += 1;
+							}else{
+								index = busiestHours.findIndex(x => x.type === final_obj.type);
+								new_hour =	{
+									hour: hour,
+									counter: 1
+								};
+								busiestHours[index].hours.push(new_hour);
+							}
+						} else {
+							activity = {
+								type: final_obj.type,
+								hours: [
+									{
+										hour: hour,
+										counter: 1
+									}
+								]
+							}
+							busiestHours.push(activity);
+						}
+						break;
+				}else {
+					continue;
+				}
+			}			
+		}
+	}
+	return busiestHours;
 }
 
+function getBusiestDay(activities){
+	let busiestDays =[]
+	let activity = {
+		type: String,
+		days: [{
+			day: String,
+			counter: Number
+		}]
+	}
+	for(let item of activities){
+		for(let act of item){
+			let timestamp = act.timestampMs;
+			let date = new Date(timestamp);
+			let day = date.getDay();
+			for(let final_obj of act.activity){
+				if (!(
+					final_obj.type === "STILL" ||
+					final_obj.type === "TILTING" ||
+					final_obj.type === "UNKNOWN" ||
+					final_obj.type === 'EXITING_VEHICLE'
+				) && final_obj.confidence >= 65) {
+						if (busiestDays.filter(e => e.type === final_obj.type).length > 0) {
+							index = busiestDays.findIndex(x => x.type === final_obj.type);
+							if(busiestDays[index].days.filter(e => e.day === day).length > 0) {
+								day_index = busiestDays[index].days.findIndex(x => x.day === day);
+								busiestDays[index].days[day_index].counter += 1;
+							}else{
+								index = busiestDays.findIndex(x => x.type === final_obj.type);
+								new_day =	{
+									day: day,
+									counter: 1
+								};
+								busiestDays[index].days.push(new_day);
+							}
+						} else {
+							activity = {
+								type: final_obj.type,
+								days: [
+									{
+										day: day,
+										counter: 1
+									}
+								]
+							};
+							busiestDays.push(activity);
+						}
+						break;
+				}else {
+					continue;
+				}
+			}			
+		}
+	}
+	return busiestDays;
+}
 
-router.get("/current_user", auth.authenticationMiddleware(), async (req, res) => {
-    current_user = req.user;
-    res.send(current_user)
-});
-
-router.delete("/locations/:id", async (req, res) => {
-    var id = req.params.id;
-    await Location.deleteMany({user_id: id}, (error, result) => {
-        if(error) {
-            return res.status(500).send(error);
-        }
-        res.send(result);
-    });
-});
+function getTypesOfActivity(activities){
+	let typesOfActivities =[]
+	activity = {
+		type: String,
+		counter: Number
+	};
+	for(let item of activities){
+		for(let act of item){
+			for(let final_obj of act.activity){
+				if (!(
+					final_obj.type === "STILL" ||
+					final_obj.type === "TILTING" ||
+					final_obj.type === "UNKNOWN" ||
+					final_obj.type === 'EXITING_VEHICLE'
+				) && final_obj.confidence >= 65) {
+						if (typesOfActivities.filter(e => e.type === final_obj.type).length > 0) {
+							index = typesOfActivities.findIndex(x => x.type === final_obj.type);
+							typesOfActivities[index].counter += 1;
+						} else {
+							activity = {
+								type: final_obj.type,
+								counter: 1
+							};
+							typesOfActivities.push(activity);
+						}
+						break;
+				}else {
+					continue;
+				}
+			}			
+		}
+	}
+	return typesOfActivities;
+}
 
 module.exports = router;
