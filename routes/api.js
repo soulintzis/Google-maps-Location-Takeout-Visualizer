@@ -72,30 +72,29 @@ router.get("/locations/:from_day/:from_month/:from_year/:id", async (req, res) =
     let day = req.params.from_day, month = req.params.from_month, year = req.params.from_year;
     let from_date = year + '-' + month + '-' + day + 'T00:00:00';
     let from = new Date(from_date).getTime();
-    console.log(from)
+    console.log(from_date);
     await Location.find({user_id: id, timestampMs: { $gte: from}}, (error, result) => {
         if(error) {
             return res.status(500).send(error);
         }
-        console.log(result);
         res.send(result);
     });
 });
 
-router.get("/locations/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/:id", async (req, res) => {
-    let id = req.params.id;
+router.get("/locations/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year", auth.authenticationMiddleware(), async (req, res) => {
+    let id = req.user.user_id;
     let from_day = req.params.from_day, from_month = req.params.from_month, from_year = req.params.from_year;
     let until_day = req.params.until_day, until_month = req.params.until_month, until_year = req.params.until_year;
+    let action = req.params.type
     let from_date = from_year + '-' + from_month + '-' + from_day + 'T00:00:00';
     let until_date = until_year + '-' + until_month + '-' + until_day + 'T00:00:00';
     let from = new Date(from_date).getTime();
     let until = new Date(until_date).getTime();
-    console.log(from, until);
     await Location.find({user_id: id, timestampMs: { $gte: from, $lte: until}}, (error, result) => {
         if(error) {
             return res.status(500).send(error);
         }
-        res.send(result);
+            res.send(results);
     });
 });
 
@@ -125,7 +124,6 @@ router.get("/locations/:id", async (req, res) => {
         if(error) {
             return res.status(500).send(error);
         }
-        console.log(result);
         res.send(result);
     });
 });
@@ -159,18 +157,6 @@ router.get("/activities/:id", async (req, res) => {
     });
 });
 
-router.get("/activities/:id", async (req, res) => {
-    let id = req.params.id;
-
-    await Location.find({user_id: id}, async (error, result) => {
-        if(error) {
-            return res.status(500).send(error);
-        }
-        let activities = await getActivities(result);
-        console.log(activities[0][1]);
-        res.send(activities);
-    });
-});
 
 router.get("/locations/get_eco_score/:id", async (req, res) => {
     let id = req.params.id;
@@ -184,10 +170,15 @@ router.get("/locations/get_eco_score/:id", async (req, res) => {
     });
 });
 
-router.get("/locations/get_busiest_hour_of_the_day/:id", async (req, res) => {
-    let id = req.params.id;
-    await Location.find({user_id: id}, (error, result) => {
-        if(error) {
+router.get("/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/get_busiest_hour_of_the_day", auth.authenticationMiddleware(), async (req, res) => {
+    let id = req.user.user_id;
+    let from_day = req.params.from_day, from_month = req.params.from_month, from_year = req.params.from_year;
+    let until_day = req.params.until_day, until_month = req.params.until_month, until_year = req.params.until_year;
+    let from_date = from_year + '-' + from_month + '-' + from_day + 'T00:00:00';
+    let until_date = until_year + '-' + until_month + '-' + until_day + 'T00:00:00';
+    let from = new Date(from_date).getTime();
+    let until = new Date(until_date).getTime();        
+    await Location.find({user_id: id, timestampMs: { $gte: from, $lte: until}},(error, result) => {        if(error) {
             return res.status(500).send(error);
         }
         let activities = getActivities(result);
@@ -196,10 +187,15 @@ router.get("/locations/get_busiest_hour_of_the_day/:id", async (req, res) => {
     });
 });
 
-router.get("/locations/get_busiest_day_of_the_week/:id", async (req, res) => {
-    let id = req.params.id;
-    await Location.find({user_id: id}, (error, result) => {
-        if(error) {
+router.get("/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/get_busiest_day_of_the_week/", auth.authenticationMiddleware(), async (req, res) => {
+    let id = req.user.user_id;
+    let from_day = req.params.from_day, from_month = req.params.from_month, from_year = req.params.from_year;
+    let until_day = req.params.until_day, until_month = req.params.until_month, until_year = req.params.until_year;
+    let from_date = from_year + '-' + from_month + '-' + from_day + 'T00:00:00';
+    let until_date = until_year + '-' + until_month + '-' + until_day + 'T00:00:00';
+    let from = new Date(from_date).getTime();
+    let until = new Date(until_date).getTime();    
+    await Location.find({user_id: id, timestampMs: { $gte: from, $lte: until}},(error, result) => {        if(error) {
             return res.status(500).send(error);
         }
         let activities = getActivities(result);
@@ -208,9 +204,15 @@ router.get("/locations/get_busiest_day_of_the_week/:id", async (req, res) => {
     });
 });
 
-router.get("/locations/get_types_of_activity/:id", async (req, res) => {
-    let id = req.params.id;
-    await Location.find({user_id: id}, (error, result) => {
+router.get("/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/get-types-of-activity", auth.authenticationMiddleware(), async (req, res) => {
+    let id = req.user.user_id;
+    let from_day = req.params.from_day, from_month = req.params.from_month, from_year = req.params.from_year;
+    let until_day = req.params.until_day, until_month = req.params.until_month, until_year = req.params.until_year;
+    let from_date = from_year + '-' + from_month + '-' + from_day + 'T00:00:00';
+    let until_date = until_year + '-' + until_month + '-' + until_day + 'T00:00:00';
+    let from = new Date(from_date).getTime();
+    let until = new Date(until_date).getTime();
+    await Location.find({user_id: id, timestampMs: { $gte: from, $lte: until}},(error, result) => {
         if(error) {
             return res.status(500).send(error);
         }
