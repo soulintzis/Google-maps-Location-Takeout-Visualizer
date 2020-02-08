@@ -6,7 +6,6 @@
             <ul id="link-list">
                 <li class="nav-link active"><a href="#welcome">Welcome</a></li>
                 <li class="nav-link"><a href="#statistics">Statistics</a></li>
-                <li class="nav-link"><a href="#heatmap">Heatmap</a></li>
                 <li class="nav-link"><a href="#profile">Profile</a></li>
                 <li class="nav-link"><a href="#upload">Upload a File</a></li>
                 <li class="nav-link"><a href="logout">Log out</a></li>
@@ -39,25 +38,13 @@
         </div>
     </section>
 
+
     <section id="statistics">
         <div class="date_pickers">
             <span>Choose date from: </span>
             <input type="date" name="from" id="from_date" class="date_input" value="2013-01-08">
             <span>Choose date until: </span>
             <input type="date" name="until" id="until_date"  class="date_input">
-        </div>
-
-        <div class="select">
-            <select name="slct" id="slct">
-                <option value="" disabled>Choose graph</option>
-                <option value="record_percentage">Records Percentage per Activity</option>
-                <option value="most_busy_hour">Most busy hour per Activity</option>
-                <option value="most_busy_day">Day of the week with most activity records</option>
-            </select>
-        </div>
-
-        <div>
-            <canvas id="graphs"></canvas>
         </div>
     </section>
 
