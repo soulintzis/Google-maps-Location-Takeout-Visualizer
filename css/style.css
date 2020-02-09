@@ -959,3 +959,16 @@ select {
   transform-origin: 0 0; /* see note above */
 }
 .ldio-5i9edknw1sc div { box-sizing: content-box; }
+
+#heatmap {
+  width: 60vw;
+  height: 60vh;
+}
+
+.heatmap-container {
+  position: relative;
+  display: block;
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;     
+}

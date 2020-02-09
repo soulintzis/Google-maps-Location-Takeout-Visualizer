@@ -195,7 +195,8 @@ router.get("/:from_day/:from_month/:from_year/:until_day/:until_month/:until_yea
     let until_date = until_year + '-' + until_month + '-' + until_day + 'T00:00:00';
     let from = new Date(from_date).getTime();
     let until = new Date(until_date).getTime();    
-    await Location.find({user_id: id, timestampMs: { $gte: from, $lte: until}},(error, result) => {        if(error) {
+    await Location.find({user_id: id, timestampMs: { $gte: from, $lte: until}},(error, result) => {        
+        if(error) {
             return res.status(500).send(error);
         }
         let activities = getActivities(result);
@@ -219,6 +220,65 @@ router.get("/:from_day/:from_month/:from_year/:until_day/:until_month/:until_yea
         let activities = getActivities(result);
         let results = getTypesOfActivity(activities);
         res.send(results);
+    });
+});
+
+router.get("/locations/:id", auth.authenticationMiddleware(), async (req, res) => {
+    // let id = req.user.user_id;
+    let id = req.params.id;
+
+    await Location.find({user_id: id}, async (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        // let latLon = getLatAndLon();
+        // console.log(latLon)
+        res.send(results);
+    });
+});
+
+router.get("/records_per_user", async (req,res) => {
+    await User.find({}, async (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        let records_per_user = [];
+        for(let user of result){
+            await Location.countDocuments({user_id: user.user_id}, async (error, counter) => {
+                if(error) {
+                    return res.status(500).send(error);
+                }
+                let doc = {
+                    username: user.username,
+                    num_of_docs: counter
+                };
+                records_per_user.push(doc);
+            });
+        }
+        res.send(records_per_user);
+    });
+});
+
+router.get("/records_per_month", async (req, res) => {
+    
+    await Location.find({}).sort({timestampMs: -1}).limit(1).exec(async function(error, date_until) {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        let until = new Date(date_until[0].timestampMs).getTime();
+        await Location.find({}).sort({timestampMs: 1}).limit(1).exec(async function(error, date_from) {
+            if(error) {
+                return res.status(500).send(error);
+            }
+            let from = new Date(date_from[0].timestampMs).getTime();
+            console.log(from, until);
+            for(let year = from.getFullYear(); year <= until.getFullYear(); year++){
+                for(let month = from.getMonth() + 1; month <= until.getMonth() + 1; month++){
+                    let date = new Date(getStartOfMonthDateAsString(date)).getTime();
+                    console.log(date)
+                }
+            }
+        });
     });
 });
 
@@ -435,5 +495,22 @@ function getTypesOfActivity(activities){
 	}
 	return typesOfActivities;
 }
+
+function getLatAndLon(locations) {
+	let points = [];
+	let location = {
+		latitude: Number,
+		longitude: Number
+	}
+	for(let item of locations){
+		let loc =  {
+			latitude: item.latitudeE7/10000000,
+			longitude: item.longitudeE7/10000000
+		};
+		points.push(loc);
+	}
+	return points;
+}
+
 
 module.exports = router;
