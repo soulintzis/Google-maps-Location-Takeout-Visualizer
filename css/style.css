@@ -972,3 +972,23 @@ select {
   margin-top: 100px;
   text-align: center;     
 }
+
+.left-lead-container{
+ 
+  position: relative;
+  width:25vw;
+  height:30vh;
+  text-align: center;
+  background-color: white;
+  border-radius: 20px;
+  margin-top:40%;
+  margin-left:10%;
+  
+}
+.text-format{
+  font-weight: 300;
+
+}
+
+
+

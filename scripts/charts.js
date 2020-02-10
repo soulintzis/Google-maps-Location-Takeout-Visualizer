@@ -150,6 +150,7 @@ function getTypesOfActivity() {
 	document.getElementById("loading-img").style.display = "block";
 	from = getDateFrom();
 	until = getDateUntil();
+	console.log(from,until);
 	const url = 'http://localhost:3000/api/' + from + '/' + until + '/get-types-of-activity';
     let xhr = new XMLHttpRequest;
     xhr.open('GET', url, true)
