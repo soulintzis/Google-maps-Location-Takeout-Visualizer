@@ -338,7 +338,7 @@ function getGraph(selectedObject) {
 	}
 }
 
-async function pieChart(results){
+function pieChart(results){
 	const ctx = document.getElementById('eco-score').getContext('2d');
 	let pieChart = new Chart(ctx,{
 	type:'doughnut',
@@ -351,7 +351,7 @@ async function pieChart(results){
 		},
 		legend: {
 			display: true,
-			position: 'bottom',
+			position: 'bottom'
 		},
 		responsive: true
     },

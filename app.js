@@ -67,16 +67,19 @@ app.use(session({
 }));
 
 //Signup Route
-var users = require('./routes/users');
+let users = require('./routes/users');
 //Login Route
-var index = require('./routes/index');
+let index = require('./routes/index');
 //API Route
-var api = require('./routes/api');
+let api = require('./routes/api');
+//API Route
+let admin_api = require('./routes/api_admin');
 
 //Routes
 app.use('/', index);
 app.use('/signup', users);  
 app.use('/api', api);
+app.use('/admin_api', admin_api);
 
 //Set EJS as view engine
 app.set('view engine', 'ejs');

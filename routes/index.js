@@ -30,12 +30,12 @@ router.get("/login", function(req, res){
 });
 
 //Login Process
-router.post("/login", function(req, res, next){
-    let query = {username: req.body.username};
-    User.findOne(query, function(err, user){
-        if(user.admin === true){
+router.post("/login", async function(req, res, next){
+    let name = req.body.username;
+    await User.findOne({username: name}, (err, result) => {
+        if(result.admin === true){
             passport.authenticate('local', {
-                successRedirect: '/admin/home',
+                successRedirect: '/admin_api/admin',
                 failureRedirect:'/'
             })(req, res, next);
         }else{
@@ -88,24 +88,11 @@ router.post("/upload", auth.authenticationMiddleware(), async function(req,res){
     }
 });
 
-
-
 router.get("/home", auth.authenticationMiddleware(), function(req, res) {
     let user = req.user;
     res.render('home', { user: user });
 });
 
-router.get("/admin", function(req, res){
-    res.render('admin');
-});
-
-router.get("/dashboard", function(req, res){
-    res.render('dashboard');
-});
-
-router.get("/heatmap", function(req, res){
-    res.render('heatmap');
-});
 
 router.get('/logout', auth.authenticationMiddleware(), async function(req, res){
     await req.session.destroy();
