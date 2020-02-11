@@ -446,7 +446,7 @@ function getTypesOfActivity(activities){
 				}
 			}			
 		}
-	}
+    }
 	return typesOfActivities;
 }
 
