@@ -7,6 +7,8 @@ let Location = require('../models/location');
 
 const auth = require('../scripts/authentication');
 
+
+
 router.get("/records_per_user", async (req,res) => {
     await User.find({}, async (error, result) => {
         let doc = {
@@ -270,6 +272,28 @@ router.delete("/delete_data", async (req, res) => {
         }
         console.log("Data was deleted")
         res.send(result);
+    });
+});
+router.get("/heatmap_locations",  async (req, res) => {
+    let lat_and_lngs = []
+    let location = {
+        lat: Number,
+        lng: Number,
+        counter: Number
+    };
+    await Location.find({}, async (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        for(let item of result){
+            location =  {
+                lat: item.latitudeE7/10000000,
+                lng: item.longitudeE7/10000000,
+                counter: 1
+            };
+            lat_and_lngs.push(location);
+        }
+        res.send(lat_and_lngs);
     });
 });
 
