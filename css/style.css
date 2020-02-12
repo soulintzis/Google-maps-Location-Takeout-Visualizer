@@ -424,7 +424,6 @@ section {
   text-align: center;
   width: 75%;
   height: 100vh;
-  padding: 25px 0px;
 }
 
 .sidebar {
@@ -584,14 +583,6 @@ section {
   height: 100vh;
 }
 
-#profile-icon{
-  display: block;
-  position: relative;
-  top: 10vh;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .profile-page .right-container .profile-info {
   display: block;
   position: relative;
@@ -628,25 +619,6 @@ section {
   padding-top: 20px;
   font-size: 1.2em;
   padding-bottom: 10px;
-}
-
-.upload-page .instructions {
-  padding-top: 10px 0 0 0;
-  list-style: decimal;
-  text-align: center;
-  justify-content: center;    
-  margin: 0 auto;
-} 
-
-.instructions ol {
-  display: inline-block;
-  text-align: left;
-  list-style: decimal;
-}
-
-.instructions ol ul {
-  list-style: lower-latin;
-  padding-left: 20px !important;
 }
 
 /* Drop zone area style */
@@ -874,7 +846,7 @@ select::-ms-expand {
 .select {
   display: block;
   position: relative;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   width: 22em;
   height: 2em;
   line-height: 2;
@@ -992,9 +964,10 @@ select {
 }
 
 #heatmap {
-  display: block;
-  margin: 0 auto;
-  position: relative;
   height: 50vh;
   width: 75%;
+}
+
+#heatmap-section {
+  padding: 50px;
 }
