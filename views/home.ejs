@@ -5,7 +5,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <li><a href="#welcome">Welcome</a></li>
         <li><a href="#statistics">Statistics</a></li>
-        <li><a href="#heatmap">Heatmap</a></li>
+        <li><a href="#heatmap-section">Heatmap</a></li>
         <li><a href="#profile">Profile</a></li>
         <li><a href="#upload">Upload a File</a></li>
         <li><a href="logout">Log out</a></li>
@@ -73,10 +73,11 @@
             <div class="graph_pos" id="graph_container" onchange="getGraph();">
                 <canvas id="graphs"></canvas>
             </div>
-        </div>
-        <div class="graph_pos" id="graph_container" onchange="getGraph();">
-            <canvas id="graphs"></canvas>
-        </div>
+
+            <div class="graph_pos" id="graph_container" onchange="getGraph();">
+                <canvas id="graphs"></canvas>
+            </div>
+    </div>
     </section>
 
     <section id="heatmap-section">
@@ -87,123 +88,111 @@
     </section>
 
     <section id="profile">
-        <div class="profile-page">
-            <div class="left-container">
 
-        </section>
+        <div class="outside-eco-container">
+            <figure class="eco_score_graph">
+                <canvas id="eco-score"></canvas>
+            </figure>
+        </div>
 
-        <section id="heatmap-section">
-            <div class="heatmap-container">
-                <div id="heatmap"></div>
-            </div>
-        </section>
-
-        <section id="profile">
-
-            <div class="outside-eco-container">
-                <figure class="eco_score_graph">
-                    <canvas id="eco-score"></canvas>
-                </figure>
-            </div>
-
-            <div id="outside-lead-cont">
-                <div class="leaderboard-container">
-                    <div class="lead-title">
+        <div id="outside-lead-cont">
+            <div class="leaderboard-container">
+                <div class="lead-title">
                     <img src="https://img.icons8.com/ios-filled/50/000000/positive-dynamic.png"
                         style="width:25px; height:25px;left:0">
                     <h1 class="text-format">Leaderboard for last month</h1>
-                    </div>
-
-                    <table>
-                        <tr>
-                            <th>Ranking</th>
-                            <th>Short Username</th>
-                            <th>Ecoscore</th>
-                        </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>username1</td>
-                            <td>eco</td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>username2</td>
-                            <td>eco</td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>username3</td>
-                            <td>eco</td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>extra username</td>
-                            <td>eco</td>
-                        </tr>
-                    </table>
-
                 </div>
-            </div>
 
-            <div id="outside-user-container">
-                <div class="my_container">
-                    <span class="info-title">General User Information</span>
-                    <hr class="line">
-                    <br><br>
-                    <span class="information-label">Username: </span>
-                    <span class="info-value"><%=user.username%></span>
-                    <span class="information-label">E-mail: </span>
-                    <span class="info-value"><%=user.email%></span>
-                    <span class="information-label">Last upload date: </span>
-                    <span class="info-value"><%=user.lastUpload%></span>
-                    <span class="information-label">Uploaded data from: </span>
-                    <div id="timestamp_from" class="info-value"></div>
-                    <span class="information-label">Uploaded data until: </span>
-                    <div id="timestamp_until" class="info-value"></div>
+                <table>
+                    <tr>
+                        <th>Ranking</th>
+                        <th>Short Username</th>
+                        <th>Ecoscore</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>username1</td>
+                        <td>eco</td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>username2</td>
+                        <td>eco</td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>username3</td>
+                        <td>eco</td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>extra username</td>
+                        <td>eco</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <div id="outside-user-container">
+            <div class="my_container">
+                <span class="info-title">General User Information</span>
+                <hr class="line">
+                <br><br>
+                <span class="information-label">Username: </span>
+                <span class="info-value"><%=user.username%></span>
+                <span class="information-label">E-mail: </span>
+                <span class="info-value"><%=user.email%></span>
+                <span class="information-label">Last upload date: </span>
+                <span class="info-value"><%=user.lastUpload%></span>
+                <span class="information-label">Uploaded data from: </span>
+                <div id="timestamp_from" class="info-value"></div>
+                <span class="information-label">Uploaded data until: </span>
+                <div id="timestamp_until" class="info-value"></div>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <div class="eco_year_graph">
+            <div></div>
+        </div>
+
+    </section>
+
+    <section id="upload">
+        <div class="page-title">
+            <h1>Upload a File</h1>
+        </div>
+        <div class="upload-page">
+            <div id="patrasMap"></div>
+            <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data"
+                onsubmit="uploadFiles(event)">
+                <input type="file" name="files" id="fileInput" multiple
+                    onchange="overrideDefault(event);addFiles(event);">
+
+                <label for="fileInput" id="fileLabel" ondragover="overrideDefault(event);fileHover();"
+                    ondragenter="overrideDefault(event);fileHover();"
+                    ondragleave="overrideDefault(event);fileHoverEnd();"
+                    ondrop="overrideDefault(event);fileHoverEnd(); addFiles(event);">
+                    <img src="/images/icons/icons8-upload-document-100.png">
                     <br>
+                    <span id="fileLabelText">
+                        Choose a file or drag it here
+                    </span>
                     <br>
-                </div>
-            </div>
+                    <span id="uploadStatus"></span>
+                </label>
+            </form>
+            <button id="upload" type="submit" value="submit" form="dropFileForm" onclick="retriveRestrictedAreas();"
+                class="uploadButton noselect">
+                Upload
+            </button>
+        </div>
 
-            <div class="eco_year_graph">
-                <div></div>
-            </div>
+    </section>
 
-        </section>
-
-        <section id="upload">
-            <div class="page-title">
-                <h1>Upload a File</h1>
-            </div>
-            <div class="upload-page">
-                <div id="patrasMap"></div>
-                <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data"
-                    onsubmit="uploadFiles(event)">
-                    <input type="file" name="files" id="fileInput" multiple
-                        onchange="overrideDefault(event);addFiles(event);">
-
-                    <label for="fileInput" id="fileLabel" ondragover="overrideDefault(event);fileHover();"
-                        ondragenter="overrideDefault(event);fileHover();"
-                        ondragleave="overrideDefault(event);fileHoverEnd();"
-                        ondrop="overrideDefault(event);fileHoverEnd(); addFiles(event);">
-                        <img src="/images/icons/icons8-upload-document-100.png">
-                        <br>
-                        <span id="fileLabelText">
-                            Choose a file or drag it here
-                        </span>
-                        <br>
-                        <span id="uploadStatus"></span>
-                    </label>
-                </form>
-                <button id="upload" type="submit" value="submit" form="dropFileForm" onclick="retriveRestrictedAreas();"
-                    class="uploadButton noselect">
-                    Upload
-                </button>
-            </div>
-
-        </section>
-
-    </div>
 </div>
+
 
 <%- include("partials/footer") %>
