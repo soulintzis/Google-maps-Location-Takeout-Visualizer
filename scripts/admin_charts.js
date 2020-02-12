@@ -5,7 +5,20 @@
 // getRecordDistributionPerMonth();
 // getRecordDistributionPerYear();
 function deleteData(){
-  console.log("Deleted");
+    const url = "http://localhost:3000/admin_api/delete_data";
+    let xhr = new XMLHttpRequest();
+    xhr.open("DELETE", url, true);
+  
+    xhr.onload = function() {
+      if (this.status === 200) {
+        console.log("Data was deleted successfully!");
+        // document.getElementById("loading-img").style.display = "none";
+      } else {
+        console.log("error");
+      }
+    };
+  
+    xhr.send();
 }
 
 function getActivitiesDistribution() {

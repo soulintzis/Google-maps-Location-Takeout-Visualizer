@@ -6,12 +6,6 @@ let User = require('../models/User');
 let Location = require('../models/location');
 
 const auth = require('../scripts/authentication');
-router.use('/css',express.static(path.join(__dirname, 'css')));
-router.use('/images',express.static(path.join(__dirname, 'images')));
-router.use('/scripts',express.static(path.join(__dirname, 'scripts')));
-router.use('/views',express.static(path.join(__dirname, 'views')));
-
-
 
 router.get("/records_per_user", async (req,res) => {
     await User.find({}, async (error, result) => {
@@ -255,10 +249,6 @@ router.get("/records_per_year", async (req, res) => {
             res.send(num_of_records_per_year);  
         });
     });
-});
-
-router.get("/admin", auth.authenticationMiddlewareAdmin(), function(req, res){
-    res.render('admin');
 });
 
 router.get("/records_per_type", async (req,res) => {

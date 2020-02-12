@@ -52,8 +52,8 @@ async function heatmapGraphs(){
         center:[38.230462, 21.75315]
     };
     let config={
-        radius:6,
-        maxOpacity:10,
+        radius:5,
+        maxOpacity:8,
         scaleRadius:false,
         latField:'lat',
         longField:'lng',
