@@ -136,6 +136,7 @@ html {
   height: 100%;
   font-family: Poppins-Regular, sans-serif;
 }
+
 /* *********************************************** */
 
 /* Login and sign-up page styles */
@@ -454,7 +455,7 @@ input[type]:focus,
 }
 
 #patrasMap {
-  z-index: 999;
+  z-index: -1;
   margin: 0 auto;
   position: relative;
   height: 50vh;
@@ -669,13 +670,11 @@ section {
 
 #dropFileForm #fileLabel:before {
   z-index: -1;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 5%,
-    black 5%,
-    black 10%
-  );
+  background: repeating-linear-gradient(45deg,
+      transparent,
+      transparent 5%,
+      black 5%,
+      black 10%);
   opacity: 0;
   transition: 0.5s;
 }
@@ -713,13 +712,13 @@ section {
 }
 
 [type="date"] {
-  background: #fff
-    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
-    97% 50% no-repeat;
+  background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
 }
+
 [type="date"]::-webkit-inner-spin-button {
   display: none;
 }
+
 [type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
 }
@@ -892,6 +891,7 @@ select {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
   }
+
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
   }
@@ -929,7 +929,8 @@ select {
   position: relative;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
+  transform-origin: 0 0;
+  /* see note above */
 }
 
 .ldio-5i9edknw1sc div {
@@ -948,7 +949,7 @@ select {
   margin-top: 100px;
   /* padding-top:100px;
   padding-bottom:100px; */
-  /* top: 30%;
+/* top: 30%;
   bottom: 20%;
   text-align: center;
 } */
@@ -977,6 +978,7 @@ select {
   /* overflow-x:auto; 
     overflow-y: auto; */
 }
+
 .lead-title {
   display: block;
 }
@@ -1106,17 +1108,21 @@ td {
   .full-container {
     font-size: 0.6em;
   }
+
   .home-page .description {
     margin: 0;
     padding: 0px !important;
   }
+
   .sidebar li a {
     font-size: 0.8em;
   }
+
   .openbtn {
     width: 40px;
     height: 40px;
   }
+
   .date_pickers span {
     padding-right: 50%;
   }
@@ -1140,23 +1146,43 @@ td {
   .date_pickers span {
     padding: 70px !important;
   }
+
   #profile {
-    font-size: 0.7em!important;
+    font-size: 0.7em !important;
   }
+
   .my_contaier {
     padding: 50px !important;
   }
-  .information-label{
-    margin-left:5% !important;
+
+  .information-label {
+    margin-left: 5% !important;
   }
-  .information-value{
-    top:10%!important;
+
+  .information-value {
+    top: 10% !important;
   }
 }
+
+#heatmap-section {
+  position: relative;
+  display: block;
+  margin: auto;
+  height: 100vh;
+  bottom: 20%;
+}
+
 #heatmap {
   display: block;
-  margin: 0 auto;
   position: relative;
-  height: 50vh;
-  width: 75%;
+  height: 80vh;
+  width: 80%;
+  z-index: -1;
+  margin: 0 auto !important;
+}
+
+.heatmap-page {
+  height: 100vh;
+  text-align: center;
+  display: block;
 }
