@@ -519,12 +519,12 @@ section {
 .page-title {
   position: relative;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   color: #000000;
   text-transform: inherit;
   text-align: center;
   font-size: 2em;
-  font-weight: 400;
+  font-weight: bold;
 }
 
 .home-page .welcome-message {
@@ -1094,13 +1094,14 @@ table {
   width: 100%;
 }
 
-th,
-td {
+th, td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   white-space: nowrap;
 }
+
+
 
 /*----------------------------------------------------------------------------------------------*/
 /*Adjustments for mobile media screens*/
@@ -1130,9 +1131,23 @@ td {
   #profile {
     overflow-y: auto;
     overflow-y: auto;
-    padding-bottom: 200px;
+    /* padding-bottom: 200px; */
     /* height:200%; */
   }
+}
+#heatmap-section{
+  /* padding-bottom: 200px; */
+  position:relative;
+}
+
+#heatmap {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  height: 50vh;
+  width: 75%;
+  padding-left: 100px;
+  z-index: -1;
 }
 
 /*Adjustments for tablet media screens*/
