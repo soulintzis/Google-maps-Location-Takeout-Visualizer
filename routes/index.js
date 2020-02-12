@@ -35,7 +35,7 @@ router.post("/login", async function(req, res, next) {
   await User.findOne({ username: name }, (err, result) => {
     if (result.admin === true) {
       passport.authenticate("local", {
-        successRedirect: "/admin_api/admin",
+        successRedirect: "/admin",
         failureRedirect: "/"
       })(req, res, next);
     } else {
