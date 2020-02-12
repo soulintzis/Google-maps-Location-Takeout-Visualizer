@@ -1,56 +1,23 @@
-heatmapGraphs();
-async function getUser() {
-    const response = await fetch("http://localhost:3000/api/current_user");
-	return await response.json();
-}
+ajaxHeatmapCall();
 
-async function getAllLocations() {  
-	const user = await getUser();
-	const user_id = user.user_id;
-	const response = await fetch(
-		"http://localhost:3000/api/locations/" + user_id
-    );
-	return await response.json();
-}
+async function ajaxHeatmapCall() {
+    const url = "http://localhost:3000/api/heatmap_locations";
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', url, true)
 
-async function getLatAndLon() {
-    const locations = await getAllLocations();
-	let points = [];
-	for(let item of locations){
-		let lococation =  {
-			lat: item.latitudeE7/10000000,
-            lng: item.longitudeE7/10000000  ,
-            counter: 1
-        };
-		points.push(lococation);
+    xhr.onload = function () {
+        if (this.status === 200)
+        {
+            heatmapGraphs(JSON.parse(this.responseText));
+		}else {
+            console.log('error')
+        }
     }
-	return points;
+
+    xhr.send()
 }
-// async function getLatLon() {
-//     const url = "http://localhost:3000/api/locations/";
-//     let xhr = new XMLHttpRequest;
-//     xhr.open('GET', url, true)
 
-//     xhr.onload = function () {
-//         if (this.status === 200)
-//         {
-//             console.log(JSON.parse(this.responseText))
-//             heatmapGraphs(JSON.parse(this.responseText));
-// 		}else {
-//             console.log('error')
-//         }
-//     }
-
-//     xhr.send()
-// }
-
-async function heatmapGraphs(){
-    let results = await getLatAndLon();
-    console.log(results)
-    let options ={
-        zoom: 11,
-        center:[38.230462, 21.75315]
-    };
+async function heatmapGraphs(results){
     let config={
         radius:5,
         maxOpacity:8,
@@ -76,9 +43,8 @@ async function heatmapGraphs(){
    
 
     testData ={
-        data:results
+        data: results
     }
-    console.log(testData);
     heatmap.setData(testData);
     user_heatmap.addLayer(heatmap);
 }

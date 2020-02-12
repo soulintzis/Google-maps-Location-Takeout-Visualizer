@@ -419,11 +419,12 @@ section {
   display: flex;
   flex-direction: column;
   margin-left: 25%;
-  /* align-items: center;
+  align-items: center;
   justify-content: center;
-  text-align: center; */
+  text-align: center;
   width: 75%;
   height: 100vh;
+  padding: 25px 0px;
 }
 
 .sidebar {
@@ -960,18 +961,18 @@ select {
 }
 .ldio-5i9edknw1sc div { box-sizing: content-box; }
 
-#heatmap {
+/* #heatmap {
   width: 60vw;
   height: 60vh;
-}
+} */
 
-.heatmap-container {
+/* .heatmap-container {
   position: relative;
   display: block;
   margin: auto;
   margin-top: 100px;
   text-align: center;     
-}
+} */
 
 .left-lead-container{
  
@@ -990,5 +991,10 @@ select {
 
 }
 
-
-
+#heatmap {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  height: 50vh;
+  width: 75%;
+}

@@ -55,8 +55,8 @@ router.get("/location/:id", async (req, res) => {
     });
 });
 
-router.get("/locations/current_month/:id", async (req, res) => {
-    let id = req.params.id;
+router.get("/locations/current_month", async (req, res) => {
+    let id = req.user.user_id;
     let date = new Date();
     let start_of_month = new Date(getStartOfMonthDateAsString(date)).getTime();
     await Location.find({user_id: id, timestampMs: { $gte: start_of_month}}, (error, result) => {
@@ -67,8 +67,8 @@ router.get("/locations/current_month/:id", async (req, res) => {
     });
 });
 
-router.get("/locations/:from_day/:from_month/:from_year/:id", async (req, res) => {
-    let id = req.params.id;
+router.get("/locations/:from_day/:from_month/:from_year", async (req, res) => {
+    let id = req.user.user_id;
     let day = req.params.from_day, month = req.params.from_month, year = req.params.from_year;
     let from_date = year + '-' + month + '-' + day + 'T00:00:00';
     let from = new Date(from_date).getTime();
@@ -98,8 +98,8 @@ router.get("/locations/:from_day/:from_month/:from_year/:until_day/:until_month/
     });
 });
 
-router.get("/location/max_timestamp/:id", async (req, res) => {
-    let id = req.params.id;
+router.get("/location/max_timestamp", async (req, res) => {
+    let id = req.user.user_id;
     await Location.find({user_id: id}).sort({timestampMs: -1}).limit(1).exec(async function(error, result) {
         if(error) {
             return res.status(500).send(error);
@@ -108,8 +108,8 @@ router.get("/location/max_timestamp/:id", async (req, res) => {
     });
 });
 
-router.get("/location/min_timestamp/:id", async (req, res) => {
-    let id = req.params.id;
+router.get("/location/min_timestamp", async (req, res) => {
+    let id = req.user.user_id;
     await Location.find({user_id: id}).sort({timestampMs: 1}).limit(1).exec(async function(error, result) {
         if(error) {
             return res.status(500).send(error);
@@ -118,8 +118,8 @@ router.get("/location/min_timestamp/:id", async (req, res) => {
     });
 });
 
-router.get("/locations/:id", async (req, res) => {
-    let id = req.params.id;
+router.get("/locations", async (req, res) => {
+    let id = req.user.user_id;
     await Location.find({user_id: id}, (error, result) => {
         if(error) {
             return res.status(500).send(error);
@@ -128,14 +128,8 @@ router.get("/locations/:id", async (req, res) => {
     });
 });
 
-
-router.get("/current_user", auth.authenticationMiddleware(), async (req, res) => {
-    current_user = req.user;
-    res.send(current_user);
-});
-
-router.delete("/locations/:id", async (req, res) => {
-    var id = req.params.id;
+router.delete("/locations", async (req, res) => {
+    let id = req.user.user_id;
     await Location.deleteMany({user_id: id}, (error, result) => {
         if(error) {
             return res.status(500).send(error);
@@ -144,8 +138,8 @@ router.delete("/locations/:id", async (req, res) => {
     });
 });
 
-router.get("/activities/:id", async (req, res) => {
-    let id = req.params.id;
+router.get("/activities", async (req, res) => {
+    let id = req.user.user_id;
 
     await Location.find({user_id: id}, async (error, result) => {
         if(error) {
@@ -158,8 +152,8 @@ router.get("/activities/:id", async (req, res) => {
 });
 
 
-router.get("/locations/get_eco_score/:id", async (req, res) => {
-    let id = req.params.id;
+router.get("/locations/get_eco_score", async (req, res) => {
+    let id = req.user.user_id;
     await Location.find({user_id: id}, (error, result) => {
         if(error) {
             return res.status(500).send(error);
@@ -223,17 +217,37 @@ router.get("/:from_day/:from_month/:from_year/:until_day/:until_month/:until_yea
     });
 });
 
-router.get("/locations/:id", auth.authenticationMiddleware(), async (req, res) => {
-    // let id = req.user.user_id;
-    let id = req.params.id;
-
+router.get("/locations", auth.authenticationMiddleware(), async (req, res) => {
+    let id = req.user.user_id;
     await Location.find({user_id: id}, async (error, result) => {
         if(error) {
             return res.status(500).send(error);
         }
-        // let latLon = getLatAndLon();
-        // console.log(latLon)
         res.send(results);
+    });
+});
+
+router.get("/heatmap_locations", auth.authenticationMiddleware(), async (req, res) => {
+    let id = req.user.user_id;
+    let lat_and_lngs = []
+    let location = {
+        lat: Number,
+        lng: Number,
+        counter: Number
+    };
+    await Location.find({user_id: id}, async (error, result) => {
+        if(error) {
+            return res.status(500).send(error);
+        }
+        for(let item of result){
+            location =  {
+                lat: item.latitudeE7/10000000,
+                lng: item.longitudeE7/10000000,
+                counter: 1
+            };
+            lat_and_lngs.push(location);
+        }
+        res.send(lat_and_lngs);
     });
 });
 
