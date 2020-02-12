@@ -4,6 +4,9 @@
 // getRecordDistributionPerHour();
 // getRecordDistributionPerMonth();
 // getRecordDistributionPerYear();
+function deleteData(){
+  console.log("Deleted");
+}
 
 function getActivitiesDistribution() {
   // document.getElementById("loading-img").style.display = "block";

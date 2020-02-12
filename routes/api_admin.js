@@ -6,6 +6,11 @@ let User = require('../models/User');
 let Location = require('../models/location');
 
 const auth = require('../scripts/authentication');
+router.use('/css',express.static(path.join(__dirname, 'css')));
+router.use('/images',express.static(path.join(__dirname, 'images')));
+router.use('/scripts',express.static(path.join(__dirname, 'scripts')));
+router.use('/views',express.static(path.join(__dirname, 'views')));
+
 
 
 router.get("/records_per_user", async (req,res) => {
@@ -267,12 +272,13 @@ router.get("/records_per_type", async (req,res) => {
     });
 });
 
-router.delete("/locations", async (req, res) => {
+router.delete("/delete_data", async (req, res) => {
     var obj_id = req.params.id;
     await Location.deleteMany({}, (error, result) => {
         if(error) {
             return res.status(500).send(error);
         }
+        console.log("Data was deleted")
         res.send(result);
     });
 });
