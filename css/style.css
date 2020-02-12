@@ -846,7 +846,7 @@ select::-ms-expand {
 .select {
   display: block;
   position: relative;
-  /* margin: 0 auto; */
+  margin: 0 auto;
   width: 22em;
   height: 2em;
   line-height: 2;

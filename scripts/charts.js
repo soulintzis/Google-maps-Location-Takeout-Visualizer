@@ -28,6 +28,7 @@ function typesGraph(results){
 					}
 				}]
 			},
+			maintainAspectRatio: false,
 			title: {
 				display: true,
 				position: 'top',
@@ -73,6 +74,7 @@ function hourGraph(results){
 					}],
 				}
 			},
+			maintainAspectRatio: false,
 			title: {
 				display: true,
 				position: 'top',
@@ -113,6 +115,7 @@ function dayGraph(results){
 					}],
 				}
 			},
+			maintainAspectRatio: false,
 			title: {
 				display: true,
 				position: 'top',
@@ -350,11 +353,12 @@ function pieChart(results){
 			fontSize: 16,
             text: 'Eco-Score'
 		},
+		maintainAspectRatio: false,
 		legend: {
 			display: true,
 			position: 'bottom'
 		},
-		responsive: true
+		// responsive: true,
     },
 	data : {
 		datasets: [{

@@ -1,65 +1,77 @@
 <%- include("partials/header") %>
 
-<main class="main">
-    <aside class="sidebar">
-        <nav class="nav">
-            <ul id="link-list">
-                <li class="nav-link active"><a href="#welcome">Welcome</a></li>
-                <li class="nav-link"><a href="#statistics">Statistics</a></li>
-                <li class="nav-link"><a href="#heatmap">Heatmap</a></li>
-                <li class="nav-link"><a href="#profile">Profile</a></li>
-                <li class="nav-link"><a href="#upload">Upload a File</a></li>
-                <li class="nav-link"><a href="logout">Log out</a></li>
-            </ul>
-        </nav>
-    </aside>
+<div id="main">
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <li><a href="#welcome">Welcome</a></li>
+        <li><a href="#statistics">Statistics</a></li>
+        <li><a href="#heatmap">Heatmap</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#upload">Upload a File</a></li>
+        <li><a href="logout">Log out</a></li>
+    </div>
 
-    <section id="welcome" class="home-page">
-        <div class="welcome-page">
-            <div class="welcome-message">
-                <h1>Welcome to Patras Crowdsourcing!</h1>
-                <!-- <p>This site was made for our semester's project for the subject of Programming on the World Wide Web.</p> -->
+    <button id="nav_btn" class="openbtn" onclick="openNav()">☰</button>
+
+
+    <div class="full-container">
+
+
+        <section id="welcome" class="home-page">
+            <div class="welcome-page">
+                <div class="welcome-message">
+                    <h1>Welcome to Patras Crowdsourcing!</h1>
+                </div>
+                <div class="description">
+                    <p>Google Maps service is being used by millions of users daily for navigation and information
+                        seeking
+                        purposes. For the service's
+                        correct operation, mobile's location services(Wi-Fi, GPS or 3/4 G Network). Voluntarily, Google
+                        account settings allow Location
+                        History service to be toggled on/off. Using this service, Google periodically saves users'
+                        current
+                        location in cloud, so that
+                        they would be able to review their transport history and explore Points of Interest near their
+                        location.</p>
+                </div>
+                <div class="team">
+                    <p>Our Team:</p>
+                    <li>Σουλιντζής Ευάγγελος - 1054374</li>
+                    <li>Στεμιτσιώτης Χρήστος - 1054375</li>
+                    <li>Ιωάννου Δημήτρης - 1054342</li>
+                </div>
             </div>
-            <div class="description">
-                <p>Google Maps service is being used by millions of users daily for navigation and information seeking
-                    purposes. For the service's
-                    correct operation, mobile's location services(Wi-Fi, GPS or 3/4 G Network). Voluntarily, Google
-                    account settings allow Location
-                    History service to be toggled on/off. Using this service, Google periodically saves users' current
-                    location in cloud, so that
-                    they would be able to review their transport history and explore Points of Interest near their
-                    location.</p>
+        </section>
+
+
+        <section id="statistics">
+            <div class="date_pickers">
+
+                <span>Choose date from: </span>
+                <input type="date" name="from" id="from_date" class="date_input" onchange="getDate();">
+
+                <span>Choose date until: </span>
+                <input type="date" name="until" id="until_date" class="date_input" onchange="getDate();">
+
             </div>
-            <div class="team">
-                <p>Our Team:</p>
-                <li>Σουλιντζής Ευάγγελος - 1054374</li>
-                <li>Στεμιτσιώτης Χρήστος - 1054375</li>
-                <li>Ιωάννου Δημήτρης - 1054342</li>
+
+            <div class="select">
+                <select name="slct" id="slct" onchange="getGraph(this);">
+                    <option value="">Choose graph</option>
+                    <option value="types_of_activity">Number of records per Type of Activity</option>
+                    <option value="busiest_hour">Busiest hour of the day per Activity</option>
+                    <option value="busiest_day">Busiest day of the week per Activity</option>
+                </select>
             </div>
-        </div>
-    </section>
 
+            <div id="loading-img" class="loadingio-spinner-rolling-7bqc3dhw93">
+                <div class="ldio-5i9edknw1sc">
+                    <div></div>
+                </div>
+            </div>
 
-    <section id="statistics">
-        <div class="date_pickers">
-            <span>Choose date from: </span>
-            <input type="date" name="from" id="from_date" class="date_input" onchange="getDate();">
-            <span>Choose date until: </span>
-            <input type="date" name="until" id="until_date" class="date_input" onchange="getDate();">
-        </div>
-
-        <div class="select">
-            <select name="slct" id="slct" onchange="getGraph(this);">
-                <option value="">Choose graph</option>
-                <option value="types_of_activity">Number of records per Type of Activity</option>
-                <option value="busiest_hour">Busiest hour of the day per Activity</option>
-                <option value="busiest_day">Busiest day of the week per Activity</option>
-            </select>
-        </div>
-
-        <div id="loading-img" class="loadingio-spinner-rolling-7bqc3dhw93">
-            <div class="ldio-5i9edknw1sc">
-                <div></div>
+            <div class="graph_pos" id="graph_container" onchange="getGraph();">
+                <canvas id="graphs"></canvas>
             </div>
         </div>
         <div class="graph_pos" id="graph_container" onchange="getGraph();">
@@ -80,82 +92,120 @@
         <div class="profile-page">
             <div class="left-container">
 
+        </section>
+
+        <section id="heatmap-section">
+            <div class="heatmap-container">
+                <div id="heatmap"></div>
+            </div>
+        </section>
+
+        <section id="profile">
+
+            <div class="outside-eco-container">
                 <figure class="eco_score_graph">
                     <canvas id="eco-score"></canvas>
                 </figure>
-                <div id="leaderboard">
-                    <div class="left-lead-container">
-                        <div class="leaderboard-content">
-                            <img src="https://img.icons8.com/ios-filled/50/000000/positive-dynamic.png"
-                                style="width:6%; height:6%">
-                            <h1 class="text-format">Leaderboard</h1>
-                        </br>
-                            <ol>
-                                <li>user1</li>
-                                <li>user2</li>
-                                <li>user3</li>
-                                <li>user4</li>
-                                <li>user5</li>
-                              </ol>  
-                        </div>
+            </div>
+
+            <div id="outside-lead-cont">
+                <div class="leaderboard-container">
+                    <div class="lead-title">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/positive-dynamic.png"
+                        style="width:25px; height:25px;left:0">
+                    <h1 class="text-format">Leaderboard for last month</h1>
                     </div>
+
+                    <table>
+                        <tr>
+                            <th>Ranking</th>
+                            <th>Short Username</th>
+                            <th>Ecoscore</th>
+                        </tr>
+                        <tr>
+                            <td>1.</td>
+                            <td>username1</td>
+                            <td>eco</td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>username2</td>
+                            <td>eco</td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>username3</td>
+                            <td>eco</td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>extra username</td>
+                            <td>eco</td>
+                        </tr>
+                    </table>
+
                 </div>
             </div>
 
-
-            <div class="right-container">
-                <div class="user-info">
+            <div id="outside-user-container">
+                <div class="my_container">
                     <span class="info-title">General User Information</span>
                     <hr class="line">
-                    <br>
-                    <span class="information_label">Username: </span>
-                    <span class="info"><%= user.username %></span>
-                    <span class="information_label">E-mail: </span>
-                    <span class="info"><%= user.email %></span>
-                    <span class="information_label">Last upload date: </span>
-                    <span class="info"> <%= user.lastUpload %></span>
-                    <span class="information_label">Uploaded data from: </span>
-                    <div id="timestamp_from" class="info"></div>
-                    <span class="information_label">Uploaded data until: </span>
-                    <div id="timestamp_until" class="info"></div>
+                    <br><br>
+                    <span class="information-label">Username: </span>
+                    <span class="info-value"><%=user.username%></span>
+                    <span class="information-label">E-mail: </span>
+                    <span class="info-value"><%=user.email%></span>
+                    <span class="information-label">Last upload date: </span>
+                    <span class="info-value"><%=user.lastUpload%></span>
+                    <span class="information-label">Uploaded data from: </span>
+                    <div id="timestamp_from" class="info-value"></div>
+                    <span class="information-label">Uploaded data until: </span>
+                    <div id="timestamp_until" class="info-value"></div>
                     <br>
                     <br>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="upload">
-        <div class="page-title">
-            <h1>Upload a File</h1>
-        </div>
-        <div class="upload-page">
-            <div id="patrasMap"></div>
-            <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data"
-                onsubmit="uploadFiles(event)">
-                <input type="file" name="files" id="fileInput" multiple
-                    onchange="overrideDefault(event);addFiles(event);">
+            <div class="eco_year_graph">
+                <div></div>
+            </div>
 
-                <label for="fileInput" id="fileLabel" ondragover="overrideDefault(event);fileHover();"
-                    ondragenter="overrideDefault(event);fileHover();"
-                    ondragleave="overrideDefault(event);fileHoverEnd();"
-                    ondrop="overrideDefault(event);fileHoverEnd(); addFiles(event);">
-                    <img src="/images/icons/icons8-upload-document-100.png">
-                    <br>
-                    <span id="fileLabelText">
-                        Choose a file or drag it here
-                    </span>
-                    <br>
-                    <span id="uploadStatus"></span>
-                </label>
-            </form>
-            <button id="upload" type="submit" value="submit" form="dropFileForm" onclick="retriveRestrictedAreas();"
-                class="uploadButton noselect">
-                Upload
-            </button>
-        </div>
-    </section>
+        </section>
 
-</main>
+        <section id="upload">
+            <div class="page-title">
+                <h1>Upload a File</h1>
+            </div>
+            <div class="upload-page">
+                <div id="patrasMap"></div>
+                <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data"
+                    onsubmit="uploadFiles(event)">
+                    <input type="file" name="files" id="fileInput" multiple
+                        onchange="overrideDefault(event);addFiles(event);">
+
+                    <label for="fileInput" id="fileLabel" ondragover="overrideDefault(event);fileHover();"
+                        ondragenter="overrideDefault(event);fileHover();"
+                        ondragleave="overrideDefault(event);fileHoverEnd();"
+                        ondrop="overrideDefault(event);fileHoverEnd(); addFiles(event);">
+                        <img src="/images/icons/icons8-upload-document-100.png">
+                        <br>
+                        <span id="fileLabelText">
+                            Choose a file or drag it here
+                        </span>
+                        <br>
+                        <span id="uploadStatus"></span>
+                    </label>
+                </form>
+                <button id="upload" type="submit" value="submit" form="dropFileForm" onclick="retriveRestrictedAreas();"
+                    class="uploadButton noselect">
+                    Upload
+                </button>
+            </div>
+
+        </section>
+
+    </div>
+</div>
 
 <%- include("partials/footer") %>
