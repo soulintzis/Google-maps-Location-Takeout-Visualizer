@@ -8,6 +8,7 @@ async function ajaxHeatmapCall() {
     xhr.onload = function () {
         if (this.status === 200)
         {
+            console.log(this.responseText)
             heatmapGraphs(JSON.parse(this.responseText));
 		}else {
             console.log('error')
