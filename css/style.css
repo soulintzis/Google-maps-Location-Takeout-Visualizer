@@ -936,22 +936,22 @@ select {
   box-sizing: content-box;
 }
 
-#heatmap {
+/* #heatmap {
   width: 60vw;
   height: 60vh;
-}
+} */
 
-.heatmap-container {
+/* .heatmap-container {
   position: relative;
   display: block;
   margin: auto;
   margin-top: 100px;
   /* padding-top:100px;
   padding-bottom:100px; */
-  top: 30%;
+  /* top: 30%;
   bottom: 20%;
   text-align: center;
-}
+} */
 
 .leaderboard-container {
   top: 10vh;
@@ -1152,4 +1152,11 @@ td {
   .information-value{
     top:10%!important;
   }
+}
+#heatmap {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  height: 50vh;
+  width: 75%;
 }
