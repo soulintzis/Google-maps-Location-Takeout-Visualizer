@@ -6,7 +6,7 @@ const locationSchema = mongoose.Schema({
         required: false
     },
     timestampMs : {
-        type: Number,
+        type: Date,
         required: true
     },
     latitudeE7 : {

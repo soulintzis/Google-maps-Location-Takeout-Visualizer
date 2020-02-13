@@ -1,9 +1,24 @@
-// getActivitiesDistribution();
-// getRecordDistributionPerUser();
-// getRecordDistributionPerDay();
-// getRecordDistributionPerHour();
-// getRecordDistributionPerMonth();
-// getRecordDistributionPerYear();
+let dayG = null, userG = null, activityG = null, hourG = null, monthG = null, yearG = null;
+
+window.onload = function() {
+  getActivitiesDistribution();
+  getRecordDistributionPerUser();
+  getRecordDistributionPerDay();
+  getRecordDistributionPerHour();
+  getRecordDistributionPerMonth();
+  getRecordDistributionPerYear();
+};
+
+function refreshGraphs() {
+  getActivitiesDistribution();
+  getRecordDistributionPerUser();
+  getRecordDistributionPerDay();
+  getRecordDistributionPerHour();
+  getRecordDistributionPerMonth();
+  getRecordDistributionPerYear();
+}
+
+
 function deleteData(){
     const url = "http://localhost:3000/admin_api/delete_data";
     let xhr = new XMLHttpRequest();
@@ -11,8 +26,7 @@ function deleteData(){
   
     xhr.onload = function() {
       if (this.status === 200) {
-        console.log("Data was deleted successfully!");
-        // document.getElementById("loading-img").style.display = "none";
+
       } else {
         console.log("error");
       }
@@ -31,7 +45,6 @@ function getActivitiesDistribution() {
 
   xhr.onload = function() {
     if (this.status === 200) {
-      console.log(this.responseText);
       activityChart(JSON.parse(this.responseText));
       // document.getElementById("loading-img").style.display = "none";
     } else {
@@ -51,7 +64,6 @@ function getRecordDistributionPerUser() {
   xhr.open("GET", url, true);
   xhr.onload = function() {
     if (this.status === 200) {
-      console.log(this.responseText);
       userChart(JSON.parse(this.responseText));
       // dayGraph(JSON.parse(this.responseText));
       // document.getElementById("loading-img").style.display = "none";
@@ -72,7 +84,6 @@ function getRecordDistributionPerMonth() {
 
   xhr.onload = function() {
     if (this.status === 200) {
-      // console.log(this.responseText);
       monthChart(JSON.parse(this.responseText));
       // document.getElementById("loading-img").style.display = "none";
     } else {
@@ -93,7 +104,6 @@ function getRecordDistributionPerDay() {
 
   xhr.onload = function() {
     if (this.status === 200) {
-      // console.log(this.responseText);
       dayChart(JSON.parse(this.responseText));
       // document.getElementById("loading-img").style.display = "none";
     } else {
@@ -114,7 +124,6 @@ function getRecordDistributionPerHour() {
 
   xhr.onload = function() {
     if (this.status === 200) {
-      // console.log(this.responseText);
       hourChart(JSON.parse(this.responseText));
       // document.getElementById("loading-img").style.display = "none";
     } else {
@@ -135,7 +144,6 @@ function getRecordDistributionPerYear() {
 
   xhr.onload = function() {
     if (this.status === 200) {
-      console.log(this.responseText);
       yearChart(JSON.parse(this.responseText));
       // document.getElementById("loading-img").style.display = "none";
     } else {
@@ -156,8 +164,11 @@ function userChart(results) {
     colors.push(getRandomColor());
     console.log(names, counters, colors);
   }
-  const ctx = document.getElementById("graphs").getContext("2d");
-  let chart = new Chart(ctx, {
+  if(userG !== null){ 
+		userG.destroy();
+	}
+  const ctx = document.getElementById("userGraph").getContext("2d");
+  userG = new Chart(ctx, {
     type: "doughnut",
     options: {
       title: {
@@ -171,7 +182,8 @@ function userChart(results) {
         position: "bottom",
         fontSize: 20
       },
-      responsive: true
+      responsive: true,
+      maintainAspectRatio: false
     },
     data: {
       datasets: [
@@ -198,9 +210,12 @@ function activityChart(results) {
     counters.push(item.counter);
     colors.push(getRandomColor());
   }
-  const ctx = document.getElementById("graphs").getContext("2d");
-  let chart = new Chart(ctx, {
-    type: "pie",
+  if(activityG !== null){ 
+		activityG.destroy();
+	}
+  const ctx = document.getElementById("activityGraph").getContext("2d");
+  activityG = new Chart(ctx, {
+    type: "doughnut",
     options: {
       title: {
         display: true,
@@ -238,8 +253,11 @@ function monthChart(results) {
     month.push(item.month_name);
     counter.push(item.count);
   }
-  const ctx = document.getElementById("graphs").getContext("2d");
-  let chart = new Chart(ctx, {
+  if(monthG !== null){ 
+		monthG.destroy();
+	}
+  const ctx = document.getElementById("monthGraph").getContext("2d");
+  monthG = new Chart(ctx, {
     type: "line",
     options: {
       title: {
@@ -282,15 +300,18 @@ function dayChart(results) {
     day.push(item.day_name);
     counter.push(item.count);
   }
-  const ctx = document.getElementById("graphs").getContext("2d");
-  let chart = new Chart(ctx, {
+  if(dayG !== null){ 
+		dayG.destroy();
+	}
+  const ctx = document.getElementById("dayGraph").getContext("2d");
+  dayG = new Chart(ctx, {
     type: "line",
     options: {
       title: {
         display: true,
         position: "top",
         fontSize: 20,
-        text: "Number of records per Month"
+        text: "Number of records per Day"
       },
       legend: {
         display: false
@@ -325,15 +346,18 @@ function hourChart(results) {
     hour.push(item.hour);
     counter.push(item.count);
   }
-  const ctx = document.getElementById("graphs").getContext("2d");
-  let chart = new Chart(ctx, {
+  if(hourG !== null){ 
+		hourG.destroy();
+	}
+  const ctx = document.getElementById("hourGraph").getContext("2d");
+  hourG = new Chart(ctx, {
     type: "line",
     options: {
       title: {
         display: true,
         position: "top",
         fontSize: 20,
-        text: "Number of records per Month"
+        text: "Number of records per Hour"
       },
       legend: {
         display: false
@@ -368,15 +392,18 @@ function yearChart(results) {
     year.push(item.year);
     counter.push(item.count);
   }
-  const ctx = document.getElementById("graphs").getContext("2d");
-  let chart = new Chart(ctx, {
+  if(yearG !== null){ 
+		yearG.destroy();
+	}
+  const ctx = document.getElementById("yearGraph").getContext("2d");
+  yearG = new Chart(ctx, {
     type: "line",
     options: {
       title: {
         display: true,
         position: "top",
         fontSize: 20,
-        text: "Number of records per Month"
+        text: "Number of records per Year"
       },
       legend: {
         display: false

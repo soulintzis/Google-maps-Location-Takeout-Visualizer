@@ -1138,6 +1138,8 @@ th, td {
 #heatmap-section{
   /* padding-bottom: 200px; */
   position:relative;
+  height: 100vh;
+  display: block;
 }
 
 #heatmap {
@@ -1200,4 +1202,40 @@ th, td {
   height: 100vh;
   text-align: center;
   display: block;
+}
+
+.row {
+  /* padding-top: 50px; */
+  height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 10px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 33%;
+  max-width: 33%;
+  height: 100vh;
+  padding: 0px 4px;
+}
+
+.column .graph canvas {
+  margin-top: 5vh;
+  vertical-align: middle;
+  width: 100%;
+  height: 40vh;
+}
+
+#refresh-btn {
+  width: 100px;
+  margin-top: 10px;
+  margin-left: 90vw;
+  height: 40px;
+  border: 0px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #111;
+  color: whitesmoke;
 }
