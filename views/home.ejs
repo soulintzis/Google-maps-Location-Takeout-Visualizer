@@ -21,6 +21,7 @@
             <div class="welcome-page">
                 <div class="welcome-message">
                     <h1>Welcome to Patras Crowdsourcing!</h1>
+                    <br>
                 </div>
                 <div class="description">
                     <p>Google Maps service is being used by millions of users daily for navigation and information
@@ -72,6 +73,11 @@
             <div class="graph_pos" id="graph_container" onchange="getGraph();">
                 <canvas id="graphs"></canvas>
             </div>
+
+            <!-- <div class="graph_pos" id="graph_container" onchange="getGraph();">
+                <canvas id="graphs"></canvas>
+            </div> -->
+
         </section>
     </div>
 
@@ -159,12 +165,11 @@
         <div class="page-title">
             <h1>Upload a File</h1>
         </div>
+
         <div class="upload-page">
             <div id="patrasMap"></div>
-            <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data"
-                onsubmit="uploadFiles(event)">
-                <input type="file" name="files" id="fileInput" multiple
-                    onchange="overrideDefault(event);addFiles(event);">
+            <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data" onsubmit="uploadFiles(event)">
+                <input type="file" name="files" id="fileInput" multiple onchange="overrideDefault(event);addFiles(event);">
 
                 <label for="fileInput" id="fileLabel" ondragover="overrideDefault(event);fileHover();"
                     ondragenter="overrideDefault(event);fileHover();"
@@ -179,7 +184,7 @@
                     <span id="uploadStatus"></span>
                 </label>
             </form>
-            <button id="upload" type="submit" value="submit" form="dropFileForm" onclick="retriveRestrictedAreas();"
+            <button id="upload-btn" type="submit" value="submit" form="dropFileForm" onclick="retriveRestrictedAreas();"
                 class="uploadButton noselect">
                 Upload
             </button>

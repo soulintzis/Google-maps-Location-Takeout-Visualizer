@@ -529,7 +529,7 @@ section {
 
 .home-page .welcome-message {
   position: relative;
-  padding-top: 90px;
+  padding-top: 10%;
   padding-bottom: 20px;
   color: #000000;
   text-transform: inherit;
@@ -753,10 +753,11 @@ section {
 #statistics {
   position: relative;
   top: 30vh;
+  padding-bottom:20vh;
 }
 
 .my_container {
-  width: 85%;
+  width: 80%;
   display: block;
   position: relative;
   align-items: center;
@@ -783,6 +784,7 @@ section {
   display: block;
   position: relative;
   padding-left: 20px;
+  padding-right:50%;
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -793,7 +795,7 @@ section {
   top: -25px;
   font-size: 1.2em;
   margin-left: 30px;
-  padding-left: 40px;
+  padding-left:30%;
 }
 
 .line {
@@ -1070,6 +1072,31 @@ select {
   font-size: 1.1em;
 }
 
+#heatmap-section{
+  /* padding-bottom: 200px; */
+  top:30vh;
+  position:relative;
+}
+
+#profile{
+  top:30vh;
+  position: relative;
+}
+
+#upload{
+  top:30vh;
+  position:relative;
+}
+
+#heatmap {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  height: 80vh;
+  width: 80%;
+  padding-left: 100px;
+  z-index: -1;
+}
 .full-container {
   display: block;
   width: 100%;
@@ -1102,9 +1129,11 @@ th, td {
 }
 
 
-
 /*----------------------------------------------------------------------------------------------*/
+
+
 /*Adjustments for mobile media screens*/
+
 @media only screen and (max-width: 500px) {
   .full-container {
     font-size: 0.6em;
@@ -1131,33 +1160,12 @@ th, td {
   #profile {
     overflow-y: auto;
     overflow-y: auto;
-    /* padding-bottom: 200px; */
-    /* height:200%; */
   }
 }
-#heatmap-section{
-  /* padding-bottom: 200px; */
-  position:relative;
-  height: 100vh;
-  display: block;
-}
 
-#heatmap {
-  display: block;
-  margin: 0 auto;
-  position: relative;
-  height: 50vh;
-  width: 75%;
-  padding-left: 100px;
-  z-index: -1;
-}
 
 /*Adjustments for tablet media screens*/
-/* @media only screen and (min-width: 768px) {
-  .date_pickers span{
-    right:0;
-  }
-}  */
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {
   .date_pickers span {
@@ -1179,6 +1187,17 @@ th, td {
   .information-value {
     top: 10% !important;
   }
+
+}
+
+@media (max-width: 425px) {
+  .date_pickers{
+    padding-right:20px!important;
+  }
+  /* .date_pickers span{
+    padding-right:-20px!important;
+  } */
+  
 }
 
 #heatmap-section {
