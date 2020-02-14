@@ -2,7 +2,7 @@ let charts = null;
 let date_from = null;
 let date_until = null;
 
-
+getEcoScoreForYear();
 
 getEcoScore()
 function typesGraph(results){
@@ -30,7 +30,7 @@ function typesGraph(results){
 				display: true,
 				position: 'top',
 				fontSize: 16,
-				text: 'Number of Records per Activity'
+				text: 'Records per Activity'
 			},
 			legend: {
 				display: true,
@@ -76,7 +76,7 @@ function hourGraph(results){
 				display: true,
 				position: 'top',
 				fontSize: 16,
-				text: 'Number of Records per Activity'
+				text: 'Records per Activity'
 			},
 			legend: {
 				display: true,
@@ -117,7 +117,7 @@ function dayGraph(results){
 				display: true,
 				position: 'top',
 				fontSize: 16,
-				text: 'Number of Records per Activity'
+				text: 'Records per Activity'
 			},
 			legend: {
 				display: true,
@@ -410,3 +410,66 @@ function pieChart(results){
 	}
 });
 }
+
+function getEcoScoreForYear() {
+	const url = 'http://localhost:3000/api/locations/get_eco_score_for_a_year';
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', url, true)
+
+    xhr.onload = function () {
+
+        if (this.status === 200)
+        {
+			ecoScoreChart(JSON.parse(this.responseText));
+		}else {
+            console.log('error');
+        }
+    }
+
+    xhr.send()
+}
+
+
+function ecoScoreChart(results) {
+	let month_names = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec"
+      ];
+	const ctx = document.getElementById("eco_score_year_graph").getContext("2d");
+	chart = new Chart(ctx, {
+	  type: "line",
+	  options: {
+		title: {
+		  display: true,
+		  position: "top",
+		  fontSize: 20,
+		  text: "Annual user's eco-score"
+		},
+		legend: {
+		  display: false
+	  },
+	  tooltips: {
+		  callbacks: {
+			 label: function(tooltipItem) {
+					return tooltipItem.yLabel;
+			 }
+		  }
+	  },
+		responsive: true
+	  },
+	  data: {
+		datasets: results,
+		labels: month_names
+	  }
+	});
+  }

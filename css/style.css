@@ -886,8 +886,8 @@ select {
 .leaderboard-container {
   top: 10vh;
   position: relative;
-  width: 70%;
-  height: 45vh;
+  width: auto;
+  height: auto;
   align-items: center;
   background-color: white;
   border-radius: 20px;
@@ -1137,19 +1137,19 @@ td {
   display: block;
   margin: 0 auto;
   width: 60%;
-  height: 30vh;
+  height: 40vh;
   background-color: white;
   border-radius: 20px;
   padding: 30px;
 }
 
-#eco-score {
+/* #eco-score {
   display: block;
   position: relative;
   top: 25vh;
   width: 80%;
   margin: 0 auto;
-}
+} */
 
 #outside-lead-cont {
   display: inline-block;
@@ -1162,15 +1162,11 @@ td {
 }
 
 .leaderboard-container {
-  top: 10vh;
-  position: relative;
-  width: 100%;
-  height: 40vh;
+  height: 30vh;
   align-items: center;
   background-color: white;
   border-radius: 20px;
-  padding: 0px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .lead-title {
   display: block;
@@ -1190,13 +1186,14 @@ td {
   bottom: 50%;
 }
 
-.my_container {
-  width: 100%;
+.info-container {
+  width: 80%;
+  height: auto;
+  top: 10vh;
   display: block;
   position: relative;
   align-items: center;
   margin: 0 auto;
-  top: -8vh;
   line-height: 1em;
   border-radius: 20px;
   background-color: white;
@@ -1280,4 +1277,30 @@ td {
   cursor: pointer;
   background-color: #111;
   color: whitesmoke;
+}
+
+.eco_year_graph{
+  border-radius:20px;
+  width: auto;
+  height: 40vh;
+  margin-top: 15vh;
+  background-color: white;
+}
+
+.container-profile {
+  width: 100%;
+}
+
+.left-half {
+  position: absolute;
+  left: 0px;
+  width: 50%;
+  height: 100vh;
+}
+
+.right-half {
+  position: absolute;
+  right: 0px;
+  width: 50%;
+  height: 100vh;
 }
