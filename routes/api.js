@@ -478,63 +478,108 @@ router.get(
           counter: { $sum: 1 }
         }
       }
-      
     ]).exec((err, result) => {
       if (err) throw err;
-        let eco_scores =[]
-        let month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-        for(let item of result){
-          if (eco_scores.filter(e => e.type === item._id.type).length > 0) {
-            index = eco_scores.findIndex(x => x.type === item._id.type);
-            new_month =	{
-              months: item._id.month,
-              counter: item.counter
-            };
-            eco_scores[index].months.push(new_month);
-          }else{
-            let new_type = {
-              type: item._id.type,
-              months: [
-                {
-                  months: item._id.month,
-                  counter: item.counter
-                }
-              ]
-            };
-            eco_scores.push(new_type)		
-          }
-        }
-        let data = eco_scores.map(function(e) {
-          return e.months;
-        });
-      
-        let activity_labels = eco_scores.map(function(e) {
-          return e.type;
-        });
-        console.log(data)
-        display_data = []
-        for(j = 0; j < data.length; j++) {
-          let months = [];
-          for(i = 1; i <= 12; i++) {
-            index = data[j].findIndex(x => x.months === i);
-            if(index === -1){
-              months.push(0);
-            }else{
-              months.push(data[j][index].counter);
-            }
-          }
-          console.log(months)
-          let inserted_data = {
-            label: activity_labels[j],
-            data: months
-            // backgroundColor: getRandomColor()
+      let eco_scores = [];
+      let month_names = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec"
+      ];
+      for (let item of result) {
+        if (eco_scores.filter(e => e.type === item._id.type).length > 0) {
+          index = eco_scores.findIndex(x => x.type === item._id.type);
+          new_month = {
+            months: item._id.month,
+            counter: item.counter
           };
-          display_data.push(inserted_data);
+          eco_scores[index].months.push(new_month);
+        } else {
+          let new_type = {
+            type: item._id.type,
+            months: [
+              {
+                months: item._id.month,
+                counter: item.counter
+              }
+            ]
+          };
+          eco_scores.push(new_type);
         }
-        // console.log(display_data)
-        // return { display_data, labels };
-      
-      res.send(result);
+      }
+      let data = eco_scores.map(function(e) {
+        return e.months;
+      });
+
+      let activity_labels = eco_scores.map(function(e) {
+        return e.type;
+      });
+      display_data = [];
+      for (j = 0; j < data.length; j++) {
+        let months = [];
+        for (i = 1; i <= 12; i++) {
+          index = data[j].findIndex(x => x.months === i);
+          if (index === -1) {
+            months.push(0);
+          } else {
+            months.push(data[j][index].counter);
+          }
+        }
+        let inserted_data = {
+          label: activity_labels[j],
+          data: months
+          // backgroundColor: getRandomColor()
+        };
+        display_data.push(inserted_data);
+      }
+      eco_months = [];
+      non_eco_months = [];
+
+      for (let item of display_data) {
+        if (
+          item.label === "IN_ROAD_VEHICLE" ||
+          item.label === "EXITING_VEHICLE" ||
+          item.label === "IN_RAIL_VEHICLE" ||
+          item.label === "IN_VEHICLE" ||
+          item.label === "IN_ROAD_VEHICLE" ||
+          item.label === "IN_FOUR_WHEELER_VEHICLE" ||
+          item.label === "IN_CAR"
+        ) {
+          non_eco_months.push(item.data);
+        } else if (
+          item.label === "WALKING" ||
+          item.label === "ON_FOOT" ||
+          item.label === "RUNNING" ||
+          item.label === "ON_BICYCLE"
+        ) {
+          eco_months.push(item.data);
+        }
+      }
+      eco_sum = [0,0,0,0,0,0,0,0,0,0,0,0];
+      non_eco_sum = [0,0,0,0,0,0,0,0,0,0,0,0];
+      for(let j=0;j<=eco_months.length-1;j++){
+        for(let i=0;i<12;i++){
+          eco_sum[i] += eco_months[j][i] 
+        }
+      }
+      for(let j=0;j<=non_eco_months.length-1;j++){
+        for(let i=0;i<12;i++){
+          non_eco_sum[i] += non_eco_months[j][i]
+        }
+      }
+      let scores = {
+        eco_sum, non_eco_sum
+      }
+      res.send(scores);
     });
   }
 );
