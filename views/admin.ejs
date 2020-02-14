@@ -1,27 +1,60 @@
 <%- include("partials/header") %>
 
-<main class="main">
-    <aside class="sidebar">
-        <nav class="nav">
-            <ul id="link-list">
-                <li class="nav-link active"><a href="#dashboard">Dashboard</a></li>
-                <li class="nav-link"><a href="#heatmap">Heatmap</a></li>
-                <li class="nav-link"><a href="export">Export Data</a></li>
-                <li class="nav-link"><a href="#" onclick ="deleteData();">Delete Data</a></li>
-                <!-- <li class="nav-link"><input type="hidden" name="delete_data" value="delete" /></li> -->
-                <li class="nav-link"><a href="logout_admin">Log out</a></li>
-            </ul>
-        </nav>
-    </aside>
+<div id="main">
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#heatmap">Heatmap</a></li>
+        <li><a href="export">Export Data</a></li>
+        <li><a href="#" onclick ="deleteData();">Delete Data</a></li>
+        <li><a href="logout_admin">Log out</a></li>
+    </div>
+
+    <button id="nav_btn" class="openbtn" onclick="openNav()">☰</button>
+
+
     <section id="dashboard">
-        <div class="graph_pos" id="graph_container">
-            <canvas id="graphs"></canvas>
+        <div class="page-title" style="padding-bottom: 0!important;">
+            <h1>Dashboard</h1>
+        </div>
+        <button id="refresh-btn" onclick="refreshGraphs();">Refresh</button>
+        <div class="row">
+            <div class="column">
+                <div class="graph">
+                    <canvas id="userGraph"></canvas>
+                </div>
+                <div class="graph">
+                        <canvas id="monthGraph"></canvas>
+                </div>
+            </div>
+            <div class="column">
+                <div class="graph">
+                    <canvas id="activityGraph"></canvas>
+                </div>
+                <div class="graph">
+                        <canvas id="dayGraph"></canvas>
+                </div>
+            </div>
+            <div class="column">
+                <div class="graph">
+                    <canvas id="yearGraph"></canvas>
+                </div>
+                <div class="graph">
+                    <canvas id="hourGraph"></canvas>
+                </div>
+            </div>
         </div>
     </section>
     
+    <section id="heatmap">
+        <div class="page-title">
+            <h1>Heatmap</h1>
+        </div>
+        <div id="heatmap"></div>
+    </section>
 
    
 
-</main>
+</div>
 
 <%- include("partials/footer") %>
