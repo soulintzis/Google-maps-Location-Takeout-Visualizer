@@ -39,7 +39,7 @@ function uploadFiles(event) {
 
         xhr.onreadystatechange = function(data) {
             if(this.readyState == 4 && this.status == 200){
-                changeStatus("The file uploaded successfully...");
+                changeStatus("File uploaded successfully!");
             }
         };
         xhr.open(dropFileForm.method, dropFileForm.action, true);

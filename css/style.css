@@ -401,10 +401,19 @@ input[type]:focus,
 }
 
 .pp-header {
-  height: 75px;
-  background: rgb(235, 232, 230);
-  background: -webkit-linear-gradient(to bottom, #ffffff, #ece9e6);
-  background: linear-gradient(to bottom, #ffffff, #ece9e6);
+  height: 80px;
+  line-height: 1.2em;
+  font-weight: bold;
+  background: #7386d5;
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  letter-spacing: 0.7px;
+  display: flex !important;
+  align-items: center !important;
+}
+.title-style {
+  margin: 0 auto;
 }
 
 .password_confirm_tip {
@@ -455,7 +464,7 @@ input[type]:focus,
 }
 
 #patrasMap {
-  z-index: -1;
+  z-index: 0;
   margin: 0 auto;
   position: relative;
   height: 50vh;
@@ -498,7 +507,6 @@ section {
   bottom: 0;
 }
 
-/*home.ejs*/
 .home-page {
   padding-top: 10vh;
   padding-bottom: 10vh;
@@ -576,12 +584,15 @@ section {
   margin-right: auto;
 }
 
-#eco-score {
-  display: block;
-  position: relative;
-  top: 25vh;
-  width: 80%;
-  margin: 0 auto;
+#main {
+  transition: margin-left 0.5s;
+  padding: 16px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  font-size: 1.1em;
 }
 
 .upload-page {
@@ -634,7 +645,7 @@ section {
   display: block;
   width: 55vw;
   height: 100%;
-  padding: 2vh;
+  padding: 1vh;
   position: relative;
   text-align: center;
   margin-left: auto;
@@ -644,8 +655,8 @@ section {
 
 #dropFileForm #fileLabel img {
   display: block;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   position: relative;
   text-align: center;
   margin: auto;
@@ -670,11 +681,13 @@ section {
 
 #dropFileForm #fileLabel:before {
   z-index: -1;
-  background: repeating-linear-gradient(45deg,
-      transparent,
-      transparent 5%,
-      black 5%,
-      black 10%);
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5%,
+    black 5%,
+    black 10%
+  );
   opacity: 0;
   transition: 0.5s;
 }
@@ -705,14 +718,16 @@ section {
 }
 
 /* Charts */
-#eco-score {
+/* #eco-score {
   display: block;
   position: relative;
   top: 0;
-}
+} */
 
 [type="date"] {
-  background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
 }
 
 [type="date"]::-webkit-inner-spin-button {
@@ -753,76 +768,7 @@ section {
 #statistics {
   position: relative;
   top: 30vh;
-  padding-bottom:20vh;
-}
-
-.my_container {
-  width: 80%;
-  display: block;
-  position: relative;
-  align-items: center;
-  margin: 0 auto;
-  top: -8vh;
-  line-height: 1.3em;
-  border-radius: 20px;
-  background-color: white;
-  padding-right: 10px;
-}
-
-.info-title {
-  display: block;
-  position: relative;
-  padding-left: 20px;
-  top: 20px;
-  font-weight: bold;
-  font-size: 1.4em;
-}
-
-.information-label {
-  width: 150px;
-  margin-left: 0px;
-  display: block;
-  position: relative;
-  padding-left: 20px;
-  padding-right:50%;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-.info-value {
-  display: inline-block;
-  position: relative;
-  top: -25px;
-  font-size: 1.2em;
-  margin-left: 30px;
-  padding-left:30%;
-}
-
-.line {
-  position: relative;
-  display: block;
-  top: 1.5em;
-  left: 10px;
-  width: 90%;
-  border: 0;
-  height: 1px;
-  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
-}
-
-.eco_score_graph {
-  top: 10vh;
-  position: relative;
-  align-items: center;
-  display: block;
-  margin: 0 auto;
-  width: 60%;
-  height: 30vh;
-  background-color: white;
-  border-radius: 20px;
-  padding: 30px;
+  padding-bottom: 20vh;
 }
 
 select {
@@ -842,7 +788,7 @@ select::-ms-expand {
   position: relative;
   margin: 0 auto;
   width: 22em;
-  height: 2em;
+  height: 2.5em;
   line-height: 2;
   background-color: whitesmoke;
   overflow: hidden;
@@ -914,14 +860,12 @@ select {
   left: 78.5px;
 }
 
-/*home.ejs*/
 .loadingio-spinner-rolling-7bqc3dhw93 {
   display: none;
   margin: auto;
   width: 157px;
   height: 157px;
   display: relative;
-  /* overflow: hidden; */
   background: rgba(255, 255, 255, 0);
 }
 
@@ -938,23 +882,6 @@ select {
 .ldio-5i9edknw1sc div {
   box-sizing: content-box;
 }
-
-/* #heatmap {
-  width: 60vw;
-  height: 60vh;
-} */
-
-/* .heatmap-container {
-  position: relative;
-  display: block;
-  margin: auto;
-  margin-top: 100px;
-  /* padding-top:100px;
-  padding-bottom:100px; */
-/* top: 30%;
-  bottom: 20%;
-  text-align: center;
-} */
 
 .leaderboard-container {
   top: 10vh;
@@ -977,30 +904,8 @@ select {
   background-size: contain;
   padding-right: 50% !important;
   top: 10vh;
-  /* overflow-x:auto; 
-    overflow-y: auto; */
 }
 
-.lead-title {
-  display: block;
-}
-
-#outside-user-container {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  background: no-repeat center top;
-  background-size: contain;
-  padding-left: 50% !important;
-  bottom: 50%;
-}
-
-.text-format {
-  font-weight: 900 !important;
-  font-weight: bold !important;
-}
-
-/*home.ejs*/
 .sidebar {
   height: 100%;
   width: 0;
@@ -1027,7 +932,6 @@ select {
   color: #f1f1f1;
 }
 
-/*home.ejs*/
 .sidebar .closebtn {
   position: absolute;
   top: 0;
@@ -1036,7 +940,6 @@ select {
   margin-left: 50px;
 }
 
-/*home.ejs*/
 .openbtn {
   font-size: 20px;
   cursor: pointer;
@@ -1053,14 +956,12 @@ select {
   z-index: 1;
 }
 
-/*home.ejs*/
 .openbtn:hover {
   background-color: #444;
   display: block;
   cursor: pointer;
 }
 
-/*home.ejs*/
 #main {
   transition: margin-left 0.5s;
   padding: 16px;
@@ -1072,20 +973,18 @@ select {
   font-size: 1.1em;
 }
 
-#heatmap-section{
-  /* padding-bottom: 200px; */
-  top:30vh;
-  position:relative;
-}
-
-#profile{
-  top:30vh;
+#upload {
+  top: 30vh;
   position: relative;
 }
 
-#upload{
-  top:30vh;
-  position:relative;
+#heatmap-section {
+  top: 30vh;
+  position: relative;
+  display: block;
+  margin: auto;
+  height: 100vh;
+  bottom: 20%;
 }
 
 #heatmap {
@@ -1095,8 +994,9 @@ select {
   height: 80vh;
   width: 80%;
   padding-left: 100px;
-  z-index: -1;
+  z-index: 0;
 }
+
 .full-container {
   display: block;
   width: 100%;
@@ -1105,36 +1005,59 @@ select {
   margin: auto;
 }
 
-.outside-eco-container {
-  display: block;
-  position: relative;
-  background-size: contain;
-  width: 90%;
-  background: no-repeat center top;
-  padding-right: 40% !important;
-  height: 20vh;
-}
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
 }
 
-th, td {
+th,
+td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   white-space: nowrap;
 }
 
+/*-----------------------------------------------------------------------------------------------------------------*/
 
-/*----------------------------------------------------------------------------------------------*/
+/*Adjustments for all screns between 768px and 320px*/
 
+/* Tablet media screens 768px and down */
+@media only screen and (max-width: 768px) {
+  /* #main{
+    background-color: red!important;
+  } */
+  .date_pickers span {
+    padding: 70px !important;
+  }
 
-/*Adjustments for mobile media screens*/
+  #profile {
+    font-size: 0.7em !important;
+  }
 
-@media only screen and (max-width: 500px) {
+  .my_contaier {
+    padding: 50px !important;
+  }
+
+  .information-label {
+    margin-left: 5% !important;
+  }
+
+  .information-value {
+    top: 10% !important;
+  }
+  #dropFileForm #fileLabel img {
+    width: 45px !important;
+    height: 45px !important;
+  }
+}
+
+/* Mobile media screens 425px and 375px down */
+@media only screen and (max-width: 425px) {
+  /* #main{
+    background-color: green!important;
+  } */
   .full-container {
     font-size: 0.6em;
   }
@@ -1155,70 +1078,170 @@ th, td {
 
   .date_pickers span {
     padding-right: 50%;
-  }
-
-  #profile {
-    overflow-y: auto;
-    overflow-y: auto;
+    white-space: nowrap;
   }
 }
 
-
-/*Adjustments for tablet media screens*/
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 768px) {
-  .date_pickers span {
-    padding: 70px !important;
-  }
-
-  #profile {
-    font-size: 0.7em !important;
-  }
-
-  .my_contaier {
-    padding: 50px !important;
-  }
-
-  .information-label {
-    margin-left: 5% !important;
-  }
-
-  .information-value {
-    top: 10% !important;
-  }
-
-}
-
-@media (max-width: 425px) {
-  .date_pickers{
-    padding-right:20px!important;
-  }
-  /* .date_pickers span{
-    padding-right:-20px!important;
+/* Mobile media screens 320px and down */
+@media only screen and (max-width: 320px) {
+  /* #main{
+    background-color: yellow!important;
   } */
-  
+  .date_pickers {
+    padding-right: 20px !important;
+  }
+  #dropFileForm #fileLabel img {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  #fileLabel span {
+    font-size: 1em;
+    display: inline-block;
+    line-height: 0.9;
+  }
 }
 
-#heatmap-section {
+/*------------------------------------------------------------------------------------------------------------------*/
+
+/********************************************************************************************************************************************/
+/*P R O F I L E */
+#profile {
+  top: 30vh;
   position: relative;
-  display: block;
-  margin: auto;
-  height: 100vh;
-  bottom: 20%;
 }
 
-#heatmap {
+#profile div {
+  white-space: nowrap;
+  /* overflow: hidden; */
+  max-width: 150%;
+  border-left: 1em solid transparent;
+  border-right: 1em solid transparent;
+  text-overflow: ellipsis;
+}
+
+.outside-eco-container {
   display: block;
   position: relative;
-  height: 80vh;
+  background-size: contain;
+  width: 90%;
+  background: no-repeat center top;
+  padding-right: 40% !important;
+  height: 20vh;
+  top: -5vh;
+}
+
+.eco_score_graph {
+  top: 10vh;
+  position: relative;
+  align-items: center;
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  height: 30vh;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+#eco-score {
+  display: block;
+  position: relative;
+  top: 25vh;
   width: 80%;
-  z-index: -1;
-  margin: 0 auto !important;
+  margin: 0 auto;
 }
 
-.heatmap-page {
-  height: 100vh;
-  text-align: center;
+#outside-lead-cont {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  background: no-repeat center top;
+  background-size: contain;
+  padding-right: 50% !important;
+  top: 10vh;
+}
+
+.leaderboard-container {
+  top: 10vh;
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 0px;
+  margin-top: 20px;
+}
+.lead-title {
   display: block;
 }
+
+.text-format {
+  font-weight: bold !important;
+}
+
+#outside-user-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  background: no-repeat center top;
+  background-size: contain;
+  padding-left: 50% !important;
+  bottom: 50%;
+}
+
+.my_container {
+  width: 100%;
+  display: block;
+  position: relative;
+  align-items: center;
+  margin: 0 auto;
+  top: -8vh;
+  line-height: 1em;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.info-title {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  top: 10px;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.line {
+  position: relative;
+  display: block;
+  top: 1.5em;
+  left: 10px;
+  width: 90%;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+
+.information-label {
+  width: 150px;
+  margin-left: 0px;
+  display: block;
+  position: relative;
+  /* padding-left: 20px; */
+  /* padding-right: 50%; */
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.info-value {
+  display: inline-block;
+  position: relative;
+  top: -20px;
+  font-size: 1.1em;
+  margin-left: 40%;
+  padding-left: 10%;
+}
+/********************************************************************************************************************************************/
