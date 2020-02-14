@@ -487,7 +487,7 @@ router.get(
           if (eco_scores.filter(e => e.type === item._id.type).length > 0) {
             index = eco_scores.findIndex(x => x.type === item._id.type);
             new_month =	{
-              month: item._id.month,
+              months: item._id.month,
               counter: item.counter
             };
             eco_scores[index].months.push(new_month);
@@ -523,6 +523,7 @@ router.get(
               months.push(data[j][index].counter);
             }
           }
+          console.log(months)
           let inserted_data = {
             label: activity_labels[j],
             data: months,
@@ -530,7 +531,7 @@ router.get(
           };
           display_data.push(inserted_data);
         }
-        console.log(display_data)
+        // console.log(display_data)
         // return { display_data, labels };
       
       res.send(result);
