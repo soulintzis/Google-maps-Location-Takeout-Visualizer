@@ -14,7 +14,7 @@
     <button id="nav_btn" class="openbtn" onclick="openNav()">☰</button>
 
 
-    <!-- <div class="full-container"> -->
+    <div class="full-container">
 
 
         <section id="welcome" class="home-page">
@@ -73,10 +73,6 @@
             <div class="graph_pos" id="graph_container" onchange="getGraph();">
                 <canvas id="graphs"></canvas>
             </div>
-
-            <!-- <div class="graph_pos" id="graph_container" onchange="getGraph();">
-                <canvas id="graphs"></canvas>
-            </div> -->
 
         </section>
     </div>
@@ -168,8 +164,10 @@
 
         <div class="upload-page">
             <div id="patrasMap"></div>
-            <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data" onsubmit="uploadFiles(event)">
-                <input type="file" name="files" id="fileInput" multiple onchange="overrideDefault(event);addFiles(event);">
+            <form id="dropFileForm" action="/upload" method="post" enctype="multipart/form-data"
+                onsubmit="uploadFiles(event)">
+                <input type="file" name="files" id="fileInput" multiple
+                    onchange="overrideDefault(event);addFiles(event);">
 
                 <label for="fileInput" id="fileLabel" ondragover="overrideDefault(event);fileHover();"
                     ondragenter="overrideDefault(event);fileHover();"
