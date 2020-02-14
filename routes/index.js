@@ -33,14 +33,14 @@ router.get("/login", function(req, res) {
 router.post("/login", async function(req, res, next) {
   let name = req.body.username;
   await User.findOne({ username: name }, (err, result) => {
-    if (result.admin === true) {
+    if (result.admin === false) {
       passport.authenticate("local", {
-        successRedirect: "/admin",
+        successRedirect: "/home",
         failureRedirect: "/"
       })(req, res, next);
     } else {
       passport.authenticate("local", {
-        successRedirect: "/home",
+        successRedirect: "/admin",
         failureRedirect: "/"
       })(req, res, next);
     }
@@ -68,7 +68,7 @@ router.post("/upload", auth.authenticationMiddleware(), async function(
     const file = req.files.files;
     const filename = file.name;
     console.log(filename);
-    crypto.randomBytes(8, (err, buf) => {
+    crypto.randomBytes(8, async (err, buf) => {
       if (err) {
         console.log(err);
       }
@@ -118,5 +118,15 @@ router.get("/logout", auth.authenticationMiddleware(), async function(
   req.logout();
   res.redirect("/");
 });
+
+router.get(
+  "/logout_admin",
+  auth.authenticationMiddlewareAdmin(),
+  async function(req, res) {
+    await req.session.destroy();
+    req.logout();
+    res.redirect("/");
+  }
+);
 
 module.exports = router;
