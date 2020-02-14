@@ -16,7 +16,7 @@
                     "timestampMs": "1510060473876",
                     "activity": [
                         {
-                            "type": "TILTING",
+                            "type": "WALKING",
                             "confidence": 100
                         },
                         {

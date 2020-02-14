@@ -823,6 +823,7 @@ section {
   background-color: white;
   border-radius: 20px;
   padding: 30px;
+  z-index: 0;
 }
 
 select {
@@ -1095,7 +1096,7 @@ select {
   height: 80vh;
   width: 80%;
   padding-left: 100px;
-  z-index: -1;
+  z-index: 0;
 }
 .full-container {
   display: block;
@@ -1213,7 +1214,7 @@ th, td {
   position: relative;
   height: 80vh;
   width: 80%;
-  z-index: -1;
+  z-index: 0;
   margin: 0 auto !important;
 }
 
@@ -1222,6 +1223,7 @@ th, td {
   text-align: center;
   display: block;
 }
+
 
 .row {
   /* padding-top: 50px; */
