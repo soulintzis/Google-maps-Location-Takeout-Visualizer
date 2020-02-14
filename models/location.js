@@ -31,7 +31,7 @@ const locationSchema = mongoose.Schema({
     },
     activity : [ new mongoose.Schema({
         timestampMs : {
-            type: Number,
+            type: Date,
             required: true
         },
         activity : [ new mongoose.Schema({
