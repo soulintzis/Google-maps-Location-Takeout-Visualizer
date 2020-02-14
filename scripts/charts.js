@@ -3,9 +3,6 @@ let date_from = null;
 let date_until = null;
 
 
-window.onload = function() {
-	curr_date();
-};
 
 getEcoScore()
 function typesGraph(results){
@@ -253,14 +250,7 @@ function getDateUntil() {
 	return until_date;
 }
 
-function curr_date() {
-    let from = document.getElementById("from_date");
-    let until = document.getElementById("until_date");
-    let today = new Date();
-    until.value = today.toISOString().substr(0, 10);
-	today.setFullYear(today.getFullYear() - 1);
-	from.value = today.toISOString().substr(0, 10);
-}
+
 
 function manipulateDateForHourGraph(result) {
 	let busiestHours =[]
