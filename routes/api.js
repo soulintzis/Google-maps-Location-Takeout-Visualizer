@@ -189,16 +189,21 @@ router.get(
           timestampMs: { $gte: new Date(from_date), $lte: new Date(until_date) }
         }
       },
-      { $project: { hour: { $hour: "$timestampMs"} , type: "$activity.activity.type" }},
+      {
+        $project: {
+          hour: { $hour: "$timestampMs" },
+          type: "$activity.activity.type"
+        }
+      },
       {
         $group: {
-          _id: { hour: "$hour", type: "$type"},
+          _id: { hour: "$hour", type: "$type" },
           counter: { $sum: 1 }
         }
       }
     ]).exec((err, result) => {
       if (err) throw err;
-      console.log(result)
+      console.log(result);
       res.send(result);
     });
   }
@@ -219,39 +224,49 @@ router.get(
     let until_date =
       until_year + "-" + until_month + "-" + until_day + "T02:00:00";
     Location.aggregate([
-        { $unwind: "$activity" },
-        { $unwind: "$activity.activity" },
-        {
+      { $unwind: "$activity" },
+      { $unwind: "$activity.activity" },
+      {
         $match: {
           user_id: id,
-          timestampMs: { $gte: new Date(from_date), $lte: new Date(until_date) },
+          timestampMs: {
+            $gte: new Date(from_date),
+            $lte: new Date(until_date)
+          },
           "activity.activity.type": {
             $not: { $regex: "STILL|UNKNOWN|TILTING|EXITING_VEHICLE" }
           },
           "activity.activity.confidence": { $gte: 65 }
         }
       },
-      { $project: { day: { $dayOfWeek: "$timestampMs"}, type: "$activity.activity.type" } },
+      {
+        $project: {
+          day: { $dayOfWeek: "$timestampMs" },
+          type: "$activity.activity.type"
+        }
+      },
       {
         $group: {
-          _id: { day: "$day", type: "$type"},
+          _id: { day: "$day", type: "$type" },
           counter: { $sum: 1 }
         }
       }
     ]).exec((err, result) => {
       if (err) throw err;
-      console.log(result)
+      console.log(result);
       res.send(result);
     });
   }
 );
 
-// Group user's activity records 
+// Group user's activity records
 router.get("/last_months_activities", async (req, res) => {
   let id = req.user.user_id;
   from_date = new Date(getStartOfMonthDateAsString(new Date()));
-  from_date.setTime(from_date.getTime() + from_date.getTimezoneOffset() * (-1) * 60 * 1000 );
-  console.log(from_date)
+  from_date.setTime(
+    from_date.getTime() + from_date.getTimezoneOffset() * -1 * 60 * 1000
+  );
+  console.log(from_date);
   Location.aggregate([
     { $unwind: "$activity" },
     { $unwind: "$activity.activity" },
@@ -277,7 +292,7 @@ router.get("/last_months_activities", async (req, res) => {
   });
 });
 
-// Group user's activity records 
+// Group user's activity records
 router.get("/activities", async (req, res) => {
   let id = req.user.user_id;
   Location.aggregate([
@@ -375,7 +390,10 @@ router.get(
       {
         $match: {
           user_id: id,
-          timestampMs: { $gte: new Date(from_date), $lte: new Date(until_date) },
+          timestampMs: {
+            $gte: new Date(from_date),
+            $lte: new Date(until_date)
+          },
           "activity.activity.type": {
             $not: { $regex: "STILL|UNKNOWN|TILTING|EXITING_VEHICLE" }
           },
@@ -392,7 +410,8 @@ router.get(
       if (err) throw err;
       res.send(result);
     });
-  });
+  }
+);
 
 router.get(
   "/heatmap_locations",
@@ -418,6 +437,46 @@ router.get(
         lat_and_lngs.push(location);
       }
       res.send(lat_and_lngs);
+    });
+  }
+);
+
+router.get(
+  "/locations/get_eco_score_for_a_year",
+  auth.authenticationMiddleware(),
+  async (req, res) => {
+    let id = req.user.user_id;
+    let current_date = new Date();
+    let new_date = new Date(getStartOfMonthDateAsString(current_date));
+    new_date.setTime(
+      new_date.getTime() + new_date.getTimezoneOffset() * -1 * 60 * 1000
+    );
+    let prev_year = new Date(new_date);
+    prev_year.setFullYear(prev_year.getFullYear() - 1);
+    Location.aggregate([
+      { $unwind: "$activity" },
+      { $unwind: "$activity.activity" },
+      {
+        $match: {
+          user_id: id,
+          timestampMs: {
+            $gte: new Date(prev_year),
+            $lte: new Date(new_date)
+          },
+          "activity.activity.type": {
+            $not: { $regex: "STILL|UNKNOWN|TILTING|EXITING_VEHICLE" }
+          },
+          "activity.activity.confidence": { $gte: 65 }
+        }
+      },
+      { $project: { month: { $month: "$timestampMs" } } },
+      // Find average for each month
+      { $group: { _id: "$month", counter: { $sum: 1 } } }
+      
+    ]).exec((err, result) => {
+      if (err) throw err;
+      res.send(result);
+      // console.log(result)
     });
   }
 );
