@@ -482,7 +482,7 @@ router.get(
     ]).exec((err, result) => {
       if (err) throw err;
         let eco_scores =[]
-      
+        let month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
         for(let item of result){
           if (eco_scores.filter(e => e.type === item._id.type).length > 0) {
             index = eco_scores.findIndex(x => x.type === item._id.type);
@@ -504,38 +504,34 @@ router.get(
             eco_scores.push(new_type)		
           }
         }
-        for(let item of eco_scores){
-
-          console.log(item);
-        }
-        // let data = busiestDays.map(function(e) {
-        //   return e.days;
-        // });
+        let data = eco_scores.map(function(e) {
+          return e.months;
+        });
       
-        // let activity_labels = busiestDays.map(function(e) {
-        //   return e.type;
-        // });
-      //   let labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      //   display_data = []
-      //   for(j = 0; j < data.length; j++) {
-      //     let days = [];
-      //     for(i = 1; i <= 7; i++) {
-      //       index = data[j].findIndex(x => x.day === i);
-      //       if(index === -1){
-      //         days.push(0);
-      //       }else{
-      //         days.push(data[j][index].counter);
-      //       }
-      //     }
-      //     let inserted_data = {
-      //       label: activity_labels[j],
-      //       data: days,
-      //       backgroundColor: getRandomColor()
-      //     };
-      //     display_data.push(inserted_data);
-      //   }
-      //   return { display_data, labels };
-      // }      
+        let activity_labels = eco_scores.map(function(e) {
+          return e.type;
+        });
+        console.log(data)
+        display_data = []
+        for(j = 0; j < data.length; j++) {
+          let months = [];
+          for(i = 1; i <= 12; i++) {
+            index = data[j].findIndex(x => x.months === i);
+            if(index === -1){
+              months.push(0);
+            }else{
+              months.push(data[j][index].counter);
+            }
+          }
+          let inserted_data = {
+            label: activity_labels[j],
+            data: months,
+            // backgroundColor: getRandomColor()
+          };
+          display_data.push(inserted_data);
+        }
+        console.log(display_data)
+        // return { display_data, labels };
       
       res.send(result);
     });
