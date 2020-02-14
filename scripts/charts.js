@@ -5,13 +5,13 @@ let date_until = null;
 
 window.onload = function() {
 	curr_date();
-	getEcoScore()
 };
 
+getEcoScore()
 function typesGraph(results){
 	let types = [], counters = [];
 	for(let item of results) {
-		types.push(item.type);
+		types.push(item._id);
 		counters.push(item.counter);
 	}
 	if(charts !== null){ 
@@ -94,11 +94,11 @@ function hourGraph(results){
 }
 
 function dayGraph(results){
-	let result = manipulateDateForDayGraph(results);
-	const ctx=document.getElementById('graphs').getContext('2d');
 	if(charts !== null){ 
 		charts.destroy();
 	}
+	let result = manipulateDateForDayGraph(results);
+	const ctx=document.getElementById('graphs').getContext('2d');
 	charts = new Chart(ctx,{
 		type:'bar',
 		options: {
@@ -134,7 +134,6 @@ function dayGraph(results){
 	});
 }
 
-
 function getHours() {
 	var hours = [];
 	var text_hour;
@@ -162,6 +161,7 @@ function getTypesOfActivity() {
 
         if (this.status === 200)
         {
+			console.log(JSON.parse(this.responseText));
 			typesGraph(JSON.parse(this.responseText));
 			document.getElementById("loading-img").style.display = "none";
 		}else {
@@ -194,15 +194,14 @@ async function getBusiestHour() {
 }
 
 async function getEcoScore() {
-    const user = await getUser();
-	const user_id = user.user_id;
-    const url = "http://localhost:3000/api/locations/get_eco_score/" + user_id;
+     const url = "http://localhost:3000/api/locations/get_eco_score";
     let xhr = new XMLHttpRequest;
     xhr.open('GET', url, true)
 
     xhr.onload = function () {
         if (this.status === 200)
         {
+			console.log(JSON.parse(this.responseText))
 			pieChart(JSON.parse(this.responseText));
 		}else {
             console.log('error')
@@ -213,10 +212,11 @@ async function getEcoScore() {
 }
 
 async function getBusiestDay() {
+	
 	document.getElementById("loading-img").style.display = "block";
 	from = getDateFrom();
 	until = getDateUntil();
-    const url = 'http://localhost:3000/api/' + from + '/' + until +  '/get_busiest_day_of_the_week/';
+    const url = 'http://localhost:3000/api/' + from + '/' + until +  '/get_busiest_day_of_the_week';
     let xhr = new XMLHttpRequest;
     xhr.open('GET', url, true)
 
@@ -263,13 +263,37 @@ function curr_date() {
 }
 
 function manipulateDateForHourGraph(result) {
-	let data = result.map(function(e) {
+	let busiestHours =[]
+	console.log(result)
+	for(let item of result){
+		if (busiestHours.filter(e => e.type === item._id.type).length > 0) {
+			index = busiestHours.findIndex(x => x.type === item._id.type);
+			let new_hour =	{
+				hour: item._id.hour,
+				counter: item.counter
+			};
+			busiestHours[index].hours.push(new_hour);
+		}else{
+			let new_type = {
+				type: item._id.type,
+				hours: [
+					{
+						hour: item._id.hour,
+						counter: item.counter
+					}
+				]
+			};
+			busiestHours.push(new_type)		
+		}
+	}
+	console.log(busiestHours)
+	let data = busiestHours.map(function(e) {
 		return e.hours;
 	});
-	let labels = result.map(function(e) {
+	let labels = busiestHours.map(function(e) {
 		return e.type;
 	});
-
+	console.log(data, labels)
 	display_data = []
 	for(j = 0; j < data.length; j++) {
 		let hours = [];
@@ -288,23 +312,46 @@ function manipulateDateForHourGraph(result) {
 		};
 		display_data.push(inserted_data);
 	}
+	console.log(display_data)
 	return display_data;
 }
 
 function manipulateDateForDayGraph(result) {
-	let data = result.map(function(e) {
+	let busiestDays =[]
+
+	for(let item of result){
+		if (busiestDays.filter(e => e.type === item._id.type).length > 0) {
+			index = busiestDays.findIndex(x => x.type === item._id.type);
+			new_day =	{
+				day: item._id.day,
+				counter: item.counter
+			};
+			busiestDays[index].days.push(new_day);
+		}else{
+			let new_type = {
+				type: item._id.type,
+				days: [
+					{
+						day: item._id.day,
+						counter: item.counter
+					}
+				]
+			};
+			busiestDays.push(new_type)		
+		}
+	}
+	let data = busiestDays.map(function(e) {
 		return e.days;
 	});
 
-	let activity_labels = result.map(function(e) {
+	let activity_labels = busiestDays.map(function(e) {
 		return e.type;
 	});
-
 	let labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 	display_data = []
 	for(j = 0; j < data.length; j++) {
 		let days = [];
-		for(i = 0; i < 7; i++) {
+		for(i = 1; i <= 7; i++) {
 			index = data[j].findIndex(x => x.day === i);
 			if(index === -1){
 				days.push(0);
@@ -358,7 +405,7 @@ function pieChart(results){
 			display: true,
 			position: 'bottom'
 		},
-		// responsive: true,
+		responsive: true,
     },
 	data : {
 		datasets: [{

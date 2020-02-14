@@ -159,8 +159,8 @@ function userChart(results) {
     counters = [],
     colors = [];
   for (let item of results) {
-    names.push(item.username);
-    counters.push(item.num_of_docs);
+    names.push(item._id);
+    counters.push(item.counter);
     colors.push(getRandomColor());
     console.log(names, counters, colors);
   }
@@ -183,7 +183,7 @@ function userChart(results) {
         fontSize: 20
       },
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: true
     },
     data: {
       datasets: [
@@ -206,7 +206,7 @@ function activityChart(results) {
     counters = [],
     colors = [];
   for (let item of results) {
-    activity.push(item.type);
+    activity.push(item._id);
     counters.push(item.counter);
     colors.push(getRandomColor());
   }
@@ -250,8 +250,8 @@ function monthChart(results) {
   let month = [],
   counter = [];
   for (let item of results) {
-    month.push(item.month_name);
-    counter.push(item.count);
+    month.push(item._id);
+    counter.push(item.counter);
   }
   if(monthG !== null){ 
 		monthG.destroy();
@@ -297,8 +297,8 @@ function dayChart(results) {
   let day = [],
   counter = [];
   for (let item of results) {
-    day.push(item.day_name);
-    counter.push(item.count);
+    day.push(item._id);
+    counter.push(item.counter);
   }
   if(dayG !== null){ 
 		dayG.destroy();
@@ -343,8 +343,8 @@ function hourChart(results) {
   let hour = [],
   counter = [];
   for (let item of results) {
-    hour.push(item.hour);
-    counter.push(item.count);
+    hour.push(item._id);
+    counter.push(item.counter);
   }
   if(hourG !== null){ 
 		hourG.destroy();
@@ -389,8 +389,8 @@ function yearChart(results) {
   let year = [],
   counter = [];
   for (let item of results) {
-    year.push(item.year);
-    counter.push(item.count);
+    year.push(item._id);
+    counter.push(item.counter);
   }
   if(yearG !== null){ 
 		yearG.destroy();
