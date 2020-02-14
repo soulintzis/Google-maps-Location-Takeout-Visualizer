@@ -576,10 +576,19 @@ router.get(
           non_eco_sum[i] += non_eco_months[j][i]
         }
       }
-      let scores = {
-        eco_sum, non_eco_sum
-      }
-      res.send(scores);
+      let results = [
+        {
+          label: "Eco Behavior",
+          data: eco_sum,
+          backgroundColor: "#1f7a1f"
+        },
+        {
+          label: "Non Eco Behavior",
+          data: non_eco_sum,
+          backgroundColor: "#990000"
+        }
+      ]
+      res.send(results);
     });
   }
 );
