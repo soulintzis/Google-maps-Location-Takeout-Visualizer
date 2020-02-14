@@ -523,9 +523,10 @@ router.get(
               months.push(data[j][index].counter);
             }
           }
+          
           let inserted_data = {
             label: activity_labels[j],
-            data: months,
+            data: months
             // backgroundColor: getRandomColor()
           };
           display_data.push(inserted_data);
