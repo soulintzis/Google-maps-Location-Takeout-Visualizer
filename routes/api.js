@@ -17,7 +17,7 @@ router.get("/users", async (req, res) => {
 });
 
 router.get("/user/:id", async (req, res) => {
-  var obj_id = req.params.id;
+  let obj_id = req.params.id;
   await User.findOne({ _id: obj_id }, (error, result) => {
     if (error) {
       return res.status(500).send(error);
@@ -73,7 +73,7 @@ router.get("/locations/:from_day/:from_month/:from_year", async (req, res) => {
   let day = req.params.from_day,
     month = req.params.from_month,
     year = req.params.from_year;
-  let date = year + "-" + month + "-" + day + "T00:00:00";
+  let date = year + "-" + month + "-" + day + "T02:00:00";
   await Location.find(
     { user_id: id, timestampMs: { $gte: date } },
     (error, result) => {
@@ -203,7 +203,6 @@ router.get(
       }
     ]).exec((err, result) => {
       if (err) throw err;
-      console.log(result);
       res.send(result);
     });
   }
@@ -253,7 +252,6 @@ router.get(
       }
     ]).exec((err, result) => {
       if (err) throw err;
-      console.log(result);
       res.send(result);
     });
   }
@@ -266,7 +264,6 @@ router.get("/last_months_activities", async (req, res) => {
   from_date.setTime(
     from_date.getTime() + from_date.getTimezoneOffset() * -1 * 60 * 1000
   );
-  console.log(from_date);
   Location.aggregate([
     { $unwind: "$activity" },
     { $unwind: "$activity.activity" },
@@ -469,14 +466,78 @@ router.get(
           "activity.activity.confidence": { $gte: 65 }
         }
       },
-      { $project: { month: { $month: "$timestampMs" } } },
-      // Find average for each month
-      { $group: { _id: "$month", counter: { $sum: 1 } } }
+      {
+        $project: {
+          month: { $month: "$timestampMs" },
+          type: "$activity.activity.type"
+        }
+      },
+      {
+        $group: {
+          _id: { month: "$month", type: "$type" },
+          counter: { $sum: 1 }
+        }
+      }
       
     ]).exec((err, result) => {
       if (err) throw err;
+        let eco_scores =[]
+      
+        for(let item of result){
+          if (eco_scores.filter(e => e.type === item._id.type).length > 0) {
+            index = eco_scores.findIndex(x => x.type === item._id.type);
+            new_month =	{
+              month: item._id.month,
+              counter: item.counter
+            };
+            eco_scores[index].months.push(new_month);
+          }else{
+            let new_type = {
+              type: item._id.type,
+              months: [
+                {
+                  months: item._id.month,
+                  counter: item.counter
+                }
+              ]
+            };
+            eco_scores.push(new_type)		
+          }
+        }
+        for(let item of eco_scores){
+
+          console.log(item);
+        }
+        // let data = busiestDays.map(function(e) {
+        //   return e.days;
+        // });
+      
+        // let activity_labels = busiestDays.map(function(e) {
+        //   return e.type;
+        // });
+      //   let labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      //   display_data = []
+      //   for(j = 0; j < data.length; j++) {
+      //     let days = [];
+      //     for(i = 1; i <= 7; i++) {
+      //       index = data[j].findIndex(x => x.day === i);
+      //       if(index === -1){
+      //         days.push(0);
+      //       }else{
+      //         days.push(data[j][index].counter);
+      //       }
+      //     }
+      //     let inserted_data = {
+      //       label: activity_labels[j],
+      //       data: days,
+      //       backgroundColor: getRandomColor()
+      //     };
+      //     display_data.push(inserted_data);
+      //   }
+      //   return { display_data, labels };
+      // }      
+      
       res.send(result);
-      // console.log(result)
     });
   }
 );
