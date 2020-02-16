@@ -51,6 +51,9 @@ function deleteData(){
 // }
 // }
 function getActivitiesDistribution() {
+  // document.getElementById("loading-img").style.display = "block";
+  // from = getDateFrom();
+  // until = getDateUntil();
   const url = "http://localhost:3000/admin_api/records_per_type";
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
@@ -67,12 +70,17 @@ function getActivitiesDistribution() {
 }
 
 function getRecordDistributionPerUser() {
+  // document.getElementById("loading-img").style.display = "block";
+  // from = getDateFrom();
+  // until = getDateUntil();
   const url = "http://localhost:3000/admin_api/records_per_user";
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.onload = function() {
     if (this.status === 200) {
       userChart(JSON.parse(this.responseText));
+      // dayGraph(JSON.parse(this.responseText));
+      // document.getElementById("loading-img").style.display = "none";
     } else {
       console.log("error");
     }
@@ -81,6 +89,9 @@ function getRecordDistributionPerUser() {
 }
 
 function getRecordDistributionPerMonth() {
+  // document.getElementById("loading-img").style.display = "block";
+  // from = getDateFrom();
+  // until = getDateUntil();
   const url = "http://localhost:3000/admin_api/records_per_month";
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
@@ -88,6 +99,7 @@ function getRecordDistributionPerMonth() {
   xhr.onload = function() {
     if (this.status === 200) {
       monthChart(JSON.parse(this.responseText));
+      // document.getElementById("loading-img").style.display = "none";
     } else {
       console.log("error");
     }
@@ -97,6 +109,9 @@ function getRecordDistributionPerMonth() {
 }
 
 function getRecordDistributionPerDay() {
+  // document.getElementById("loading-img").style.display = "block";
+  // from = getDateFrom();
+  // until = getDateUntil();
   const url = "http://localhost:3000/admin_api/records_per_day";
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
@@ -104,6 +119,7 @@ function getRecordDistributionPerDay() {
   xhr.onload = function() {
     if (this.status === 200) {
       dayChart(JSON.parse(this.responseText));
+      // document.getElementById("loading-img").style.display = "none";
     } else {
       console.log("error");
     }
@@ -113,6 +129,9 @@ function getRecordDistributionPerDay() {
 }
 
 function getRecordDistributionPerHour() {
+  // document.getElementById("loading-img").style.display = "block";
+  // from = getDateFrom();
+  // until = getDateUntil();
   const url = "http://localhost:3000/admin_api/records_per_hour";
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
@@ -120,6 +139,7 @@ function getRecordDistributionPerHour() {
   xhr.onload = function() {
     if (this.status === 200) {
       hourChart(JSON.parse(this.responseText));
+      // document.getElementById("loading-img").style.display = "none";
     } else {
       console.log("error");
     }
@@ -129,6 +149,9 @@ function getRecordDistributionPerHour() {
 }
 
 function getRecordDistributionPerYear() {
+  // document.getElementById("loading-img").style.display = "block";
+  // from = getDateFrom();
+  // until = getDateUntil();
   const url = "http://localhost:3000/admin_api/records_per_year";
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
@@ -136,6 +159,7 @@ function getRecordDistributionPerYear() {
   xhr.onload = function() {
     if (this.status === 200) {
       yearChart(JSON.parse(this.responseText));
+      // document.getElementById("loading-img").style.display = "none";
     } else {
       console.log("error");
     }
