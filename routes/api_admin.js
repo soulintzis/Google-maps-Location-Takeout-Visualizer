@@ -1,4 +1,6 @@
 const express = require("express");
+let json2csv = require("json2csv").parse;
+let fs = require("fs");
 
 const router = express.Router();
 
@@ -6,8 +8,6 @@ let User = require("../models/User");
 let Location = require("../models/location");
 
 const auth = require("../scripts/authentication");
-
-
 
 router.delete("/delete_data", async (req, res) => {
   var obj_id = req.params.id;
@@ -162,6 +162,107 @@ router.get("/records_per_user", async (req, res) => {
     if (err) throw err;
     console.log(result);
     res.send(result);
+  });
+});
+
+router.get("/export_to_json", async (req, res) => {
+  let data;
+  Location.find({}).exec(function(err, result) {
+    data = JSON.stringify(result, null, 4);
+    fs.writeFile("../exports/data.json", data, function(err, res) {
+      if (err) {
+        console.log("error writing /data/people.json");
+      } else {
+        console.log("JSON file written to exports/data/data.json");
+      }
+    });
+  });
+});
+
+router.get("/export_to_json/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year", async (req, res) => {
+  let data;
+  let from_day = req.params.from_day,
+      from_month = req.params.from_month,
+      from_year = req.params.from_year;
+  let until_day = req.params.until_day,
+      until_month = req.params.until_month,
+      until_year = req.params.until_year;
+  let from_date = from_year + "-" + from_month + "-" + from_day + "T02:00:00";
+  let until_date = until_year + "-" + until_month + "-" + until_day + "T02:00:00";
+  Location.find({timestampMs: { $gte: from_date, $lte: until_date }}).exec(function(err, result) {
+    data = JSON.stringify(result, null, 4);
+    fs.writeFile("../exports/data.json", data, function(err, res) {
+      if (err) {
+        console.log("error writing /data/people.json");
+      } else {
+        console.log("JSON file written to exports/data/data.json");
+      }
+    });
+  });
+});
+
+
+router.get("/export_to_json/:type_of_activity", async (req, res) => {
+  let data;
+  let type = req.params.type_of_activity;
+  Location.aggregate([
+    { $unwind: "$activity" },
+    { $unwind: "$activity.activity" },
+    {
+      $match: {
+        "activity.activity.type": {
+          $regex: type
+        }
+      }
+    },
+  ]).exec((err, result) => {
+    if (err) throw err;
+    data = JSON.stringify(result, null, 4);
+    fs.writeFile("../exports/data.json", data, function(err, res) {
+      if (err) {
+        console.log("error writing /data/people.json");
+      } else {
+        console.log("JSON file written to exports/data/data.json");
+      }
+    });
+  });
+});
+
+router.get("/export_to_json/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/:type_of_activity", async (req, res) => {
+  let data;
+  let type = req.params.type_of_activity;
+  let from_day = req.params.from_day,
+      from_month = req.params.from_month,
+      from_year = req.params.from_year;
+  let until_day = req.params.until_day,
+      until_month = req.params.until_month,
+      until_year = req.params.until_year;
+  let from_date = from_year + "-" + from_month + "-" + from_day + "T02:00:00";
+  let until_date = until_year + "-" + until_month + "-" + until_day + "T02:00:00";
+  Location.aggregate([
+    { $unwind: "$activity" },
+    { $unwind: "$activity.activity" },
+    {
+      $match: {
+        "activity.activity.type": {
+          $regex: type
+        },
+        timestampMs: {
+          $gte: new Date(from_date),
+          $lte: new Date(until_date)
+        }
+      }
+    },
+  ]).exec((err, result) => {
+    if (err) throw err;
+    data = JSON.stringify(result, null, 4);
+    fs.writeFile("../exports/data.json", data, function(err, res) {
+      if (err) {
+        console.log("error writing /data/people.json");
+      } else {
+        console.log("JSON file written to exports/data/data.json");
+      }
+    });
   });
 });
 
