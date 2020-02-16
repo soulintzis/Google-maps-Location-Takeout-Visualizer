@@ -26,6 +26,8 @@
     "express-fileupload": "^1.1.6",
     "express-session": "^1.17.0",
     "express-validator": "^6.3.0",
+    "fs": "0.0.1-security",
+    "json2csv": "^4.5.4",
     "mongoose": "^5.8.1",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
