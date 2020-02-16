@@ -1021,10 +1021,16 @@ td {
 
 /*-----------------------------------------------------------------------------------------------------------------*/
 
-/*Adjustments for all screns between 768px and 320px*/
+/*Adjustments for all screens with max width 1024 pixels*/
+@media only screen and (max-width: 1024px) {
+.eco_score_graph {
+  width: 80% !important;
+}
+}
+
 
 /* Tablet media screens 768px and down */
-@media only screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   /* #main{
     background-color: red!important;
   } */
@@ -1051,6 +1057,27 @@ td {
     width: 45px !important;
     height: 45px !important;
   }
+
+  
+  .left-half {
+    position: relative !important;
+    left: 0px !important;
+    width: 100% !important;
+    height: 100vh !important;
+    margin: auto;
+  }
+  
+  .right-half {
+    position: relative !important;
+    right: 0px !important;
+    width: 100% !important;
+    height: 100vh !important;
+  }
+  #profile {
+    overflow-x: auto !important;
+    overflow-y: auto !important; 
+  }
+
 }
 
 /* Mobile media screens 425px and 375px down */
@@ -1079,6 +1106,36 @@ td {
   .date_pickers span {
     padding-right: 50%;
     white-space: nowrap;
+  }
+  .container-profile {
+    width: 100vw !important;
+    margin: auto;
+    position: relative;
+    display: contents;
+  }
+
+  .info-container {
+    top: 15vh !important;
+    width: 100% !important;
+  }
+
+  .eco_year_graph {
+    top: 20vh !important;
+    width: 100% !important;
+  }
+
+  .info-value {
+    font-size: 0.9em;
+    top: -13px !important;
+  }
+
+  .info-title {
+    font-size: 1.3em;
+  }
+
+  .information-label {
+    font-size: 1em !important;
+    line-height: 1.1em;
   }
 }
 
@@ -1112,7 +1169,7 @@ td {
 
 #profile div {
   white-space: nowrap;
-  /* overflow: hidden; */
+  height: auto;
   max-width: 150%;
   border-left: 1em solid transparent;
   border-right: 1em solid transparent;
@@ -1187,13 +1244,13 @@ td {
 }
 
 .info-container {
-  width: 80%;
-  height: auto;
-  top: 10vh;
-  display: block;
+  display: inline-grid;
   position: relative;
-  align-items: center;
   margin: 0 auto;
+  width: 90%;
+  height: auto;
+  top: 5vh;
+  align-items: center;
   line-height: 1em;
   border-radius: 20px;
   background-color: white;
@@ -1223,23 +1280,23 @@ td {
 }
 
 .information-label {
-  width: 150px;
-  margin-left: 0px;
-  display: block;
+  margin-left: 10px;
+  display: inline-block;
   position: relative;
   /* padding-left: 20px; */
   /* padding-right: 50%; */
   font-weight: bold;
   font-size: 1.2em;
+  line-height: 1.3em;
 }
 
 .info-value {
-  display: inline-block;
+  white-space: normal !important;
+  display: block;
   position: relative;
   top: -20px;
-  font-size: 1.1em;
+  font-size: 1em;
   margin-left: 40%;
-  padding-left: 10%;
 }
 /********************************************************************************************************************************************/
 
@@ -1281,9 +1338,9 @@ td {
 
 .eco_year_graph{
   border-radius:20px;
-  width: auto;
-  height: 40vh;
-  margin-top: 15vh;
+  position: relative;
+  width: 100%;
+  top: 10.5vh;
   background-color: white;
 }
 
@@ -1303,4 +1360,5 @@ td {
   right: 0px;
   width: 50%;
   height: 100vh;
+  margin: 0 auto;
 }
