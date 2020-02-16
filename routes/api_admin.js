@@ -1,6 +1,7 @@
 const express = require("express");
-let json2csv = require("json2csv").parse;
 let fs = require("fs");
+let path = require("path");
+let http = require('http').Server(express);
 
 const router = express.Router();
 
@@ -165,21 +166,35 @@ router.get("/records_per_user", async (req, res) => {
   });
 });
 
-router.get("/export_to_json", async (req, res) => {
+router.get("/export_to_json", async (req, res, next) => {
   let data;
-  Location.find({}).exec(function(err, result) {
+  Location.find({}).exec(async function(err, result) {
     data = JSON.stringify(result, null, 4);
-    fs.writeFile("../exports/data.json", data, function(err, res) {
+    let filename = 'data.json';
+    let absPath = path.join(__dirname, '../exports/', filename);
+    let relPath = path.join('./exports', filename); // path relative to server root
+    console.log(absPath, relPath)
+    await fs.writeFile(relPath, data, async (err) => {
       if (err) {
-        console.log("error writing /data/people.json");
-      } else {
-        console.log("JSON file written to exports/data/data.json");
+        console.log(err);
       }
+      await res.download(absPath, async (err) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log("Downloaded")
+        await fs.unlink(relPath, (err) => {
+          if (err) {
+            console.log(err);
+          }
+          console.log('FILE [' + filename + '] REMOVED!');
+        });
+      });
     });
   });
 });
 
-router.get("/export_to_json/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year", async (req, res) => {
+router.get("/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/export_to_json", async (req, res) => {
   let data;
   let from_day = req.params.from_day,
       from_month = req.params.from_month,
@@ -196,13 +211,13 @@ router.get("/export_to_json/:from_day/:from_month/:from_year/:until_day/:until_m
         console.log("error writing /data/people.json");
       } else {
         console.log("JSON file written to exports/data/data.json");
-      }
+            }
     });
   });
 });
 
 
-router.get("/export_to_json/:type_of_activity", async (req, res) => {
+router.get("/:type_of_activity/export_to_json", async (req, res) => {
   let data;
   let type = req.params.type_of_activity;
   Location.aggregate([
@@ -228,7 +243,7 @@ router.get("/export_to_json/:type_of_activity", async (req, res) => {
   });
 });
 
-router.get("/export_to_json/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/:type_of_activity", async (req, res) => {
+router.get("/:from_day/:from_month/:from_year/:until_day/:until_month/:until_year/:type_of_activity/export_to_json", async (req, res) => {
   let data;
   let type = req.params.type_of_activity;
   let from_day = req.params.from_day,

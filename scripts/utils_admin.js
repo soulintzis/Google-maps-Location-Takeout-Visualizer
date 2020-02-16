@@ -15,3 +15,19 @@ function deleteData(){
         xhr.send();
     }
 }
+
+function exportData(){
+  const url = "http://localhost:3000/admin_api/export_to_json";
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+  
+    xhr.onload = function() {
+      if (this.status === 200) {
+        console.log("Data exported successfully")
+      } else {
+        console.log("error");
+      }
+    };
+    xhr.send();
+}
+e
