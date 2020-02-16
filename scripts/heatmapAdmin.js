@@ -1,7 +1,7 @@
 ajaxHeatmapCall();
 
 async function ajaxHeatmapCall() {
-    const url = "http://localhost:3000/api_admin/heatmap_locations";
+    const url = "http://localhost:3000/admin_api/heatmap_locations";
     let xhr = new XMLHttpRequest;
     xhr.open('GET', url, true)
 
