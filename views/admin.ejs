@@ -4,9 +4,9 @@
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#heatmap">Heatmap</a></li>
-        <li><a href="export">Export Data</a></li>
-        <li><a href="#" onclick ="deleteData();">Delete Data</a></li>
+        <li><a href="#heatmap-section">Heatmap</a></li>
+        <li><a href="#export">Export Data</a></li>
+        <li><a href="#" onclick="deleteData();">Delete Data</a></li>
         <li><a href="logout_admin">Log out</a></li>
     </div>
 
@@ -24,7 +24,7 @@
                     <canvas id="userGraph"></canvas>
                 </div>
                 <div class="graph">
-                        <canvas id="monthGraph"></canvas>
+                    <canvas id="monthGraph"></canvas>
                 </div>
             </div>
             <div class="column">
@@ -32,7 +32,7 @@
                     <canvas id="activityGraph"></canvas>
                 </div>
                 <div class="graph">
-                        <canvas id="dayGraph"></canvas>
+                    <canvas id="dayGraph"></canvas>
                 </div>
             </div>
             <div class="column">
@@ -45,15 +45,42 @@
             </div>
         </div>
     </section>
-    
-    <section id="heatmap">
+
+    <section id="heatmap-section">
         <div class="page-title">
             <h1>Heatmap</h1>
         </div>
         <div id="heatmap"></div>
     </section>
 
-   
+    <section id="export">
+        <div class="page-title" style="padding-bottom: 0!important;">
+            <h1>Export</h1>
+        </div>
+        <p class="page-info">Select a period of time or a type of activity or both of them and export them to a json
+            file.</p>
+        <div class="export_date_picker">
+            <span>Choose date from: </span>
+            <input type="date" name="from" id="from_date" class="date_input" onchange="getDate();">
+
+            <span>Choose date until: </span>
+            <input type="date" name="until" id="until_date" class="date_input" onchange="getDate();">
+        </div>
+        <div class="select export_select">
+            <select name="slct" id="slct" onchange="getGraph(this);">
+                <option value="">Choose graph</option>
+                <option value="">WALKING</option>
+                <option value="">ON_FOOT</option>
+                <option value="">RUNNING</option>
+                <option value="">ON_BICYCLE</option>
+                <option value="">IN_ROAD_VEHICLE</option>
+                <option value="">IN_CAR</option>
+                <option value="">IN_FOUR_WHEELER_VEHICLE</option>
+                <option value="">IN_RAIL_VEHICLE</option>
+            </select>
+        </div>
+        <button id="export_json" onclick="exportData();">EXPORT</button>
+    </section>
 
 </div>
 
