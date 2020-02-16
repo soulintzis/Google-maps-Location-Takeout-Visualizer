@@ -33,16 +33,21 @@ router.get("/login", function(req, res) {
 router.post("/login", async function(req, res, next) {
   let name = req.body.username;
   await User.findOne({ username: name }, (err, result) => {
-    if (result.admin === false) {
-      passport.authenticate("local", {
-        successRedirect: "/home",
-        failureRedirect: "/"
-      })(req, res, next);
-    } else {
-      passport.authenticate("local", {
-        successRedirect: "/admin",
-        failureRedirect: "/"
-      })(req, res, next);
+    if(result) {
+      if (result.admin === false) {
+        passport.authenticate("local", {
+          successRedirect: "/home",
+          failureRedirect: "/"
+        })(req, res, next);
+      } else {
+        passport.authenticate("local", {
+          successRedirect: "/admin",
+          failureRedirect: "/"
+        })(req, res, next);
+      }
+    }else{
+      console.log("You gave wrong credentials");
+      res.render("login");
     }
   });
 });
