@@ -1362,3 +1362,47 @@ td {
   height: 100vh;
   margin: 0 auto;
 }
+
+#export {
+  top: 30vh;
+  position: relative;
+  margin: auto; 
+  height: 100vh;
+}
+
+.page-info {
+  text-decoration: underline;
+  margin-top: 30px;
+  text-align: center;
+  font-size: 1.3em;
+}
+
+.export_date_picker {
+  display: block;
+  position: relative;
+  margin: 50px auto;
+}
+
+.export_select {
+  height: 1.8em;
+}
+
+#export_json {
+  width: 10vw;
+  height: 40px;
+  border: 0px;
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-top: 50px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #002b80;
+  color: whitesmoke;
+}
+
+#export_json {background-image: linear-gradient(to right, #1e3c72 0%, #2a5298 51%, #1e3c72 100%)}
+#export_json:hover { background-position: right center; }
+
+#export p {
+  margin-top: 10vh;
+}

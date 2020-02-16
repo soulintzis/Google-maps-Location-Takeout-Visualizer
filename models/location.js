@@ -46,13 +46,18 @@ const locationSchema = mongoose.Schema({
         },{
             strict: false
         })
-        ]
+    ]
+    
     }, {    
         strict: false
     },{
         ordered: false
     })
-    ]
+    ],
+    user_id: {
+        type: String,
+        required: true
+    }
 });
 
 const Location = mongoose.exports = mongoose.model('Location', locationSchema);

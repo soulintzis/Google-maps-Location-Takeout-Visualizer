@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
         default: false
     },
     lastUpload: {
-        type: Date,
+        type: Date
     }},
     {
         timestamps: true
