@@ -110,19 +110,13 @@ router.get("/admin", auth.authenticationMiddlewareAdmin(), function(req, res) {
   res.render("admin");
 });
 
-router.get("/logout", auth.authenticationMiddleware(), async function(
-  req,
-  res
-) {
+router.get("/logout", auth.authenticationMiddleware(), async function(req, res ) {
   await req.session.destroy();
   req.logout();
   res.redirect("/");
 });
 
-router.get(
-  "/logout_admin",
-  auth.authenticationMiddlewareAdmin(),
-  async function(req, res) {
+router.get("/logout_admin", auth.authenticationMiddlewareAdmin(), async function(req, res) {
     await req.session.destroy();
     req.logout();
     res.redirect("/");

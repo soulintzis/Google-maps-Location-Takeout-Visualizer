@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 let User = require("../models/User");
+let LeaderBoard = require("../models/leaderBoard");
 let Location = require("../models/location");
 
 const auth = require("../scripts/authentication");
@@ -113,30 +114,34 @@ router.get(
 );
 
 // Get the date from which the user has uploaded data
-router.get("/locations/max_date", async (req, res) => {
+router.get("/max_date", async (req, res) => {
   let id = req.user.user_id;
   await Location.find({ user_id: id })
     .sort({ timestampMs: -1 })
     .limit(1)
-    .exec(async function(error, result) {
+    .exec(function(error, result) {
       if (error) {
         return res.status(500).send(error);
       }
-      res.send(result[0].timestampMs);
-    });
+      let date = new Date(result[0].timestampMs);
+      date.setTime(date.getTime() + date.getTimezoneOffset() * (-1) * 60 * 1000 );
+      res.send(date);
+  });
 });
 
 // Get the date until which the user has uploaded date
-router.get("/locations/min_date", async (req, res) => {
+router.get("/min_date", async (req, res) => {
   let id = req.user.user_id;
   await Location.find({ user_id: id })
     .sort({ timestampMs: 1 })
     .limit(1)
-    .exec(async function(error, result) {
+    .exec(function(error, result) {
       if (error) {
         return res.status(500).send(error);
       }
-      res.send(result[0].timestampMs);
+      let date = new Date(result[0].timestampMs);
+      date.setTime(date.getTime() + date.getTimezoneOffset() * (-1) * 60 * 1000 );
+      res.send(date);
     });
 });
 
@@ -349,7 +354,6 @@ router.get("/locations/get_eco_score", async (req, res) => {
         item._id === "EXITING_VEHICLE" ||
         item._id === "IN_RAIL_VEHICLE" ||
         item._id === "IN_VEHICLE" ||
-        item._id === "IN_ROAD_VEHICLE" ||
         item._id === "IN_FOUR_WHEELER_VEHICLE" ||
         item._id === "IN_CAR"
       ) {
@@ -378,9 +382,9 @@ router.get(
     let until_day = req.params.until_day,
       until_month = req.params.until_month,
       until_year = req.params.until_year;
-    let from_date = from_year + "-" + from_month + "-" + from_day + "T00:00:00";
+    let from_date = from_year + "-" + from_month + "-" + from_day + "T02:00:00";
     let until_date =
-      until_year + "-" + until_month + "-" + until_day + "T00:00:00";
+      until_year + "-" + until_month + "-" + until_day + "T02:00:00";
     Location.aggregate([
       { $unwind: "$activity" },
       { $unwind: "$activity.activity" },
@@ -437,6 +441,26 @@ router.get(
     });
   }
 );
+
+router.get("/leaderboard", auth.authenticationMiddleware(), async (req, res) => {
+  username = req.user.username;
+  let results = [];
+  await LeaderBoard.find({})
+  .sort({ eco_score: -1 })
+  .exec(async function(error, result) {
+    if (error) {
+      return res.status(500).send(error);
+    }
+    if (result.filter(e => e.username === username).length > 0) {
+      index = result.findIndex(e => e.username === username);
+    }
+    if(result.length > 3 && index > 3) {
+        results.push(results, index, username);
+    }else{
+      res.send(result);
+    }
+  });
+});
 
 router.get(
   "/locations/get_eco_score_for_a_year",
