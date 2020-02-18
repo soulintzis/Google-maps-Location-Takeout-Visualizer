@@ -6,7 +6,7 @@ module.exports = {
       if (!typeof req.session.passport != undefined) {
         if (req.isAuthenticated() && req.user.admin === true) {
           if(req.route.path === '/'){
-            res.redirect("/admin_api/admin");
+            res.redirect("/admin");
           }else{
             return next();
           }

@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const locationSchema = mongoose.Schema({
-    user_id : {
-        type: String,
-        required: false
-    },
     timestampMs : {
         type: Date,
         required: true

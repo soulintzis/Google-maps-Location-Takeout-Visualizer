@@ -11,7 +11,6 @@ let Location = require("../models/location");
 const auth = require("../scripts/authentication");
 
 router.delete("/delete_data", async (req, res) => {
-  var obj_id = req.params.id;
   await Location.deleteMany({}, (error, result) => {
     if (error) {
       return res.status(500).send(error);
@@ -20,6 +19,7 @@ router.delete("/delete_data", async (req, res) => {
     res.send(result);
   });
 });
+
 router.get("/heatmap_locations", async (req, res) => {
   let lat_and_lngs = [];
   let location = {
@@ -158,11 +158,28 @@ router.get("/records_per_type", async (req, res) => {
 
 router.get("/records_per_user", async (req, res) => {
   Location.aggregate([
+
     { $group: { _id: "$user_id", counter: { $sum: 1 } } }
-  ]).exec((err, result) => {
+  ]).exec(async (err, result) => {
     if (err) throw err;
-    console.log(result);
-    res.send(result);
+    // console.log(result);
+    // res.send(result);
+    let arr = [];
+    let obj = {
+      usernames: String,
+      records: Number
+    }
+    for (let item of result) {
+      await User.findOne({ user_id: item._id }, (err, user) => {
+        if (err) throw err;
+        obj = {
+          usernames: user.username,
+          records: item.counter
+        }
+        arr.push(obj);
+      });
+    }
+    res.send(arr);
   });
 });
 
@@ -170,7 +187,7 @@ router.get("/export_to_json", async (req, res, next) => {
   let data;
   Location.find({}).exec(async function(err, result) {
     data = JSON.stringify(result, null, 4);
-    let filename = 'data.json';
+    let filename = 'export_data.json';
     let absPath = path.join(__dirname, '../exports/', filename);
     let relPath = path.join('./exports', filename); // path relative to server root
     console.log(absPath, relPath)
@@ -178,18 +195,19 @@ router.get("/export_to_json", async (req, res, next) => {
       if (err) {
         console.log(err);
       }
-      await res.download(absPath, async (err) => {
-        if (err) {
-          console.log(err);
-        }
-        console.log("Downloaded")
-        await fs.unlink(relPath, (err) => {
-          if (err) {
-            console.log(err);
-          }
-          console.log('FILE [' + filename + '] REMOVED!');
-        });
-      });
+      res.send(relPath)
+      // await res.download(absPath, async (err) => {
+      //   if (err) {
+      //     console.log(err);
+      //   }
+      //   console.log("Downloaded")
+      //   await fs.unlink(relPath, (err) => {
+      //     if (err) {
+      //       console.log(err);
+      //     }
+      //     console.log('FILE [' + filename + '] REMOVED!');
+      //   });
+      // });
     });
   });
 });

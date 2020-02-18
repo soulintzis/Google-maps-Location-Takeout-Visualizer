@@ -11,7 +11,7 @@ let LeaderBoard = require("../models/leaderBoard");
 
 module.exports = {
   readJsonObjectFromFile: (filename, pass) => {
-    path = filePath + filename;
+    let path = filePath + filename;
     locations = [];
     fs.readFile(path, (err, data) => {
       let inside_counter = 0;
@@ -38,23 +38,23 @@ module.exports = {
         console.log("Inside: " + inside_counter);
         console.log("Outside: " + outside_counter);
         Location.insertMany(locations)
-          .then(function(mongooseDocuments) {
+          .then(async function(mongooseDocuments) {
+            var query = { _id: objId };
+            let date = new Date();
+            date.setTime(
+              date.getTime() + date.getTimezoneOffset() * -1 * 60 * 1000
+            );
+            await User.updateOne(query, { lastUpload: date }, function(err, count) {
+              if (err) return next(err);
+            });
+            await module.exports.getUsersActivityForLastMonth(user_id);
             console.log("Your data was processed successfully");
+          });
           })
           .catch(function(err) {
-            console.log("An error occurred.");
+            console.log("An error occurred.");s
             console.log(err);
           });
-        var query = { _id: objId };
-        let date = new Date();
-        date.setTime(
-          date.getTime() + date.getTimezoneOffset() * -1 * 60 * 1000
-        );
-        await User.updateOne(query, { lastUpload: date }, function(err, count) {
-          if (err) return next(err);
-        });
-        await module.exports.getUsersActivityForLastMonth(user_id);
-      });
     });
   },
   getStartOfMonthDateAsString: date => {
@@ -105,15 +105,25 @@ module.exports = {
         }
         console.log("Inside: " + inside_counter);
         console.log("Outside: " + outside_counter);
-        var newLocation = new Location(location);
-        newLocation.save(function(err, location) {
-          if (err) {
-            console.log(err);
-            return;
-          }
+        Location.insertMany(locations)
+        .then(async function(mongooseDocuments) {
+          var query = { _id: objId };
+          let date = new Date();
+          date.setTime(
+            date.getTime() + date.getTimezoneOffset() * -1 * 60 * 1000
+          );
+          await User.updateOne(query, { lastUpload: date }, function(err, count) {
+            if (err) return next(err);
+          });
+          await module.exports.getUsersActivityForLastMonth(user.user_id);
+          console.log("Your data was processed successfully");
+        });
+        })
+        .catch(function(err) {
+          console.log("An error occurred.");s
+          console.log(err);
         });
       });
-    });
   },
   //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
   checkLocation: (latp, lonp) => {

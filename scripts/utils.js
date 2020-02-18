@@ -28,6 +28,6 @@ function curr_date() {
   let until = document.getElementById("until_date");
   let today = new Date();
   until.value = today.toISOString().substr(0, 10);
-today.setFullYear(today.getFullYear() - 1);
-from.value = today.toISOString().substr(0, 10);
+  today.setFullYear(today.getFullYear() - 1);
+  from.value = today.toISOString().substr(0, 10);
 }

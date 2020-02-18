@@ -52,14 +52,19 @@ router.post("/login", async function(req, res, next) {
   });
 });
 
-let restrictedAreas = "";
+let restrictedAreas = [];
 
 router.post("/restrictions", auth.authenticationMiddleware(), function(
   req,
   res
 ) {
-  restrictedAreas = req.body;
-  console.log(restrictedAreas);
+  let obj = {
+    areas: req.body,
+    id: req.user._id
+  }
+  restrictedAreas.push(obj)
+  // restrictedAreas = req.body;
+  console.log(obj.areas);
   res.send();
 });
 
@@ -85,10 +90,12 @@ router.post("/upload", auth.authenticationMiddleware(), async function(
           if (err) {
             console.log(err);
           } else {
-            if (restrictedAreas != "") {
+            if (restrictedAreas.filter(e => e.id == req.user.id).length > 0) {
+              index = restrictedAreas.findIndex(x => x.id == req.user.id);
+              console.log("Hello")
               await parser.readJsonObjectFromFileExtra(
                 newFilename,
-                restrictedAreas,
+                restrictedAreas[index].areas,
                 req.session.passport
               );
             } else {
@@ -97,7 +104,6 @@ router.post("/upload", auth.authenticationMiddleware(), async function(
                 req.session.passport
               );
             }
-            console.log("The file uploaded successfully.");
           }
         });
       }

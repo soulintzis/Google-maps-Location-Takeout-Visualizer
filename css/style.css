@@ -1406,3 +1406,17 @@ td {
 #export p {
   margin-top: 10vh;
 }
+
+#download-link {
+  position: relative;
+  display: block;
+  margin: 50px auto;
+  text-decoration: none;
+}
+
+#loading-export {
+  position: relative;
+  display: none;
+  margin: 50px auto;
+  text-decoration: none;
+}

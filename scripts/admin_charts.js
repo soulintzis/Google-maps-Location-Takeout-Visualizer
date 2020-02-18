@@ -146,15 +146,18 @@ function getRecordDistributionPerYear() {
 }
 
 function userChart(results) {
-  let names = [],
-    counters = [],
-    colors = [];
-  for (let item of results) {
-    names.push(item._id);
-    counters.push(item.counter);
+  // let names = [],
+  let   count = [],
+    colors = [],
+    username=[];
+  for (let items of results) {
+     // names.push(item._id);
+    username.push(items.usernames.substr(0,5));
+    count.push(items.records);
     colors.push(getRandomColor());
-    console.log(names, counters, colors);
-  }
+    console.log(username,count, colors);
+  
+}
   if(userG !== null){ 
 		userG.destroy();
 	}
@@ -179,15 +182,15 @@ function userChart(results) {
     data: {
       datasets: [
         {
-          label: names,
-          data: counters,
+          label: username,
+          data: count,
           backgroundColor: colors,
           borderColor: colors,
           borderWidth: 1,
           position: top
         }
       ],
-      labels: names
+      labels: username
     }
   });
 }

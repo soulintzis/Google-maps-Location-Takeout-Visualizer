@@ -33,7 +33,7 @@ router.post("/register", [
     const password = req.body.password;
     const confirm = req.body.confirm;
 
-    var id = '';
+    let id = '';
 
     let errors = validationResult(req);
 
@@ -42,7 +42,7 @@ router.post("/register", [
             errors: errors
         });
     } else {
-        var newUser = new User({
+        let newUser = new User({
             username: username,
             email: email,
             password: password,
@@ -50,7 +50,7 @@ router.post("/register", [
         });
 
         //Create a user_id that only the user himself can decipher using his password
-        var key = crypto.createCipher('aes-128-cbc', password);
+        let key = crypto.createCipher('aes-128-cbc', password);
         id = key.update(email, 'utf8', 'hex')
         id += key.final('hex');
         newUser.user_id = id;
