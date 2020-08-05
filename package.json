@@ -23,7 +23,7 @@
     "crypto": "^1.0.1",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.6",
+    "express-fileupload": "^1.1.9",
     "express-session": "^1.17.0",
     "express-validator": "^6.3.0",
     "fs": "0.0.1-security",
